@@ -1,0 +1,1349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Canopy · Chicago Tech, AI &amp; Security Calendar</title>
+<meta name="description" content="Chicago's tech, AI and security events on one calendar: chapter meetings, meetups, workshops and conferences.">
+<meta property="og:title" content="Canopy · Chicago Tech, AI &amp; Security Calendar">
+<meta property="og:description" content="Chicago's tech, AI and security events on one calendar: chapter meetings, meetups, workshops and conferences.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0d6b4c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* Leaflet 1.9.4 CSS, BSD-2-Clause, (c) Vladimir Agafonkin, CloudMade */
+/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: url(images/layers.png);
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url(images/layers-2x.png);
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url(images/marker-icon.png);
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+
+
+/* Layout: wide condensed masthead, sticky filter rail, day-grouped event list + sidebar mini-calendar. Topics coded like transit lines. */
+:root{
+  --bg:#f3f6f2; --surface:#ffffff; --ink:#13231c; --muted:#5b6b63; --line:#d8e0da;
+  --brand:#0d6b4c; --brand-ink:#ffffff; --peach:#ff9f6e; --peach-soft:#ffe6d6;
+  --chip:#e7eee9; --water:#d6e6ee; --land:#f6f8f4; --focus:#ff7a3d;
+  --t-ai:#7a4cd9; --t-web:#1f78d1; --t-sec:#c23a3a; --t-start:#d98a00; --t-data:#0f9b8e; --t-cloud:#4d6b8a; --t-design:#c2479b; --t-dev:#2f6f3e; --t-lead:#8a5a2b; --t-career:#5a4fcf;
+  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1612; --surface:#14211b; --ink:#e6efe9; --muted:#93a59b; --line:#25362e;
+  --brand:#3fbf8c; --brand-ink:#08130e; --peach:#ffa97c; --peach-soft:#3a271d; --chip:#1c2c25; --water:#0f2230; --land:#17241e; --focus:#ffa97c;
+  --t-ai:#a585f0; --t-web:#5aa7f0; --t-sec:#ef6f6f; --t-start:#f0b23c; --t-data:#3fcfbf; --t-cloud:#8fa9c4; --t-design:#e67cc2; --t-dev:#7fcf8f; --t-lead:#d9a46c; --t-career:#a39cf2;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1612; --surface:#14211b; --ink:#e6efe9; --muted:#93a59b; --line:#25362e;
+  --brand:#3fbf8c; --brand-ink:#08130e; --peach:#ffa97c; --peach-soft:#3a271d; --chip:#1c2c25; --water:#0f2230; --land:#17241e; --focus:#ffa97c;
+  --t-ai:#a585f0; --t-web:#5aa7f0; --t-sec:#ef6f6f; --t-start:#f0b23c; --t-data:#3fcfbf; --t-cloud:#8fa9c4; --t-design:#e67cc2; --t-dev:#7fcf8f; --t-lead:#d9a46c; --t-career:#a39cf2;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body)}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 19px/1 var(--display);font-stretch:85%;letter-spacing:-.01em}
+nav.main{display:flex;gap:4px;margin-left:auto}
+nav.main button{background:none;border:0;padding:8px 12px;border-radius:8px;cursor:pointer;color:var(--muted);font-weight:500}
+nav.main button[aria-current="page"]{color:var(--ink);background:var(--chip)}
+nav.main .count{font:500 11px var(--mono);background:var(--peach);color:#2a1206;border-radius:99px;padding:1px 6px;margin-left:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--brand);color:var(--brand-ink)}
+.btn-ghost{background:var(--chip);color:var(--ink)}
+
+/* hero */
+.hero{padding-block:44px 28px}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.hero h1{font:900 clamp(40px,7.4vw,92px)/.92 var(--display);font-stretch:68%;letter-spacing:-.015em;margin:12px 0 18px;text-wrap:balance;max-width:14ch}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--peach) 62%);padding:0 .06em}
+.hero p.lede{font-size:18px;color:var(--muted);max-width:56ch;margin:0}
+.stats{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.stat b{display:block;font:800 34px/1 var(--display);font-stretch:75%;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* filters */
+.filters{position:sticky;top:calc(env(safe-area-inset-top,0px) + 55px);z-index:15;background:var(--bg);padding-block:12px;border-bottom:1px solid var(--line)}
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.search{flex:1 1 260px;position:relative;min-width:0}
+.search input{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+select.sel{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+
+/* main grid */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;padding-block:28px 64px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}.side{order:-1}}
+.day{margin-bottom:28px}
+.day-head{display:flex;align-items:baseline;gap:12px;margin:0 0 10px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.day-head h2{font:800 24px/1 var(--display);font-stretch:80%;margin:0}
+.day-head .rel{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--brand)}
+.day-head .n{margin-left:auto;font:12px var(--mono);color:var(--muted)}
+
+.ev{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:16px;align-items:start;padding:16px 4px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:6px}
+.ev:hover{background:var(--surface)}
+.ev-time{font:500 14px/1.3 var(--mono);font-variant-numeric:tabular-nums}
+.ev-time small{display:block;color:var(--muted);font-size:12px}
+.ev h3{font:600 17px/1.3 var(--body);margin:0 0 4px}
+.ev .meta{font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 12px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font:500 11.5px var(--mono);padding:2px 8px;border-radius:4px;background:var(--chip);display:inline-flex;align-items:center;gap:5px}
+.tag.type{background:transparent;border:1px solid var(--line)}
+.tag.free{background:var(--peach-soft);color:var(--ink)}
+.save{background:none;border:1px solid var(--line);border-radius:8px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;color:var(--muted)}
+.save[aria-pressed="true"]{background:var(--peach);border-color:var(--peach);color:#2a1206}
+.save svg{width:18px;height:18px}
+@media (max-width:520px){.ev{grid-template-columns:60px minmax(0,1fr);}.ev .save{grid-column:2;justify-self:start}}
+
+.empty{padding:48px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+.empty strong{display:block;color:var(--ink);font:700 20px var(--display);font-stretch:85%;margin-bottom:6px}
+
+/* sidebar */
+.side{display:flex;flex-direction:column;gap:20px;min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel h4{font:700 15px var(--display);font-stretch:90%;margin:0 0 12px;text-transform:uppercase;letter-spacing:.04em}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cal-head b{font-weight:600}
+.cal-head button{background:none;border:1px solid var(--line);border-radius:6px;width:28px;height:28px;cursor:pointer}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;font:12.5px var(--mono);font-variant-numeric:tabular-nums}
+.cal .dow{color:var(--muted);font-size:11px;padding:4px 0}
+.cal button{position:relative;border:0;background:none;border-radius:6px;padding:7px 0;cursor:pointer}
+.cal button:disabled{color:var(--line);cursor:default}
+.cal button.has::after{content:"";position:absolute;left:50%;bottom:3px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--brand)}
+.cal button.today{outline:1px solid var(--ink)}
+.cal button.sel{background:var(--brand);color:var(--brand-ink)}
+.cal button.sel::after{background:var(--brand-ink)}
+.cal-clear{margin-top:10px;font-size:13px;background:none;border:0;color:var(--brand);cursor:pointer;padding:0;text-decoration:underline}
+.legend{display:grid;gap:8px;font-size:13.5px}
+.legend div{display:flex;align-items:center;gap:8px}
+.legend .line{width:22px;height:4px;border-radius:2px}
+.news p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.news form{display:flex;gap:8px}
+.news input{flex:1;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.ok{font-size:13px;color:var(--brand);margin-top:8px}
+
+/* submit view */
+.submit{max-width:680px;padding-block:40px 64px}
+.submit h2{font:900 44px/1 var(--display);font-stretch:70%;margin:8px 0 10px}
+.submit p{color:var(--muted)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.form .full{grid-column:1/-1}
+@media (max-width:560px){.form{grid-template-columns:1fr}}
+.form label{display:grid;gap:6px;font-size:13px;font-weight:600}
+.form input,.form select,.form textarea{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-weight:400}
+.form textarea{min-height:90px;resize:vertical}
+.check-row{display:flex;flex-wrap:wrap;gap:6px}
+
+/* modal */
+.scrim{position:fixed;inset:0;background:rgba(5,12,9,.55);z-index:50;display:grid;place-items:center;padding:16px}
+.modal{background:var(--surface);border-radius:14px;max-width:560px;width:100%;max-height:90vh;overflow:auto;padding:28px;position:relative}
+.modal .x{position:absolute;right:14px;top:14px;background:var(--chip);border:0;border-radius:8px;width:34px;height:34px;cursor:pointer;font-size:18px}
+.modal h3{font:800 30px/1.05 var(--display);font-stretch:78%;margin:10px 40px 8px 0;text-wrap:balance}
+.modal .org{color:var(--muted);margin:0 0 16px}
+.dl{display:grid;grid-template-columns:90px 1fr;gap:8px 12px;font-size:14px;padding:14px 0;border-block:1px solid var(--line)}
+.dl dt{font:500 11.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:2px}
+.dl dd{margin:0}
+.modal .desc{margin:16px 0 20px}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+.sample-note{font:12px var(--mono);color:var(--muted)}
+@media (max-width:640px){nav.main .lbl-long{display:none}.top .btn{display:none}}
+@media (prefers-reduced-motion:no-preference){.ev{transition:background .15s}}
+
+/* groups view */
+.groups{padding-block:40px 64px}
+.groups h2{font:900 44px/1 var(--display);font-stretch:70%;margin:8px 0 10px}
+.groups > p{color:var(--muted);max-width:60ch;margin:0}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:16px;margin-top:28px}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.gcard h3{font:800 22px/1.1 var(--display);font-stretch:80%;margin:0}
+.gcard .focus{font:500 11.5px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--brand)}
+.gcard p{margin:0;font-size:14px;color:var(--muted);flex:1}
+.gstatus{font-size:13.5px;display:flex;align-items:center;gap:8px}
+.gstatus .pip{width:8px;height:8px;border-radius:50%;background:var(--brand);flex:none}
+.gstatus.none .pip{background:var(--muted)}
+.gcard .actions .btn{padding:8px 12px;font-size:13.5px}
+.note-tag{font:500 11.5px var(--mono);color:var(--brand)}
+.filter-banner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--peach-soft);border-radius:8px;padding:10px 14px;margin-bottom:18px;font-size:14px}
+.filter-banner button{background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;padding:0}
+.ev-org{font-weight:600;color:var(--ink)}
+.empty a{color:var(--brand)}
+
+.gtools{display:flex;gap:10px;margin-top:24px;max-width:420px}
+#catChips{padding-top:12px}
+.chip .cnt{font:11px var(--mono);opacity:.7}
+.gsec{margin-top:32px}
+.gsec-h{font:800 22px var(--display);font-stretch:80%;margin:0 0 4px;display:flex;align-items:baseline;gap:10px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.gsec-h span{font:12px var(--mono);color:var(--muted)}
+.gsec .ggrid{margin-top:16px}
+.gcard h4{font:800 21px/1.1 var(--display);font-stretch:80%;margin:0}
+@media (max-width:520px){.top .wrap{gap:10px}.logo-text{display:none}nav.main{min-width:0;overflow-x:auto}nav.main button{padding:8px 9px;white-space:nowrap}}
+.linkish{background:none;border:0;padding:0;color:var(--brand);text-decoration:underline;cursor:pointer;font:inherit}
+.auto-note{font-size:12.5px;color:var(--muted);margin:-8px 0 18px}
+
+/* map */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:9px 14px;cursor:pointer;font-weight:500;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.map-tools{display:flex;gap:6px;margin-bottom:10px}
+#map{height:min(600px,72vh);min-height:340px;border-radius:var(--r);border:1px solid var(--line);background:var(--water);z-index:0}
+.map-note{font-size:13px;color:var(--muted);margin:10px 0 0}
+.pin{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--brand);color:var(--brand-ink);font:600 12px var(--mono);border:2px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.pin.cluster{width:38px;height:38px;background:var(--ink);color:var(--bg);font-size:13px;border:3px solid var(--peach)}
+.pin.approx{background:var(--surface);color:var(--brand);border:2px dashed var(--brand)}
+.lake-label{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.pop{font:13px/1.4 var(--body);color:#13231c}
+.pop-venue{font-weight:600;margin-bottom:2px}
+.pop-approx{font-size:12px;color:#5b6b63;margin-bottom:4px}
+.pop ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px}
+.pop button{all:unset;cursor:pointer;display:block;padding:6px 8px;border-radius:6px;background:#eef3ef;width:100%;box-sizing:border-box}
+.pop button:hover,.pop button:focus-visible{background:#dde8e0;outline:2px solid #0d6b4c}
+.pop button span{display:block;font:500 11.5px var(--mono);color:#0d6b4c}
+.pop-more{font-size:12px;color:#5b6b63;margin-top:6px}
+.leaflet-container{font:inherit}
+@media (max-width:640px){.seg{width:100%}.seg button{flex:1}}
+@media (max-width:900px){.legend-panel{display:none}.layout.is-map .side{order:1}}
+@media (max-width:520px){.logo-text{display:inline;font-size:17px}nav.main button{padding:8px 7px;font-size:14px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#events" data-view="events">
+      <span class="logo-text">Canopy</span>
+    </a>
+    <nav class="main" aria-label="Main">
+      <button data-view="events" aria-current="page">Events</button>
+      <button data-view="groups">Groups</button>
+      <button data-view="saved">Saved<span class="count" id="savedCount" hidden>0</span></button>
+      <button data-view="submit"><span class="lbl-long">Submit an </span>event</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="view-list">
+    <div class="wrap hero" id="hero">
+      <div class="eyebrow">Chicago · tech, AI &amp; security · last checked <span class="checked"></span></div>
+      <h1>Every Chicago tech, AI and security event on <em>one</em> calendar.</h1>
+      <p class="lede">Chapter meetings, meetups, workshops, pitch nights and conferences from security associations, AI communities, developer groups and startup hubs. Every listing links to the organizer's official page.</p>
+      <div class="stats">
+        <div class="stat"><b id="stMonth">0</b><span>events in the next 30 days</span></div>
+        <div class="stat"><b id="stFree">0</b><span>listed as free</span></div>
+        <div class="stat"><b id="stGroups">0</b><span>groups tracked</span></div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="wrap">
+        <div class="filter-row">
+          <label class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input id="q" type="search" placeholder="Search events, groups, venues" aria-label="Search events">
+          </label>
+          <select id="fGroup" class="sel" aria-label="Group"><option value="">All groups</option></select>
+          <select id="fType" class="sel" aria-label="Event type"><option value="">All types</option></select>
+          <select id="fMode" class="sel" aria-label="Format">
+            <option value="">In person &amp; virtual</option>
+            <option value="In person">In person</option>
+            <option value="Virtual">Virtual</option>
+            <option value="free">Free only</option>
+          </select>
+          <div class="seg" role="group" aria-label="View">
+            <button type="button" data-layout="list" aria-pressed="true">List</button>
+            <button type="button" data-layout="map" aria-pressed="false">Map</button>
+          </div>
+        </div>
+        <div class="chips" id="topicChips" role="group" aria-label="Topics"></div>
+      </div>
+    </div>
+
+    <div class="wrap layout">
+      <div style="min-width:0">
+        <div class="filter-banner" id="groupBanner" hidden></div>
+        <div id="list" aria-live="polite"></div>
+        <div id="mapWrap" hidden>
+          <div class="map-tools"><button type="button" class="chip" data-zoom="all">Whole area</button><button type="button" class="chip" data-zoom="downtown">Downtown</button></div>
+          <div id="map" role="region" aria-label="Map of event locations"></div>
+          <p class="map-note" id="mapNote"></p>
+        </div>
+      </div>
+      <aside class="side">
+        <div class="panel">
+          <div class="cal-head">
+            <button id="calPrev" aria-label="Previous month">‹</button>
+            <b id="calTitle"></b>
+            <button id="calNext" aria-label="Next month">›</button>
+          </div>
+          <div class="cal" id="cal"></div>
+          <button class="cal-clear" id="calClear" hidden>Show all dates</button>
+        </div>
+        <div class="panel legend-panel">
+          <h4>Topic lines</h4>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="panel news">
+          <h4>Missing something?</h4>
+          <p>Know a Chicago group or event that isn't here? Send it in and we'll add it.</p>
+          <button class="btn btn-primary" data-view="submit">Submit an event or group</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="view-groups" hidden>
+    <div class="wrap groups">
+      <div class="eyebrow">Groups we track</div>
+      <h2>Chicago tech, AI &amp; security groups</h2>
+      <p>Associations, meetups, conferences and hubs across the Chicago area. We check each group's official calendar and list only events we can confirm. Missing a group? <button class="linkish" data-view="submit">Tell us about it</button>.</p>
+      <div class="gtools">
+        <label class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="gq" type="search" placeholder="Search groups" aria-label="Search groups">
+        </label>
+      </div>
+      <div class="chips" id="catChips" role="group" aria-label="Categories"></div>
+      <div id="ggroups"></div>
+    </div>
+  </section>
+
+  <section id="view-submit" hidden>
+    <div class="wrap submit">
+      <div class="eyebrow">For organizers</div>
+      <h2>Submit an event or group</h2>
+      <p>Running a chapter meeting, meetup, training or conference in the Chicago area? Add it here. Submissions currently appear only in your own browser while review is being set up.</p>
+      <form class="form" id="subForm">
+        <label class="full">Event name<input id="sTitle" required placeholder="Q1 Chapter Meeting"></label>
+        <label>Group<select id="sGroup"><option value="">Other / not listed</option></select></label>
+        <label>Organizer name<input id="sOrg" required placeholder="ISSA Chicago"></label>
+        <label>Type<select id="sType"></select></label>
+        <label>Format<select id="sMode"><option>In person</option><option>Virtual</option></select></label>
+        <label>Date<input id="sDate" type="date" required></label>
+        <label>Start time<input id="sTime" type="time" value="17:30"></label>
+        <label>Venue<input id="sVenue" required placeholder="Venue name and address"></label>
+        <label>Neighborhood or suburb<input id="sArea" placeholder="The Loop"></label>
+        <label>Price<input id="sPrice" placeholder="Free, or members free / non-members $25"></label>
+        <label>Event link<input id="sLink" type="url" placeholder="https://"></label>
+        <div class="full"><div style="font-size:13px;font-weight:600;margin-bottom:6px">Topics</div><div class="check-row" id="sTopics"></div></div>
+        <label class="full">Short description<textarea id="sDesc" placeholder="What will people learn or do?"></textarea></label>
+        <div class="full actions"><button class="btn btn-primary" type="submit">Add to calendar</button><button class="btn btn-ghost" type="button" data-view="events">Cancel</button></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="scrim" id="scrim" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" id="modal"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>Canopy · a community calendar for Chicago's tech, AI and security scene</span>
+    <span class="sample-note">Checked against official listings <span class="checked"></span>. Confirm details before you go.</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>window.CANOPY_COUNTIES={"type":"FeatureCollection","features":[{"type":"Feature","properties":{"n":"DeKalb"},"geometry":{"type":"Polygon","coordinates":[[[-88.9412,42.1523],[-88.7043,42.154],[-88.5895,42.154],[-88.5895,42.0664],[-88.6002,42.0664],[-88.6002,41.7193],[-88.6038,41.6317],[-88.9376,41.6282],[-88.9412,41.892],[-88.9376,42.0646],[-88.9412,42.1523]]]}},{"type":"Feature","properties":{"n":"Kendall"},"geometry":{"type":"Polygon","coordinates":[[[-88.6002,41.7193],[-88.2628,41.7245],[-88.2521,41.4633],[-88.5966,41.4573],[-88.6038,41.6317],[-88.6002,41.7193]]]}},{"type":"Feature","properties":{"n":"Grundy"},"geometry":{"type":"Polygon","coordinates":[[[-88.5966,41.4573],[-88.2521,41.4633],[-88.2449,41.2013],[-88.2413,41.1145],[-88.2521,41.1145],[-88.5859,41.1085],[-88.5966,41.4573]]]}},{"type":"Feature","properties":{"n":"Kenosha"},"geometry":{"type":"Polygon","coordinates":[[[-88.3059,42.611],[-88.1875,42.6119],[-88.1875,42.6694],[-87.807,42.6677],[-87.8213,42.6162],[-87.7998,42.4916],[-88.1982,42.4959],[-88.3059,42.495],[-88.3059,42.611]]]}},{"type":"Feature","properties":{"n":"McHenry"},"geometry":{"type":"Polygon","coordinates":[[[-88.7079,42.4933],[-88.3059,42.495],[-88.1982,42.4959],[-88.1982,42.154],[-88.2377,42.154],[-88.5895,42.154],[-88.7043,42.154],[-88.7079,42.4933]]]}},{"type":"Feature","properties":{"n":"Kane"},"geometry":{"type":"Polygon","coordinates":[[[-88.5895,42.154],[-88.2377,42.154],[-88.2377,42.0672],[-88.2628,42.0664],[-88.2628,41.9865],[-88.2628,41.7245],[-88.6002,41.7193],[-88.6002,42.0664],[-88.5895,42.0664],[-88.5895,42.154]]]}},{"type":"Feature","properties":{"n":"Lake"},"geometry":{"type":"Polygon","coordinates":[[[-87.527,41.2984],[-87.527,41.4702],[-87.5234,41.7081],[-87.4696,41.6729],[-87.4265,41.6901],[-87.4014,41.6772],[-87.4229,41.6428],[-87.326,41.6231],[-87.2219,41.6239],[-87.2183,41.2417],[-87.2758,41.2185],[-87.326,41.1858],[-87.4158,41.1626],[-87.4409,41.1738],[-87.527,41.1661],[-87.527,41.2984]]]}},{"type":"Feature","properties":{"n":"Racine"},"geometry":{"type":"Polygon","coordinates":[[[-88.3059,42.8421],[-88.069,42.8429],[-87.8285,42.8421],[-87.7675,42.7845],[-87.7819,42.7081],[-87.807,42.6677],[-88.1875,42.6694],[-88.1875,42.6119],[-88.3059,42.611],[-88.3059,42.8421]]]}},{"type":"Feature","properties":{"n":"Cook"},"geometry":{"type":"Polygon","coordinates":[[[-88.2377,42.154],[-88.1982,42.154],[-87.7603,42.1523],[-87.6814,42.0758],[-87.6706,42.0294],[-87.6239,41.91],[-87.6096,41.8456],[-87.5593,41.7657],[-87.5306,41.7485],[-87.5234,41.7081],[-87.527,41.4702],[-87.789,41.4702],[-87.7926,41.5587],[-87.9111,41.5569],[-87.9111,41.6437],[-88.0259,41.6411],[-88.0295,41.6858],[-87.9685,41.6867],[-87.9147,41.7167],[-87.9218,41.8619],[-87.9218,41.9942],[-88.2628,41.9865],[-88.2628,42.0664],[-88.2377,42.0672],[-88.2377,42.154]]]}},{"type":"Feature","properties":{"n":"Will"},"geometry":{"type":"Polygon","coordinates":[[[-88.2628,41.7245],[-88.0295,41.7287],[-88.0295,41.6858],[-88.0259,41.6411],[-87.9111,41.6437],[-87.9111,41.5569],[-87.7926,41.5587],[-87.789,41.4702],[-87.527,41.4702],[-87.527,41.2984],[-88.0152,41.2923],[-88.0116,41.2056],[-88.2449,41.2013],[-88.2521,41.4633],[-88.2628,41.7245]]]}},{"type":"Feature","properties":{"n":"Porter"},"geometry":{"type":"Polygon","coordinates":[[[-87.2219,41.6239],[-87.1214,41.6454],[-86.9312,41.7107],[-86.9312,41.2365],[-86.9671,41.2193],[-87.0604,41.2691],[-87.1322,41.2863],[-87.1932,41.2657],[-87.2183,41.2417],[-87.2219,41.6239]]]}},{"type":"Feature","properties":{"n":"Lake"},"geometry":{"type":"Polygon","coordinates":[[[-88.1982,42.4959],[-87.7998,42.4916],[-87.807,42.3851],[-87.8357,42.3017],[-87.7998,42.2081],[-87.7603,42.1523],[-88.1982,42.154],[-88.1982,42.4959]]]}},{"type":"Feature","properties":{"n":"Walworth"},"geometry":{"type":"Polygon","coordinates":[[[-88.7761,42.8429],[-88.5428,42.8429],[-88.3059,42.8421],[-88.3059,42.611],[-88.3059,42.495],[-88.7079,42.4933],[-88.7761,42.4925],[-88.7797,42.7545],[-88.7761,42.8429]]]}},{"type":"Feature","properties":{"n":"DuPage"},"geometry":{"type":"Polygon","coordinates":[[[-88.2628,41.9865],[-87.9218,41.9942],[-87.9218,41.8619],[-87.9147,41.7167],[-87.9685,41.6867],[-88.0295,41.6858],[-88.0295,41.7287],[-88.2628,41.7245],[-88.2628,41.9865]]]}}]};</script>
+<script src="data.js"></script>
+<script src="auto-events.js"></script>
+
+<script>
+const GROUPS = window.CANOPY_GROUPS || {};
+const MANUAL = window.CANOPY_EVENTS || [];
+const AUTO = (window.CANOPY_AUTO && window.CANOPY_AUTO.events) || [];
+const normT = s=>String(s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
+// Hand-entered events win; auto events that duplicate one (same date, matching title) are dropped.
+const EVENTS = MANUAL.concat(AUTO.filter(a=>!MANUAL.some(m=>m.date===a.date&&(normT(m.title).includes(normT(a.title))||normT(a.title).includes(normT(m.title))))));
+const TOPICS = {
+  sec:{label:"Security",c:"--t-sec"}, grc:{label:"GRC & Audit",c:"--t-data"}, privacy:{label:"Privacy",c:"--t-web"},
+  ai:{label:"AI",c:"--t-ai"}, data:{label:"Data & Cloud",c:"--t-cloud"}, dev:{label:"Software Dev",c:"--t-dev"},
+  pm:{label:"Product & Design",c:"--t-design"}, startup:{label:"Startups",c:"--t-start"}, lead:{label:"Leadership",c:"--t-lead"}, career:{label:"Careers & Certs",c:"--t-career"}
+};
+const CATS = ["Security & GRC","AI & Data","Developers","Product & Design","IT Leadership","Startups & Innovation","Conferences"];
+
+(()=>{let label=window.CANOPY_CHECKED||"";const u=window.CANOPY_AUTO&&window.CANOPY_AUTO.updated;if(u){const d=new Date(u);if(!isNaN(d))label=d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}document.querySelectorAll(".checked").forEach(el=>el.textContent=label)})();
+
+const today = new Date(); today.setHours(0,0,0,0);
+const addDays = (d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const ymd = d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+
+const store = {
+  get(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+const evKey = e=>`${e.date}|${e.start}|${e.title}`;
+let events = EVENTS.map(e=>({...e,id:evKey(e)})).concat(store.get("canopy-chi-v4-submitted",[]));
+let saved = new Set(store.get("canopy-chi-v4-saved",[]));
+
+const state = {layout:"list",view:"events",q:"",type:"",group:"",mode:"",topics:new Set(),day:null,calMonth:new Date(today.getFullYear(),today.getMonth(),1),gq:"",cat:""};
+
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const parseDate = s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+const fmtTime = t=>{if(!t)return "";let [h,m]=t.split(":").map(Number);const ap=h>=12?"pm":"am";h=h%12||12;return `${h}:${String(m).padStart(2,"0")}${ap}`};
+const timeRange = e=>e.allDay?"All day":!e.start?"Time not posted":e.end?`${fmtTime(e.start)} – ${fmtTime(e.end)}`:`Starts ${fmtTime(e.start)}`;
+const relLabel = d=>{const diff=Math.round((d-today)/864e5);return diff===0?"Today":diff===1?"Tomorrow":diff<7?"This week":diff<14?"Next week":""};
+const upcoming = ()=>events.filter(e=>parseDate(e.date)>=today);
+const groupCount = k=>upcoming().filter(e=>(e.orgs||[]).includes(k)).length;
+const isFree = e=>/^free$/i.test(e.price||"");
+
+// selects
+[...new Set(events.map(e=>e.type))].sort().forEach(t=>{$("#fType").add(new Option(t,t));$("#sType").add(new Option(t,t))});
+CATS.forEach(c=>{
+  const og=document.createElement("optgroup");og.label=c;
+  Object.entries(GROUPS).filter(([,g])=>g.cat===c).sort((a,b)=>a[1].name.localeCompare(b[1].name)).forEach(([k,g])=>og.append(new Option(g.name,k)));
+  $("#fGroup").append(og);$("#sGroup").append(og.cloneNode(true));
+});
+
+// chips & legend
+const sTopics=$("#sTopics");
+Object.entries(TOPICS).forEach(([k,t])=>{
+  const b=document.createElement("button");b.className="chip";b.type="button";b.dataset.topic=k;b.setAttribute("aria-pressed","false");
+  b.innerHTML=`<span class="dot" style="background:var(${t.c})"></span>${t.label}`;$("#topicChips").append(b);
+  $("#legend").insertAdjacentHTML("beforeend",`<div><span class="line" style="background:var(${t.c})"></span>${t.label}</div>`);
+  const s=b.cloneNode(true);s.dataset.stopic=k;delete s.dataset.topic;sTopics.append(s);
+});
+["All",...CATS].forEach(c=>{
+  const b=document.createElement("button");b.className="chip";b.type="button";b.dataset.cat=c==="All"?"":c;b.setAttribute("aria-pressed",c==="All"?"true":"false");
+  const n=c==="All"?Object.keys(GROUPS).length:Object.values(GROUPS).filter(g=>g.cat===c).length;
+  b.innerHTML=`${c} <span class="cnt">${n}</span>`;$("#catChips").append(b);
+});
+
+function matches(e){
+  if(state.view==="saved"&&!saved.has(e.id))return false;
+  if(parseDate(e.date)<today)return false;
+  if(state.type&&e.type!==state.type)return false;
+  if(state.group&&!(e.orgs||[]).includes(state.group))return false;
+  if(state.mode==="free"){if(!isFree(e))return false}else if(state.mode&&e.mode!==state.mode)return false;
+  if(state.day&&e.date!==state.day)return false;
+  if(state.topics.size&&!e.topics.some(t=>state.topics.has(t)))return false;
+  if(state.q){const q=state.q.toLowerCase();const names=(e.orgs||[]).map(o=>GROUPS[o]?.name||"").join(" ");if(![e.title,e.host,names,e.venue,e.area,e.type].join(" ").toLowerCase().includes(q))return false}
+  return true;
+}
+const sorted = ()=>events.slice().sort((a,b)=>(a.date+(a.start||"99")).localeCompare(b.date+(b.start||"99")));
+
+const bookmark = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z"/></svg>`;
+const bookmarkO = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1Z"/></svg>`;
+const topicTags = e=>e.topics.filter(t=>TOPICS[t]).map(t=>`<span class="tag"><span class="dot" style="background:var(${TOPICS[t].c})"></span>${TOPICS[t].label}</span>`).join("");
+
+function renderList(){
+  const banner=$("#groupBanner");
+  if(state.group&&GROUPS[state.group]){banner.hidden=false;banner.innerHTML=`Showing events for <b>${esc(GROUPS[state.group].name)}</b><button id="clearGroup">Show all groups</button>`}
+  else banner.hidden=true;
+  const list=sorted().filter(matches);
+  const el=$("#list");
+  const showMap=state.layout==="map";
+  el.hidden=showMap; $("#mapWrap").hidden=!showMap;
+  document.querySelector(".layout").classList.toggle("is-map",showMap);
+  if(showMap){renderMap(list);return}
+  if(!list.length){
+    const g=state.group&&GROUPS[state.group];
+    el.innerHTML = state.view==="saved"
+      ? `<div class="empty"><strong>Nothing saved yet</strong>Tap the bookmark on any event and it will show up here.</div>`
+      : g&&!groupCount(state.group)
+        ? `<div class="empty"><strong>No upcoming ${esc(g.name)} events</strong>${esc(g.status||"Nothing confirmed right now.")} <a href="${g.url}" target="_blank" rel="noopener">Check their calendar</a></div>`
+        : `<div class="empty"><strong>No events match</strong>Try clearing a filter or picking another date.</div>`;
+    return;
+  }
+  const byDay={};list.forEach(e=>(byDay[e.date]=byDay[e.date]||[]).push(e));
+  el.innerHTML=Object.entries(byDay).map(([date,evs])=>{
+    const d=parseDate(date);
+    const head=d.toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"});
+    return `<section class="day"><div class="day-head"><h2>${head}</h2><span class="rel">${relLabel(d)}</span><span class="n">${evs.length} event${evs.length>1?"s":""}</span></div>
+    ${evs.map(e=>`<article class="ev" data-id="${esc(e.id)}" tabindex="0">
+      <div class="ev-time">${e.allDay?"All day":e.start?fmtTime(e.start):"TBA"}<small>${e.allDay?"":e.end?fmtTime(e.end):e.start?"":"see listing"}</small></div>
+      <div style="min-width:0"><h3>${esc(e.title)}</h3>
+        <div class="meta"><span class="ev-org">${esc(e.host)}</span><span>${e.mode==="Virtual"?"Virtual":esc(e.area||"In person")}</span>${e.note?`<span class="note-tag">${esc(e.note)}</span>`:""}</div>
+        <div class="tags"><span class="tag type">${esc(e.type)}</span>${isFree(e)?`<span class="tag free">Free</span>`:""}${topicTags(e)}</div>
+      </div>
+      <button class="save" data-save="${esc(e.id)}" aria-pressed="${saved.has(e.id)}" aria-label="${saved.has(e.id)?"Remove from saved":"Save event"}">${saved.has(e.id)?bookmark:bookmarkO}</button>
+    </article>`).join("")}</section>`;
+  }).join("");
+}
+
+
+const PLACES = window.CANOPY_PLACES || {};
+const AREA_PTS = window.CANOPY_AREAS || {};
+const PLACE_KEYS = Object.keys(PLACES).sort((a,b)=>b.length-a.length);
+function locate(e){
+  if(e.mode==="Virtual")return null;
+  if(typeof e.lat==="number"&&typeof e.lng==="number")return {ll:[e.lat,e.lng],approx:!!e.approx};
+  const v=(e.venue||"").toLowerCase();
+  for(const k of PLACE_KEYS){if(v.includes(k.toLowerCase())){const p=PLACES[k];return {ll:[p[0],p[1]],approx:!!p[2]}}}
+  const a=AREA_PTS[e.area];
+  return a?{ll:a,approx:true}:null;
+}
+const cssVar = n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let map=null, markerLayer=null, lastPts=[], spotList=[];
+function initMap(){
+  if(map)return;
+  map=L.map("map",{scrollWheelZoom:false}).setView([41.88,-87.72],10);
+  map.createPane("backdrop").style.zIndex=150;
+  L.geoJSON(window.CANOPY_COUNTIES,{pane:"backdrop",interactive:false,style:{color:cssVar("--line"),weight:1,fillColor:cssVar("--land"),fillOpacity:1}}).addTo(map);
+  L.marker([42.06,-87.56],{pane:"backdrop",interactive:false,icon:L.divIcon({className:"lake-label",html:"Lake Michigan",iconSize:[120,20]})}).addTo(map);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(map);
+  markerLayer=L.layerGroup().addTo(map);
+  map.on("zoomend",drawMarkers);
+  map.on("popupopen",ev=>{ev.popup.getElement().querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.open)))});
+}
+function popupHtml(s){
+  const e0=s.evs[0];
+  return `<div class="pop"><div class="pop-venue">${esc(e0.venue)}</div>${s.approx?'<div class="pop-approx">Approximate location</div>':""}<ul>${s.evs.slice(0,8).map(e=>`<li><button type="button" data-open="${esc(e.id)}"><span>${parseDate(e.date).toLocaleDateString(undefined,{month:"short",day:"numeric"})}${e.start?" · "+fmtTime(e.start):""}</span>${esc(e.title)}</button></li>`).join("")}</ul>${s.evs.length>8?`<div class="pop-more">+${s.evs.length-8} more. Use the list view or filters to see them.</div>`:""}</div>`;
+}
+function renderMap(list){
+  if(!window.L){$("#map").innerHTML='<div class="empty"><strong>Map unavailable</strong>The map couldn\'t load. Check your connection and reload the page.</div>';$("#mapNote").textContent="";return}
+  initMap(); markerLayer.clearLayers();
+  const spots={}; let virt=0, missing=0, mapped=0;
+  list.forEach(e=>{const loc=locate(e);if(!loc){e.mode==="Virtual"?virt++:missing++;return}
+    mapped++;const k=loc.ll.map(n=>n.toFixed(4)).join(",");(spots[k]=spots[k]||{ll:loc.ll,approx:loc.approx,evs:[]}).evs.push(e)});
+  spotList=Object.values(spots);
+  lastPts=spotList.map(s=>s.ll);
+  setTimeout(()=>{map.invalidateSize();zoomTo("all")},0);
+  const skipped=[];if(virt)skipped.push(`${virt} virtual`);if(missing)skipped.push(`${missing} without a posted location`);
+  $("#mapNote").textContent=list.length?`${mapped} event${mapped===1?"":"s"} on the map${skipped.length?`. Not shown: ${skipped.join(", ")}`:""}. Dashed pins mark approximate locations.`:"No events match these filters.";
+}
+
+// Group pins that would overlap at the current zoom; clicking a group zooms in on it.
+function drawMarkers(){
+  if(!map)return;
+  markerLayer.clearLayers();
+  const z=map.getZoom(), groups=[];
+  spotList.forEach(s=>{
+    const pt=map.project(s.ll,z);
+    const g=z<16&&groups.find(g=>g.pt.distanceTo(pt)<34);
+    g?g.spots.push(s):groups.push({pt,spots:[s]});
+  });
+  groups.forEach(g=>{
+    if(g.spots.length===1){
+      const s=g.spots[0], n=s.evs.length;
+      const icon=L.divIcon({className:"",html:`<span class="pin${s.approx?" approx":""}">${n}</span>`,iconSize:[30,30],iconAnchor:[15,15],popupAnchor:[0,-12]});
+      markerLayer.addLayer(L.marker(s.ll,{icon,title:`${n} event${n>1?"s":""} at ${s.evs[0].venue}`}).bindPopup(()=>popupHtml(s),{maxWidth:300}));
+      return;
+    }
+    const n=g.spots.reduce((a,s)=>a+s.evs.length,0);
+    const lat=g.spots.reduce((a,s)=>a+s.ll[0],0)/g.spots.length, lng=g.spots.reduce((a,s)=>a+s.ll[1],0)/g.spots.length;
+    const icon=L.divIcon({className:"",html:`<span class="pin cluster">${n}</span>`,iconSize:[38,38],iconAnchor:[19,19]});
+    const m=L.marker([lat,lng],{icon,title:`${n} events at ${g.spots.length} places. Select to zoom in`});
+    m.on("click",()=>map.fitBounds(g.spots.map(s=>s.ll),{padding:[70,70],maxZoom:17}));
+    markerLayer.addLayer(m);
+  });
+}
+function zoomTo(which){
+  if(!map)return;
+  if(which==="downtown")map.setView([41.8835,-87.6365],14);
+  else lastPts.length?map.fitBounds(lastPts,{padding:[30,30],maxZoom:14}):map.setView([41.88,-87.72],10);
+  drawMarkers();
+}
+
+function renderGroups(){
+  const q=state.gq.toLowerCase();
+  const html=CATS.filter(c=>!state.cat||state.cat===c).map(c=>{
+    const items=Object.entries(GROUPS).filter(([,g])=>g.cat===c&&(!q||[g.name,g.focus,g.desc].join(" ").toLowerCase().includes(q))).sort((a,b)=>groupCount(b[0])-groupCount(a[0])||a[1].name.localeCompare(b[1].name));
+    if(!items.length)return "";
+    return `<section class="gsec"><h3 class="gsec-h">${c}<span>${items.length}</span></h3><div class="ggrid">${items.map(([k,g])=>{
+      const n=groupCount(k);
+      return `<article class="gcard"><div class="focus">${esc(g.focus)}</div><h4>${esc(g.name)}</h4><p>${esc(g.desc)}</p>
+        <div class="gstatus ${n?"":"none"}"><span class="pip"></span>${n?`${n} upcoming event${n>1?"s":""} on Canopy`:esc(g.status||"No confirmed events right now")}</div>
+        <div class="actions">${n?`<button class="btn btn-primary" data-group="${k}">See events</button>`:""}<a class="btn btn-ghost" href="${g.url}" target="_blank" rel="noopener">Official site ↗</a></div></article>`;
+    }).join("")}</div></section>`;
+  }).join("");
+  $("#ggroups").innerHTML=html||`<div class="empty"><strong>No groups match</strong>Try another search.</div>`;
+}
+
+function renderStats(){
+  const up=upcoming();
+  $("#stMonth").textContent=up.filter(e=>parseDate(e.date)<addDays(today,30)).length;
+  $("#stFree").textContent=up.filter(isFree).length;
+  $("#stGroups").textContent=Object.keys(GROUPS).length;
+  $("#savedCount").textContent=saved.size;$("#savedCount").hidden=!saved.size;
+}
+
+function renderCal(){
+  const m=state.calMonth, y=m.getFullYear(), mo=m.getMonth();
+  $("#calTitle").textContent=m.toLocaleDateString(undefined,{month:"long",year:"numeric"});
+  const days=new Set(events.map(e=>e.date));
+  const first=new Date(y,mo,1).getDay(), n=new Date(y,mo+1,0).getDate();
+  let h=["S","M","T","W","T","F","S"].map(d=>`<span class="dow">${d}</span>`).join("");
+  for(let i=0;i<first;i++)h+="<span></span>";
+  for(let d=1;d<=n;d++){
+    const dt=new Date(y,mo,d), k=ymd(dt), past=dt<today;
+    h+=`<button data-day="${k}" ${past?"disabled":""} class="${days.has(k)&&!past?"has":""} ${k===ymd(today)?"today":""} ${state.day===k?"sel":""}" aria-label="${dt.toDateString()}">${d}</button>`;
+  }
+  $("#cal").innerHTML=h;
+  $("#calClear").hidden=!state.day;
+}
+
+function render(){renderStats();renderList();renderCal();renderGroups()}
+
+function gcalLink(e){
+  const d=e.date.replace(/-/g,"");
+  let dates;
+  if(e.start&&!e.allDay){
+    const st=d+"T"+e.start.replace(":","")+"00";
+    let en=e.end;if(!en){const [h,m]=e.start.split(":").map(Number);en=`${String(Math.min(h+1,23)).padStart(2,"0")}:${String(m).padStart(2,"0")}`}
+    dates=`${st}/${d}T${en.replace(":","")}00`;
+  }else{dates=`${d}/${ymd(addDays(parseDate(e.date),1)).replace(/-/g,"")}`}
+  const loc=e.mode==="Virtual"?"Online":/see event page/i.test(e.venue)?`${e.area||"Chicago"}, IL`:`${e.venue}${e.area&&!/Loop|Fulton|River|Pilsen|Logan|Village/.test(e.area)?", "+e.area:""}, IL`;
+  const p=new URLSearchParams({action:"TEMPLATE",text:e.title,dates,details:`${e.desc||""}\n\nHosted by ${e.host}${e.link?`\n${e.link}`:""}`,location:loc,ctz:"America/Chicago"});
+  return "https://calendar.google.com/calendar/render?"+p;
+}
+
+function openModal(id){
+  const e=events.find(x=>x.id===id);if(!e)return;
+  const d=parseDate(e.date);
+  const groupNames=(e.orgs||[]).filter(o=>GROUPS[o]).map(o=>esc(GROUPS[o].name)).join(", ");
+  $("#modal").innerHTML=`<button class="x" aria-label="Close">×</button>
+    <div class="tags"><span class="tag type">${esc(e.type)}</span>${topicTags(e)}</div>
+    <h3 id="mTitle">${esc(e.title)}</h3><p class="org">Hosted by ${esc(e.host)}</p>
+    <dl class="dl"><dt>When</dt><dd>${d.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"})}<br>${timeRange(e)}${e.start?" CT":""}${e.note?`<br><span class="note-tag">${esc(e.note)}</span>`:""}</dd>
+    <dt>Where</dt><dd>${esc(e.venue)}${e.area&&e.mode!=="Virtual"?`<br><span style="color:var(--muted)">${esc(e.area)}</span>`:""}</dd>
+    <dt>Price</dt><dd>${e.price?esc(e.price):"See the event page"}</dd>
+    ${groupNames?`<dt>Groups</dt><dd>${groupNames}</dd>`:""}</dl>
+    <p class="desc">${esc(e.desc||"")}</p>${e.auto?`<p class="auto-note">Added automatically from the organizer's calendar feed. Check the event page for final details.</p>`:""}
+    <div class="actions">
+      ${e.link?`<a class="btn btn-primary" href="${esc(e.link)}" target="_blank" rel="noopener">Event page &amp; registration ↗</a>`:""}
+      <a class="btn btn-ghost" href="${gcalLink(e)}" target="_blank" rel="noopener">Add to Google Calendar</a>
+      <button class="btn btn-ghost" data-save="${esc(e.id)}">${saved.has(e.id)?"Saved ✓":"Save event"}</button>
+    </div>`;
+  $("#scrim").hidden=false;$("#modal .x").focus();
+}
+const closeModal=()=>{$("#scrim").hidden=true};
+
+function toggleSave(id){
+  saved.has(id)?saved.delete(id):saved.add(id);store.set("canopy-chi-v4-saved",[...saved]);
+  render();if(!$("#scrim").hidden)openModal(id);
+}
+
+function setView(v){
+  state.view=v;
+  document.querySelectorAll("nav.main button").forEach(b=>{if(b.dataset.view===v)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
+  $("#view-list").hidden=!(v==="events"||v==="saved");
+  $("#view-groups").hidden=v!=="groups";
+  $("#view-submit").hidden=v!=="submit";
+  $("#hero").hidden=v==="saved";
+  if(v==="submit"&&!$("#sDate").value)$("#sDate").value=ymd(addDays(today,14));
+  render();window.scrollTo({top:0});
+}
+function setGroup(k){state.group=k;$("#fGroup").value=k;}
+
+document.addEventListener("click",ev=>{
+  const t=ev.target;
+  const lay=t.closest("[data-layout]");if(lay){state.layout=lay.dataset.layout;document.querySelectorAll("[data-layout]").forEach(x=>x.setAttribute("aria-pressed",x===lay));renderList();return}
+  const zm=t.closest("[data-zoom]");if(zm){zoomTo(zm.dataset.zoom);return}
+  const sv=t.closest("[data-save]");if(sv){ev.stopPropagation();toggleSave(sv.dataset.save);return}
+  const gp=t.closest("[data-group]");if(gp){setGroup(gp.dataset.group);setView("events");return}
+  if(t.id==="clearGroup"){setGroup("");renderList();return}
+  const vw=t.closest("[data-view]");if(vw){ev.preventDefault();setView(vw.dataset.view);return}
+  const ct=t.closest("[data-cat]");if(ct){state.cat=ct.dataset.cat;document.querySelectorAll("[data-cat]").forEach(b=>b.setAttribute("aria-pressed",b===ct));renderGroups();return}
+  const tp=t.closest("[data-topic]");if(tp){const k=tp.dataset.topic;state.topics.has(k)?state.topics.delete(k):state.topics.add(k);tp.setAttribute("aria-pressed",state.topics.has(k));renderList();return}
+  const st=t.closest("[data-stopic]");if(st){st.setAttribute("aria-pressed",st.getAttribute("aria-pressed")!=="true");return}
+  const dy=t.closest("[data-day]");if(dy){state.day=state.day===dy.dataset.day?null:dy.dataset.day;render();return}
+  const card=t.closest(".ev");if(card){openModal(card.dataset.id);return}
+  if(t.id==="scrim"||t.closest(".x"))closeModal();
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")closeModal();
+  if(e.key==="Enter"&&e.target.classList.contains("ev"))openModal(e.target.dataset.id);
+});
+$("#q").addEventListener("input",e=>{state.q=e.target.value.trim();renderList()});
+$("#gq").addEventListener("input",e=>{state.gq=e.target.value.trim();renderGroups()});
+$("#fType").addEventListener("change",e=>{state.type=e.target.value;renderList()});
+$("#fGroup").addEventListener("change",e=>{state.group=e.target.value;renderList()});
+$("#fMode").addEventListener("change",e=>{state.mode=e.target.value;renderList()});
+$("#calPrev").addEventListener("click",()=>{state.calMonth=new Date(state.calMonth.getFullYear(),state.calMonth.getMonth()-1,1);renderCal()});
+$("#calNext").addEventListener("click",()=>{state.calMonth=new Date(state.calMonth.getFullYear(),state.calMonth.getMonth()+1,1);renderCal()});
+$("#calClear").addEventListener("click",()=>{state.day=null;render()});
+$("#subForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const topics=[...document.querySelectorAll("[data-stopic][aria-pressed='true']")].map(b=>b.dataset.stopic);
+  const g=$("#sGroup").value, mode=$("#sMode").value, start=$("#sTime").value;
+  let end="";if(start){const [h,m]=start.split(":").map(Number);end=`${String(Math.min(h+2,23)).padStart(2,"0")}:${String(m).padStart(2,"0")}`}
+  const ne={date:$("#sDate").value,start,end,title:$("#sTitle").value,host:$("#sOrg").value,orgs:g?[g]:[],type:$("#sType").value,venue:$("#sVenue").value,area:mode==="Virtual"?"Virtual":$("#sArea").value,mode,topics:topics.length?topics:["dev"],price:$("#sPrice").value,desc:$("#sDesc").value,link:$("#sLink").value,note:"Your submission"};
+  ne.id="u|"+Date.now();
+  events.push(ne);
+  const mine=store.get("canopy-chi-v4-submitted",[]);mine.push(ne);store.set("canopy-chi-v4-submitted",mine);
+  e.target.reset();document.querySelectorAll("[data-stopic]").forEach(b=>b.setAttribute("aria-pressed","false"));
+  state.day=ne.date;const nd=parseDate(ne.date);state.calMonth=new Date(nd.getFullYear(),nd.getMonth(),1);
+  setView("events");
+  requestAnimationFrame(()=>openModal(ne.id));
+});
+
+render();
+</script>
+
+</body>
+</html>
