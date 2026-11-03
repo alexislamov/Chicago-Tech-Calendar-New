@@ -1140,7 +1140,6 @@ function renderList(){
         <div class="meta"><span class="ev-org">${esc(e.host)}</span><span>${e.mode==="Virtual"?"Virtual":esc(e.area||"In person")}</span>${e.note?`<span class="note-tag">${esc(e.note)}</span>`:""}</div>
         ${e.cohosts?.length?`<div class="cohost-summary">With ${esc(cohostSummary(e))}</div>`:""}
         <div class="community-summary" data-community-summary="${esc(e.id)}">${window.canopyCommunity?window.canopyCommunity.summary(e.id):"Community counts unavailable"}</div>
-        <button class="outlook-inline" data-outlook="${esc(e.id)}" title="Download an Outlook-compatible calendar file">Add to Outlook Calendar</button>
         <div class="tags"><span class="tag type">${esc(e.type)}</span>${isFree(e)?`<span class="tag free">Free</span>`:""}${topicTags(e)}</div>
       </div>
       <button class="save" data-save="${esc(e.id)}" aria-pressed="${saved.has(e.id)}" aria-label="${saved.has(e.id)?"Remove from saved":"Save event"}">${saved.has(e.id)?bookmark:bookmarkO}</button>
