@@ -987,7 +987,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     <div class="wrap submit">
       <div class="eyebrow">For organizers</div>
       <h2>Submit an Event or group</h2>
-      <p>Running a chapter meeting, meetup, training or conference in the Chicago area? Add it here. Submissions currently appear only in your own browser while review is being set up.</p>
+      <p>Running a chapter meeting, meetup, training or conference in the Chicago area? Add it here. Submissions go to our shared review queue. We check the details before adding an event to the public calendar. No email notifications are sent.</p>
       <form class="form" id="subForm">
         <label class="full">Event name<input id="sTitle" required placeholder="Q1 Chapter Meeting"></label>
         <label>Group<select id="sGroup"><option value="">Other / not listed</option></select></label>
@@ -1002,7 +1002,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
         <label>Event link<input id="sLink" type="url" placeholder="https://"></label>
         <div class="full"><div style="font-size:13px;font-weight:600;margin-bottom:6px">Topics</div><div class="check-row" id="sTopics"></div></div>
         <label class="full">Short description<textarea id="sDesc" placeholder="What will people learn or do?"></textarea></label>
-        <div class="full actions"><button class="btn btn-primary" type="submit">Add to calendar</button><button class="btn btn-ghost" type="button" data-view="events">Cancel</button></div>
+        <div class="full actions"><button class="btn btn-primary" type="submit">Submit for review</button><button class="btn btn-ghost" type="button" data-view="events">Cancel</button></div>
+        <p id="submissionStatus" class="full" role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -1333,19 +1334,22 @@ $("#fMode").addEventListener("change",e=>{state.mode=e.target.value;renderList()
 $("#calPrev").addEventListener("click",()=>{state.calMonth=new Date(state.calMonth.getFullYear(),state.calMonth.getMonth()-1,1);renderCal()});
 $("#calNext").addEventListener("click",()=>{state.calMonth=new Date(state.calMonth.getFullYear(),state.calMonth.getMonth()+1,1);renderCal()});
 $("#calClear").addEventListener("click",()=>{state.day=null;render()});
-$("#subForm").addEventListener("submit",e=>{
+$("#subForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const topics=[...document.querySelectorAll("[data-stopic][aria-pressed='true']")].map(b=>b.dataset.stopic);
   const g=$("#sGroup").value, mode=$("#sMode").value, start=$("#sTime").value;
   let end="";if(start){const [h,m]=start.split(":").map(Number);end=`${String(Math.min(h+2,23)).padStart(2,"0")}:${String(m).padStart(2,"0")}`}
   const ne={date:$("#sDate").value,start,end,title:$("#sTitle").value,host:$("#sOrg").value,orgs:g?[g]:[],type:$("#sType").value,venue:$("#sVenue").value,area:mode==="Virtual"?"Virtual":$("#sArea").value,mode,topics:topics.length?topics:["dev"],price:$("#sPrice").value,desc:$("#sDesc").value,link:$("#sLink").value,note:"Your submission"};
-  ne.id="u|"+Date.now();
-  events.push(ne);
-  const mine=store.get("canopy-chi-v4-submitted",[]);mine.push(ne);store.set("canopy-chi-v4-submitted",mine);
-  e.target.reset();document.querySelectorAll("[data-stopic]").forEach(b=>b.setAttribute("aria-pressed","false"));
-  state.day=ne.date;const nd=parseDate(ne.date);state.calMonth=new Date(nd.getFullYear(),nd.getMonth(),1);
-  setView("events");
-  requestAnimationFrame(()=>openModal(ne.id));
+  const button=e.target.querySelector('[type="submit"]'),status=$("#submissionStatus");
+  if(button.disabled)return;
+  button.disabled=true;button.textContent="Submitting…";status.textContent="Sending your event for review…";
+  try {
+    const result=await Community.submitEvent(ne);
+    e.target.reset();document.querySelectorAll("[data-stopic]").forEach(b=>b.setAttribute("aria-pressed","false"));
+    status.textContent="Received for review. Your event is not public yet. Reference: "+result.id.slice(0,12)+". No email notification is sent.";
+  }catch(error){status.textContent=error.message||"Could not submit. Please try again."}
+  finally{button.disabled=false;button.textContent="Submit for review"}
+
 });
 
 render();

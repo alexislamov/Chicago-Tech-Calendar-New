@@ -73,7 +73,14 @@ const Community = (() => {
     if(saveJournal([entry,...journal])){renderJournal();message('Connection saved privately in this browser.')}
   });
   async function init(){await load();if(invitedEvent){const event=events.find(x=>x.id===invitedEvent);if(event)openModal(event.id);else message('This invited event is no longer listed. Explore upcoming events instead.')}}
-  return {panel,summary,renderJournal,init};
+  async function submitEvent(event) {
+    if(!identity)throw new Error('Enable browser storage to submit an event.');
+    const response=await fetch('/api/submissions',{method:'POST',headers:{Authorization:`Bearer ${identity}`,'Content-Type':'application/json'},body:JSON.stringify(event)});
+    let result;try{result=await response.json()}catch{throw new Error('Submissions are temporarily unavailable. Please try again.');}
+    if(!response.ok)throw new Error(result.error||'Could not submit your event. Please try again.');
+    return result;
+  }
+  return {panel,summary,renderJournal,init,submitEvent};
 })();
 window.canopyCommunity=Community;
 Community.init();

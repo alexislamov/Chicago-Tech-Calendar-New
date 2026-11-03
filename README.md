@@ -149,11 +149,10 @@ These calendars cover most of what's on the site:
 
 ---
 
-## Making the forms work (optional)
+## Event submissions
 
-Right now, "Submit an event" saves only in the visitor's own browser, and nothing reaches you. To actually receive submissions:
+The Submit an Event form sends new entries to the shared `event_submissions` review queue in Cloudflare D1. It does not send email or publish unreviewed submissions. See [REVIEW-QUEUE.md](REVIEW-QUEUE.md) for the staff workflow.
 
-- **Easiest:** make a Google Form with the same questions, then change the "Submit an event" button so it links to the form. Responses land in a Google Sheet you review before adding them to `data.js`.
-- **Or:** use a form service such as Formspree or Netlify Forms (built into Netlify hosting) to email each submission to you.
+## LinkedIn connections
 
-I can wire up either one for you.
+My Connections supports optional personal LinkedIn profile links when logging a connection and adding, editing or removing links on existing records. Profiles and journal notes remain in the visitor's browser; there is no LinkedIn account integration or automatic connection request.
