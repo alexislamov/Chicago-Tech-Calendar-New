@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS news_sources (
+ id TEXT PRIMARY KEY, payload TEXT NOT NULL, refreshed_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS news_brief (
+ id INTEGER PRIMARY KEY CHECK(id=1), payload TEXT NOT NULL DEFAULT '{}',
+ last_success TEXT, attempt_day TEXT NOT NULL DEFAULT '', last_attempt INTEGER NOT NULL DEFAULT 0,
+ lease_until INTEGER NOT NULL DEFAULT 0, last_error TEXT NOT NULL DEFAULT ''
+);
+INSERT OR IGNORE INTO news_brief(id) VALUES(1);

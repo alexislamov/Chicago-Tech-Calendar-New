@@ -910,6 +910,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
         <div class="stat"><b id="stFree">0</b><span>listed as free</span></div>
         <div class="stat"><b id="stGroups">0</b><span>groups tracked</span></div>
       </div>
+      <section id="dailyNews" class="news-brief" aria-label="Daily cybersecurity and AI news"></section>
     </div>
 
     <div class="filters">
@@ -1138,6 +1139,7 @@ function renderList(){
         <div class="meta"><span class="ev-org">${esc(e.host)}</span><span>${e.mode==="Virtual"?"Virtual":esc(e.area||"In person")}</span>${e.note?`<span class="note-tag">${esc(e.note)}</span>`:""}</div>
         ${e.cohosts?.length?`<div class="cohost-summary">With ${esc(cohostSummary(e))}</div>`:""}
         <div class="community-summary" data-community-summary="${esc(e.id)}">${window.canopyCommunity?window.canopyCommunity.summary(e.id):"Community counts unavailable"}</div>
+        <button class="outlook-inline" data-outlook="${esc(e.id)}" title="Download an Outlook-compatible calendar file">Add to Outlook Calendar</button>
         <div class="tags"><span class="tag type">${esc(e.type)}</span>${isFree(e)?`<span class="tag free">Free</span>`:""}${topicTags(e)}</div>
       </div>
       <button class="save" data-save="${esc(e.id)}" aria-pressed="${saved.has(e.id)}" aria-label="${saved.has(e.id)?"Remove from saved":"Save event"}">${saved.has(e.id)?bookmark:bookmarkO}</button>
@@ -1288,8 +1290,9 @@ function openModal(id){
     <div class="actions">
       ${e.link?`<a class="btn btn-primary" href="${esc(e.link)}" target="_blank" rel="noopener">Event page &amp; registration ↗</a>`:""}
       <a class="btn btn-ghost" href="${gcalLink(e)}" target="_blank" rel="noopener">Add to Google Calendar</a>
+      <button class="btn btn-ghost" data-outlook="${esc(e.id)}" title="Download an .ics file to open or import in Outlook">Add to Outlook Calendar</button>
       <button class="btn btn-ghost" data-save="${esc(e.id)}">${saved.has(e.id)?"Saved ✓":"Save event"}</button>
-    </div>${Community.panel(e.id)}`;
+    </div><p class="auto-note">Outlook downloads a calendar file (.ics). Open it in Outlook or import it from Add calendar. Events without a posted start time use an all-day reminder.</p>${Community.panel(e.id)}`;
   $("#scrim").hidden=false;$("#modal .x").focus();
 }
 const closeModal=()=>{$("#scrim").hidden=true};
@@ -1317,6 +1320,7 @@ function setGroup(k){state.group=k;$("#fGroup").value=k;}
 
 document.addEventListener("click",ev=>{
   const t=ev.target;
+  const outlook=t.closest("[data-outlook]");if(outlook){ev.preventDefault();CanopyCalendar.download(events.find(e=>e.id===outlook.dataset.outlook));return}
   const lay=t.closest("[data-layout]");if(lay){state.layout=lay.dataset.layout;document.querySelectorAll("[data-layout]").forEach(x=>x.setAttribute("aria-pressed",x===lay));renderList();return}
   const zm=t.closest("[data-zoom]");if(zm){zoomTo(zm.dataset.zoom);return}
   const sv=t.closest("[data-save]");if(sv){ev.stopPropagation();toggleSave(sv.dataset.save);return}
@@ -1366,7 +1370,9 @@ render();
 </script>
 
 <div id="communityMessage" class="community-message" role="status" hidden></div>
+<script src="calendar.js"></script>
 <script src="community.js"></script>
 <script src="collaboration.js"></script>
+<script src="news.js"></script>
 </body>
 </html>

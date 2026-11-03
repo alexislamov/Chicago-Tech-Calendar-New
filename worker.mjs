@@ -1,3 +1,4 @@
+import {refreshNews,newsResponse} from './news-service.mjs';
 import {notify,retryNotifications} from './notifications.mjs';
 import {partnerRequests} from './partners.mjs';
 const json = (body, status=200) => new Response(JSON.stringify(body), {status, headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
@@ -79,8 +80,12 @@ export async function submitEvent({request,env}) {
 }
 
 export default {
-  async scheduled(controller,env,ctx){ctx.waitUntil(retryNotifications(env));},
-  async fetch(request, env) {
+  async scheduled(controller,env,ctx){ctx.waitUntil(Promise.allSettled([retryNotifications(env),refreshNews(env)]));},
+  async fetch(request, env,ctx) {
+    if (new URL(request.url).pathname === '/api/news') {
+      if(request.method!=='GET')return json({error:'Method not allowed'},405);
+      try{return await newsResponse(env,ctx)}catch{return json({error:'Daily brief temporarily unavailable'},503)}
+    }
     if (new URL(request.url).pathname === '/api/partners') return partnerRequests(request,env);
     if (new URL(request.url).pathname === '/api/submissions') return submitEvent({request,env});
     if (new URL(request.url).pathname === '/api/community') return onRequest({request,env});
