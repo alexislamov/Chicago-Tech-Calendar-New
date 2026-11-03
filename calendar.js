@@ -18,7 +18,7 @@ globalThis.CanopyCalendar=(()=>{
  function serialize(event,now=Date.now()){
   const allDay=event.allDay||!event.start;
   let timing;
-  if(allDay)timing=['DTSTART;VALUE=DATE:'+event.date.replace(/-/g,''),'DTEND;VALUE=DATE:'+dayAfter(event.date).replace(/-/g,'')];
+  if(allDay)timing=['DTSTART;VALUE=DATE:'+event.date.replace(/-/g,''),'DTEND;VALUE=DATE:'+dayAfter(event.endDate||event.date).replace(/-/g,'')];
   else{const start=utc(event.date,event.start);const end=event.end?utc(event.end<=event.start?dayAfter(event.date):event.date,event.end):start+36e5;timing=['DTSTART:'+stamp(start),'DTEND:'+stamp(end)]}
   const description=[event.desc,event.note,'Hosted by '+event.host,(event.cohosts||[]).map(x=>x.name+' ('+x.role+')').join('; '),event.link,!event.start?'Start time not posted. This is an all-day reminder; confirm the time with the organizer.':'Confirm details and registration with the organizer.'].filter(Boolean).join('\n\n');
   const uid=encodeURIComponent(event.id||event.date+'|'+event.title)+'@chitech.events';

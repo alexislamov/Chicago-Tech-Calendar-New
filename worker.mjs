@@ -54,7 +54,7 @@ export async function submitEvent({request,env}) {
     if(!/^\d{4}-\d{2}-\d{2}$/.test(event.date)||Number.isNaN(Date.parse(event.date))||new Date(event.date).toISOString().slice(0,10)!==event.date)return json({error:'Enter a valid event date.'},400);
     for(const field of ['start','end'])if(event[field]&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(event[field]))return json({error:'Enter a valid event time.'},400);
     if(event.link){let url;try{url=new URL(event.link)}catch{return json({error:'Enter a valid event URL.'},400)}if(!['https:','http:'].includes(url.protocol)||url.username||url.password)return json({error:'Use an http or https event URL.'},400)}
-    const allowed=['sec','grc','privacy','ai','data','dev','pm','startup','lead','career'];
+    const allowed=['sec','grc','privacy','ai','data','dev','pm','startup','lead','career','quantum'];
     event.topics=Array.isArray(body.topics)?[...new Set(body.topics.filter(t=>allowed.includes(t)))]:[];
     event.orgs=Array.isArray(body.orgs)?body.orgs.filter(x=>typeof x==='string'&&/^[a-z0-9-]{1,80}$/.test(x)).slice(0,10):[];
     event.cohosts=[];

@@ -7,6 +7,12 @@
 window.CANOPY_CHECKED = "Oct 1, 2026";
 
 window.CANOPY_GROUPS = {
+  cqe:{"cat": "AI & Data", "name": "Chicago Quantum Exchange", "focus": "Quantum · research · commercialization", "topics": ["quantum", "startup"], "desc": "Chicago quantum research and industry community. Co-hosts Q2B26 x Chicago Quantum Summit with QC Ware.", "url": "https://chicagoquantum.org/2026-summit"},
+  evanta:{"cat": "Security & GRC", "name": "Gartner Chicago CISO Community", "aliases": ["Evanta", "Gartner C-Level Communities"], "topics": ["sec", "grc", "lead"], "focus": "Security leadership · eligibility-based", "desc": "Peer community for senior security executives, formerly Evanta. Attendance is eligibility-based; membership applications are vetted by the organizer.", "url": "https://www.evanta.com/ciso/chicago"},
+  futurecon:{"cat": "Conferences", "name": "FutureCon Chicago", "topics": ["sec", "grc", "ai"], "focus": "Cybersecurity · hybrid conference", "desc": "Announced Chicago-area cybersecurity conference editions for practitioners and security leaders. January 14, 2027 is at Chicago Marriott Oak Brook with virtual participation.", "url": "https://futureconevents.com/events/chicago-il-2027/"},
+  aicollective:{"cat": "AI & Data", "name": "The AI Collective — Chicago", "topics": ["ai", "dev"], "focus": "AI builders · demos · community", "desc": "Distinct Chicago community of The AI Collective, with organizer-hosted programming including OpenClaw demos and discussions. Attendance totals are not independently verified.", "url": "https://luma.com/aic-chi-20260401-openclaw", "status": "Check the organizer for upcoming Chicago programming"},
+  techstars:{"cat": "Startups & Innovation", "name": "Techstars Chicago", "topics": ["startup", "career"], "focus": "Accelerator · founder opportunities", "desc": "Early-stage accelerator in partnership with Long Chicago. Applications close November 18, 2026; the next program starts March 8, 2027, with Demo Day June 3.", "url": "https://www.techstars.com/accelerators/chicago"},
+
   /* ---------- Security & GRC ---------- */
   isaca:{cat:"Security & GRC",name:"ISACA Chicago",focus:"IT audit · risk · governance",desc:"Monthly meetings, SheLeadsTech sessions and review courses for CISA, CRISC and other ISACA certifications.",url:"https://engage.isaca.org/chicagochapter/events/calendar"},
   issa:{cat:"Security & GRC",name:"ISSA Chicago",focus:"Information security",desc:"Information Systems Security Association chapter. Monthly chapter meetings, usually in Rosemont.",url:"https://www.tickettailor.com/events/issachicago"},
@@ -84,6 +90,13 @@ window.CANOPY_GROUPS = {
 
 /* Helper for events whose time isn't posted: start "" */
 window.CANOPY_EVENTS = [
+ {"date": "2026-12-08", "endDate": "2026-12-10", "title": "Q2B26 x Chicago Quantum Summit", "host": "Chicago Quantum Exchange", "orgs": ["cqe"], "cohosts": [{"name": "QC Ware", "role": "Co-host"}], "type": "Conference", "venue": "Marriott Marquis Chicago and McCormick Place", "area": "South Loop", "mode": "In person", "topics": ["quantum", "startup"], "note": "December 8–10, 2026 · registration required", "desc": "Three days of quantum research, business and commercialization, jointly hosted by Chicago Quantum Exchange and QC Ware. Confirm session times with the organizer.", "link": "https://chicagoquantum.org/2026-summit", "start": "", "end": "", "checked": "2026-11-03"},
+ {"date": "2026-12-02", "title": "Chicago CISO Community Executive Summit", "host": "Gartner Chicago CISO Community (Evanta)", "orgs": ["evanta"], "type": "Conference", "venue": "Convene, Willis Tower, 233 S Wacker Dr", "area": "The Loop", "mode": "In person", "topics": ["sec", "grc", "lead"], "note": "Eligibility-based attendance", "desc": "Peer discussions for senior security leaders. Membership applications are vetted; confirm eligibility and registration with Gartner.", "link": "https://www.evanta.com/ciso/chicago", "start": "", "end": "", "checked": "2026-11-03"},
+ {"date": "2027-01-14", "start": "08:00", "end": "17:00", "title": "FutureCon Chicago Cybersecurity Conference 2027", "host": "FutureCon", "orgs": ["futurecon"], "type": "Conference", "venue": "Chicago Marriott Oak Brook", "area": "Oak Brook", "mode": "Hybrid", "topics": ["sec", "grc", "ai"], "note": "Hybrid · in person and online", "desc": "Cybersecurity presentations, AI security sessions and leadership discussions. The organizer offers both on-site and virtual participation; agenda times may change.", "link": "https://futureconevents.com/events/chicago-il-2027/", "checked": "2026-11-03"},
+ {"date": "2026-11-18", "title": "Techstars Chicago — application deadline", "host": "Techstars Chicago", "orgs": ["techstars"], "type": "Opportunity", "venue": "Online application", "area": "Virtual", "mode": "Virtual", "topics": ["startup", "career"], "note": "Application deadline · not a meetup", "desc": "Final application date for the Techstars Chicago accelerator. The program starts March 8, 2027; Demo Day is June 3, 2027. Confirm the deadline time with Techstars.", "link": "https://www.techstars.com/accelerators/chicago", "start": "", "end": "", "checked": "2026-11-03"},
+ {"date": "2027-03-08", "title": "Techstars Chicago — accelerator starts", "host": "Techstars Chicago", "orgs": ["techstars"], "type": "Program", "venue": "Chicago — details for selected companies", "area": "Chicago", "mode": "In person", "topics": ["startup"], "note": "Selected companies · program milestone", "desc": "Start of the announced Techstars Chicago accelerator. This is a program milestone for selected companies, not an open meetup.", "link": "https://www.techstars.com/accelerators/chicago", "start": "", "end": "", "checked": "2026-11-03"},
+ {"date": "2027-06-03", "title": "Techstars Chicago — Demo Day", "host": "Techstars Chicago", "orgs": ["techstars"], "type": "Demo Day", "venue": "Venue and access details not yet posted", "area": "Chicago", "mode": "In person", "topics": ["startup"], "note": "Confirm access and format with organizer", "desc": "Announced Demo Day for the Techstars Chicago cohort. Venue, time and public access are not confirmed here; check the organizer before making plans.", "link": "https://www.techstars.com/accelerators/chicago", "start": "", "end": "", "checked": "2026-11-03"},
+
  /* ===== October ===== */
  {date:"2026-10-01",start:"09:00",end:"18:00",title:"Chicago Women in Technology Conference (ChiWitCon) 2026",host:"ChiWitCon",orgs:[],type:"Conference",venue:"The Old Post Office, 433 W Van Buren St",area:"The Loop",mode:"In person",topics:["career","lead"],desc:"A full-day conference for women in technology.",link:"https://calendars.illinois.edu/detail/7948?eventId=33546161"},
  {date:"2026-10-01",start:"13:30",end:"16:30",title:"AI Workshop with Microsoft and Neo4j",host:"Chicago Enterprise AI",orgs:["enterpriseai"],type:"Workshop",venue:"Microsoft, 200 E Randolph St, Suite 200",area:"The Loop",mode:"In person",topics:["ai","data"],price:"Free",desc:"Hands-on workshop building AI agents on knowledge graphs, with a GraphRAG pipeline on Neo4j Aura and Microsoft Foundry.",link:"https://www.meetup.com/chicago-ai-llms/events/316394976/"},
@@ -206,3 +219,243 @@ window.CANOPY_AREAS = {
   "The Loop":[41.8810,-87.6298], "River North":[41.8924,-87.6341], "University Village":[41.8690,-87.6510],
   "Oak Brook":[41.8328,-87.9290], "Skokie":[42.0324,-87.7416], "Oak Park":[41.8850,-87.7845]
 };
+
+// Expansion candidates are not confirmed active groups or scheduled events.
+window.CANOPY_EXPANSION_QUEUE = [
+  {
+    "name": "WISP Chicago",
+    "topics": [
+      "sec",
+      "privacy"
+    ],
+    "note": "Verify chapter calendar; distinguish physical security, fraud and financial crime in focus tags."
+  },
+  {
+    "name": "ASIS Chicago",
+    "topics": [
+      "sec"
+    ],
+    "note": "Physical and converged security. Verify the chapter calendar before publishing events."
+  },
+  {
+    "name": "Greater Chicago ACFE",
+    "topics": [
+      "grc"
+    ],
+    "note": "Fraud examination. Verify through the chapter or parent association, not host.io."
+  },
+  {
+    "name": "ACAMS Chicago",
+    "topics": [
+      "grc"
+    ],
+    "note": "Financial crime and anti-money laundering. Verify the chapter calendar."
+  },
+  {
+    "name": "IIA Northwest Metro Chicago",
+    "topics": [
+      "grc"
+    ],
+    "note": "Verify chapter calendar; distinguish physical security, fraud and financial crime in focus tags."
+  },
+  {
+    "name": "MLOps Community Chicago",
+    "topics": [
+      "ai",
+      "data"
+    ],
+    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
+  },
+  {
+    "name": "PyData Chicago",
+    "topics": [
+      "data",
+      "dev"
+    ],
+    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
+  },
+  {
+    "name": "Fabric / Power BI",
+    "topics": [
+      "data"
+    ],
+    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
+  },
+  {
+    "name": "ChiTUG",
+    "topics": [
+      "data"
+    ],
+    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
+  },
+  {
+    "name": "Microsoft Foundry",
+    "topics": [
+      "ai",
+      "dev"
+    ],
+    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
+  },
+  {
+    "name": "Chicago Microsoft Power Platform Users Group",
+    "topics": [
+      "dev",
+      "data"
+    ],
+    "note": "Confirm distinct organizer identities; associate communities without merging them."
+  },
+  {
+    "name": "Chicago .NET Developers",
+    "topics": [
+      "dev"
+    ],
+    "note": "Confirm distinct organizer identities; associate communities without merging them."
+  },
+  {
+    "name": "CNUG",
+    "topics": [
+      "dev"
+    ],
+    "note": "Confirm distinct organizer identities; associate communities without merging them."
+  },
+  {
+    "name": "CJUG",
+    "topics": [
+      "dev"
+    ],
+    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
+  },
+  {
+    "name": "Chicago Kotlin",
+    "topics": [
+      "dev"
+    ],
+    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
+  },
+  {
+    "name": "Illinois JUG",
+    "topics": [
+      "dev"
+    ],
+    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
+  },
+  {
+    "name": "ChicagoRuby",
+    "topics": [
+      "dev"
+    ],
+    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
+  },
+  {
+    "name": "React Chicago",
+    "topics": [
+      "dev"
+    ],
+    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
+  },
+  {
+    "name": "Cloud Native Chicago",
+    "topics": [
+      "data",
+      "dev"
+    ],
+    "note": "Use official CNCF chapter as canonical; verify separate organizers before adding the other group."
+  },
+  {
+    "name": "Chicago Cloud Native x AI",
+    "topics": [
+      "data",
+      "ai"
+    ],
+    "note": "Use official CNCF chapter as canonical; verify separate organizers before adding the other group."
+  },
+  {
+    "name": "APLN Chicago",
+    "topics": [
+      "pm",
+      "lead"
+    ],
+    "note": "Verify current local organizer and calendar."
+  },
+  {
+    "name": "AIGA Chicago",
+    "topics": [
+      "pm"
+    ],
+    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
+  },
+  {
+    "name": "IxDA Chicago",
+    "topics": [
+      "pm"
+    ],
+    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
+  },
+  {
+    "name": "Chicago Camps",
+    "topics": [
+      "pm"
+    ],
+    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
+  },
+  {
+    "name": "Women in Product Chicago",
+    "topics": [
+      "pm"
+    ],
+    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
+  },
+  {
+    "name": "Chicago Product Alliance",
+    "topics": [
+      "pm"
+    ],
+    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
+  },
+  {
+    "name": "Polsky",
+    "topics": [
+      "startup",
+      "lead"
+    ],
+    "note": "Verify current local organizer; preserve fintech, LGBTQ+ founder and health IT focus tags."
+  },
+  {
+    "name": "FinTEx",
+    "topics": [
+      "startup",
+      "data"
+    ],
+    "note": "Verify current local organizer; preserve fintech, LGBTQ+ founder and health IT focus tags."
+  },
+  {
+    "name": "StartOut Chicago",
+    "topics": [
+      "startup",
+      "lead"
+    ],
+    "note": "Verify current local organizer; preserve fintech, LGBTQ+ founder and health IT focus tags."
+  },
+  {
+    "name": "HIMSS Greater Illinois",
+    "topics": [
+      "data",
+      "lead"
+    ],
+    "note": "Verify current local organizer; preserve fintech, LGBTQ+ founder and health IT focus tags."
+  },
+  {
+    "name": "JS Tek",
+    "topics": [
+      "dev"
+    ],
+    "note": "Verify separate or co-located brands before creating conference records."
+  },
+  {
+    "name": "PHP Tek",
+    "topics": [
+      "dev"
+    ],
+    "note": "Verify separate or co-located brands before creating conference records."
+  }
+];

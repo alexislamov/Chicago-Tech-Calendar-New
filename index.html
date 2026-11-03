@@ -683,7 +683,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   --bg:#f3f6f2; --surface:#ffffff; --ink:#13231c; --muted:#5b6b63; --line:#d8e0da;
   --brand:#0d6b4c; --brand-ink:#ffffff; --peach:#ff9f6e; --peach-soft:#ffe6d6;
   --chip:#e7eee9; --water:#d6e6ee; --land:#f6f8f4; --focus:#ff7a3d;
-  --t-ai:#7a4cd9; --t-web:#1f78d1; --t-sec:#c23a3a; --t-start:#d98a00; --t-data:#0f9b8e; --t-cloud:#4d6b8a; --t-design:#c2479b; --t-dev:#2f6f3e; --t-lead:#8a5a2b; --t-career:#5a4fcf;
+  --t-quantum:#087f8c; --t-ai:#7a4cd9; --t-web:#1f78d1; --t-sec:#c23a3a; --t-start:#d98a00; --t-data:#0f9b8e; --t-cloud:#4d6b8a; --t-design:#c2479b; --t-dev:#2f6f3e; --t-lead:#8a5a2b; --t-career:#5a4fcf;
   --display:"Archivo","Arial Narrow",system-ui,sans-serif;
   --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -692,12 +692,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0d1612; --surface:#14211b; --ink:#e6efe9; --muted:#93a59b; --line:#25362e;
   --brand:#3fbf8c; --brand-ink:#08130e; --peach:#ffa97c; --peach-soft:#3a271d; --chip:#1c2c25; --water:#0f2230; --land:#17241e; --focus:#ffa97c;
-  --t-ai:#a585f0; --t-web:#5aa7f0; --t-sec:#ef6f6f; --t-start:#f0b23c; --t-data:#3fcfbf; --t-cloud:#8fa9c4; --t-design:#e67cc2; --t-dev:#7fcf8f; --t-lead:#d9a46c; --t-career:#a39cf2;
+  --t-quantum:#60d4de; --t-ai:#a585f0; --t-web:#5aa7f0; --t-sec:#ef6f6f; --t-start:#f0b23c; --t-data:#3fcfbf; --t-cloud:#8fa9c4; --t-design:#e67cc2; --t-dev:#7fcf8f; --t-lead:#d9a46c; --t-career:#a39cf2;
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0d1612; --surface:#14211b; --ink:#e6efe9; --muted:#93a59b; --line:#25362e;
   --brand:#3fbf8c; --brand-ink:#08130e; --peach:#ffa97c; --peach-soft:#3a271d; --chip:#1c2c25; --water:#0f2230; --land:#17241e; --focus:#ffa97c;
-  --t-ai:#a585f0; --t-web:#5aa7f0; --t-sec:#ef6f6f; --t-start:#f0b23c; --t-data:#3fcfbf; --t-cloud:#8fa9c4; --t-design:#e67cc2; --t-dev:#7fcf8f; --t-lead:#d9a46c; --t-career:#a39cf2;
+  --t-quantum:#60d4de; --t-ai:#a585f0; --t-web:#5aa7f0; --t-sec:#ef6f6f; --t-start:#f0b23c; --t-data:#3fcfbf; --t-cloud:#8fa9c4; --t-design:#e67cc2; --t-dev:#7fcf8f; --t-lead:#d9a46c; --t-career:#a39cf2;
   color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -925,7 +925,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
           <select id="fMode" class="sel" aria-label="Format">
             <option value="">In person &amp; virtual</option>
             <option value="In person">In person</option>
-            <option value="Virtual">Virtual</option>
+            <option value="Virtual">Virtual</option><option value="Hybrid">Hybrid</option>
             <option value="free">Free only</option>
           </select>
           <div class="seg" role="group" aria-label="View">
@@ -1037,6 +1037,7 @@ const normT = s=>String(s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
 // Hand-entered events win; auto events that duplicate one (same date, matching title) are dropped.
 const EVENTS = MANUAL.concat(AUTO.filter(a=>!MANUAL.some(m=>m.date===a.date&&(normT(m.title).includes(normT(a.title))||normT(a.title).includes(normT(m.title))))));
 const TOPICS = {
+  quantum:{label:"Quantum",c:"--t-quantum"},
   sec:{label:"Security",c:"--t-sec"}, grc:{label:"GRC & Audit",c:"--t-data"}, privacy:{label:"Privacy",c:"--t-web"},
   ai:{label:"AI",c:"--t-ai"}, data:{label:"Data & Cloud",c:"--t-cloud"}, dev:{label:"Software Dev",c:"--t-dev"},
   pm:{label:"Product & Design",c:"--t-design"}, startup:{label:"Startups",c:"--t-start"}, lead:{label:"Leadership",c:"--t-lead"}, career:{label:"Careers & Certs",c:"--t-career"}
@@ -1063,7 +1064,7 @@ const $ = s=>document.querySelector(s);
 const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const parseDate = s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
 const fmtTime = t=>{if(!t)return "";let [h,m]=t.split(":").map(Number);const ap=h>=12?"pm":"am";h=h%12||12;return `${h}:${String(m).padStart(2,"0")}${ap}`};
-const timeRange = e=>e.allDay?"All day":!e.start?"Time not posted":e.end?`${fmtTime(e.start)} – ${fmtTime(e.end)}`:`Starts ${fmtTime(e.start)}`;
+const timeRange = e=>e.endDate?`${parseDate(e.date).toLocaleDateString(undefined,{month:"short",day:"numeric"})} – ${parseDate(e.endDate).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}`:e.allDay?"All day":!e.start?"Time not posted":e.end?`${fmtTime(e.start)} – ${fmtTime(e.end)}`:`Starts ${fmtTime(e.start)}`;
 const relLabel = d=>{const diff=Math.round((d-today)/864e5);return diff===0?"Today":diff===1?"Tomorrow":diff<7?"This week":diff<14?"Next week":""};
 const upcoming = ()=>events.filter(e=>parseDate(e.date)>=today);
 const groupCount = k=>upcoming().filter(e=>(e.orgs||[]).includes(k)).length;
@@ -1224,16 +1225,16 @@ function zoomTo(which){
 function renderGroups(){
   const q=state.gq.toLowerCase();
   const html=CATS.filter(c=>!state.cat||state.cat===c).map(c=>{
-    const items=Object.entries(GROUPS).filter(([,g])=>g.cat===c&&(!q||[g.name,g.focus,g.desc].join(" ").toLowerCase().includes(q))).sort((a,b)=>groupCount(b[0])-groupCount(a[0])||a[1].name.localeCompare(b[1].name));
+    const items=Object.entries(GROUPS).filter(([,g])=>g.cat===c&&(!q||[g.name,...(g.aliases||[]),g.focus,g.desc,...(g.topics||[]).map(t=>TOPICS[t]?.label||t)].join(" ").toLowerCase().includes(q))).sort((a,b)=>groupCount(b[0])-groupCount(a[0])||a[1].name.localeCompare(b[1].name));
     if(!items.length)return "";
     return `<section class="gsec"><h3 class="gsec-h">${c}<span>${items.length}</span></h3><div class="ggrid">${items.map(([k,g])=>{
       const n=groupCount(k);
-      return `<article class="gcard"><div class="focus">${esc(g.focus)}</div><h4>${esc(g.name)}</h4><p>${esc(g.desc)}</p>
+      return `<article class="gcard"><div class="focus">${esc(g.focus)}</div><h4>${esc(g.name)}</h4>${g.topics?`<div class="tags">${topicTags(g)}</div>`:""}<p>${esc(g.desc)}</p>
         <div class="gstatus ${n?"":"none"}"><span class="pip"></span>${n?`${n} upcoming event${n>1?"s":""} on Canopy`:esc(g.status||"No confirmed events right now")}</div>
         <div class="actions">${n?`<button class="btn btn-primary" data-group="${k}">See events</button>`:""}<a class="btn btn-ghost" href="${g.url}" target="_blank" rel="noopener">Official site ↗</a></div></article>`;
     }).join("")}</div></section>`;
   }).join("");
-  $("#ggroups").innerHTML=html||`<div class="empty"><strong>No groups match</strong>Try another search.</div>`;
+  $("#ggroups").innerHTML=(html||`<div class="empty"><strong>No groups match</strong>Try another search.</div>`)+`<details class="gsec"><summary class="gsec-h">Expansion queue · ${(window.CANOPY_EXPANSION_QUEUE||[]).length} candidates</summary><p>Organizer and calendar verification pending. These are candidates, not confirmed events.</p><div class="ggrid">${(window.CANOPY_EXPANSION_QUEUE||[]).filter(g=>!q||[g.name,g.note,...g.topics.map(t=>TOPICS[t].label)].join(" ").toLowerCase().includes(q)).map(g=>`<article class="gcard"><div class="focus">Pending verification</div><h4>${esc(g.name)}</h4><div class="tags">${topicTags(g)}</div><p>${esc(g.note)}</p></article>`).join("")}</div></details>`;
 }
 
 function renderStats(){
@@ -1268,7 +1269,7 @@ function gcalLink(e){
     const st=d+"T"+e.start.replace(":","")+"00";
     let en=e.end;if(!en){const [h,m]=e.start.split(":").map(Number);en=`${String(Math.min(h+1,23)).padStart(2,"0")}:${String(m).padStart(2,"0")}`}
     dates=`${st}/${d}T${en.replace(":","")}00`;
-  }else{dates=`${d}/${ymd(addDays(parseDate(e.date),1)).replace(/-/g,"")}`}
+  }else{dates=`${d}/${ymd(addDays(parseDate(e.endDate||e.date),1)).replace(/-/g,"")}`}
   const loc=e.mode==="Virtual"?"Online":/see event page/i.test(e.venue)?`${e.area||"Chicago"}, IL`:`${e.venue}${e.area&&!/Loop|Fulton|River|Pilsen|Logan|Village/.test(e.area)?", "+e.area:""}, IL`;
   const p=new URLSearchParams({action:"TEMPLATE",text:e.title,dates,details:`${e.desc||""}\n\nHosted by ${e.host}${e.link?`\n${e.link}`:""}`,location:loc,ctz:"America/Chicago"});
   return "https://calendar.google.com/calendar/render?"+p;
