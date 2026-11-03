@@ -151,8 +151,12 @@ These calendars cover most of what's on the site:
 
 ## Event submissions
 
-The Submit an Event form sends new entries to the shared `event_submissions` review queue in Cloudflare D1. It does not send email or publish unreviewed submissions. See [REVIEW-QUEUE.md](REVIEW-QUEUE.md) for the staff workflow.
+The Submit an Event form sends new entries to the shared `event_submissions` review queue in Cloudflare D1. It notifies the review team by email and does not publish unreviewed submissions. See [REVIEW-QUEUE.md](REVIEW-QUEUE.md) for the staff workflow.
 
 ## LinkedIn connections
 
 My Connections supports optional personal LinkedIn profile links when logging a connection and adding, editing or removing links on existing records. Profiles and journal notes remain in the visitor's browser; there is no LinkedIn account integration or automatic connection request.
+
+## Event collaboration
+
+Submit an Event supports up to five co-hosts and partners, each with a role. Partner Requests lets organizations seek co-hosts, venues, speakers, sponsors and community partners. New requests require staff approval before becoming public. See REVIEW-QUEUE.md for moderation and notifications.

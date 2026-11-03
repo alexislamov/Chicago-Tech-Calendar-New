@@ -1,3 +1,5 @@
+import {notify,retryNotifications} from './notifications.mjs';
+import {partnerRequests} from './partners.mjs';
 const json = (body, status=200) => new Response(JSON.stringify(body), {status, headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
 const digest = async value => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value)))).map(x=>x.toString(16).padStart(2,'0')).join('');
 export async function onRequest({request,env}) {
@@ -54,6 +56,16 @@ export async function submitEvent({request,env}) {
     const allowed=['sec','grc','privacy','ai','data','dev','pm','startup','lead','career'];
     event.topics=Array.isArray(body.topics)?[...new Set(body.topics.filter(t=>allowed.includes(t)))]:[];
     event.orgs=Array.isArray(body.orgs)?body.orgs.filter(x=>typeof x==='string'&&/^[a-z0-9-]{1,80}$/.test(x)).slice(0,10):[];
+    event.cohosts=[];
+    if(body.cohosts!=null){
+      if(!Array.isArray(body.cohosts)||body.cohosts.length>5)return json({error:'Add up to five co-host organizations.'},400);
+      for(const host of body.cohosts){
+        if(!host||typeof host.name!=='string'||!host.name.trim()||host.name.length>180||!['Co-host','Venue partner','Community partner','Sponsor'].includes(host.role))return json({error:'Each co-host needs a name and valid role.'},400);
+        const groupId=typeof host.groupId==='string'&&/^[a-z0-9-]{1,80}$/.test(host.groupId)?host.groupId:'';
+        event.cohosts.push({name:host.name.trim(),role:host.role,groupId});
+        if(groupId&&!event.orgs.includes(groupId))event.orgs.push(groupId);
+      }
+    }
     const visitor=await digest(token),payload=JSON.stringify(event),id=await digest(visitor+'|'+payload);
     const existing=await env.COMMUNITY.prepare('SELECT id FROM event_submissions WHERE id = ?').bind(id).first();
     if(existing)return json({id:existing.id,status:'received'},200);
@@ -61,12 +73,15 @@ export async function submitEvent({request,env}) {
     const recent=await env.COMMUNITY.prepare("SELECT COUNT(*) AS total FROM event_submissions WHERE visitor = ? AND submitted_at >= strftime('%Y-%m-%dT%H:%M:%fZ','now','-1 hour')").bind(visitor).first();
     if(recent.total>=5)return json({error:'You have submitted five events this hour. Please try again later.'},429);
     await env.COMMUNITY.prepare('INSERT OR IGNORE INTO event_submissions(id,visitor,title,organizer,event_date,payload) VALUES(?,?,?,?,?,?)').bind(id,visitor,event.title,event.host,event.date,payload).run();
-    return json({id,status:'pending'},201);
+    let notified=false;try{notified=await notify(env,'event:'+id,'Canopy: new event submission',JSON.stringify(event,null,2)+'\nReference: '+id)}catch{}
+    return json({id,status:'pending',notification:notified?'sent':'queued'},201);
   }catch{return json({error:'Could not submit your event. Your form has been kept; please try again.'},500)}
 }
 
 export default {
+  async scheduled(controller,env,ctx){ctx.waitUntil(retryNotifications(env));},
   async fetch(request, env) {
+    if (new URL(request.url).pathname === '/api/partners') return partnerRequests(request,env);
     if (new URL(request.url).pathname === '/api/submissions') return submitEvent({request,env});
     if (new URL(request.url).pathname === '/api/community') return onRequest({request,env});
     return env.ASSETS.fetch(request);

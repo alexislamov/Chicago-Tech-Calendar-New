@@ -3,11 +3,32 @@
   "name": "chicago-tech-calendar",
   "main": "worker.mjs",
   "compatibility_date": "2026-11-02",
-  "build": {"command": "node build-site.mjs"},
-  "assets": {"directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"]},
-  "d1_databases": [{
-    "binding": "COMMUNITY",
-    "database_name": "canopy-community",
-    "database_id": "2883607c-8d04-41dc-82b6-0d5fa62d78ed"
-  }]
+  "build": {
+    "command": "node build-site.mjs"
+  },
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "COMMUNITY",
+      "database_name": "canopy-community",
+      "database_id": "2883607c-8d04-41dc-82b6-0d5fa62d78ed"
+    }
+  ],
+  "send_email": [
+    {
+      "name": "NOTIFICATIONS",
+      "destination_address": "iskandarislamov@gmail.com"
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "*/15 * * * *"
+    ]
+  }
 }
