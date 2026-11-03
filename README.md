@@ -1,6 +1,6 @@
 # Canopy: Chicago Tech, AI & Security Calendar
 
-This folder is the whole website. It has no build step, no database and no server code.
+This folder contains the website. The calendar has no build step. Shared community responses use a Cloudflare Worker and D1 database; see [COMMUNITY-SETUP.md](COMMUNITY-SETUP.md). Event sharing and the private connection journal also work in a static preview.
 
 | File | What it is |
 |---|---|

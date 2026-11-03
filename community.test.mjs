@@ -1,0 +1,26 @@
+import {DatabaseSync} from 'node:sqlite';
+import {readFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+import {webcrypto} from 'node:crypto';
+globalThis.crypto ??= webcrypto;
+const {onRequest}=await import('./worker.mjs');
+const db=new DatabaseSync(':memory:');db.exec(readFileSync(new URL('./community-schema.sql',import.meta.url),'utf8'));
+const env={COMMUNITY:{prepare(sql){return {bind(...args){this.args=args;return this},async run(){return db.prepare(sql).run(...this.args)},async all(){return {results:db.prepare(sql).all(...(this.args||[]))}},async first(){return db.prepare(sql).get(...(this.args||[]))}}}}};
+const a='aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa',b='bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb';
+async function call(token,body,origin='https://example.com') {const response=await onRequest({env,request:new Request('https://example.com/api/community',{method:body?'POST':'GET',headers:{Authorization:`Bearer ${token}`,Origin:origin},body:body?JSON.stringify(body):undefined})});return {status:response.status,...await response.json()}}
+const owner=await call(a);
+await call(b,{event:'event-one',status:'interested',ref:owner.inviteCode});
+let result=await call(b,{event:'event-one',status:'going',ref:owner.inviteCode});
+assert.equal(result.counts[0].interested,0);assert.equal(result.counts[0].going,1);
+assert.equal((await call(a)).joined,1);
+await call(b,{event:'event-two',status:'going',ref:owner.inviteCode});
+assert.equal((await call(a)).joined,1,'same friend across events counts once');
+await call(a,{event:'event-one',status:'going',ref:owner.inviteCode});
+assert.equal((await call(a)).joined,1,'self referrals excluded');
+assert.equal((await call(a)).mine.length,1,'private responses isolated');
+await call(b,{event:'event-one',status:'none'});await call(b,{event:'event-two',status:'none'});
+assert.equal((await call(a)).joined,0,'withdrawn responses no longer count');
+assert.equal((await call(a,{event:'x',status:'bad'})).status,400);
+assert.equal((await call(a,{event:'x',status:'going'},'https://other.example')).status,403);
+assert.equal((await call('invalid')).status,401);
+console.log('Passed: response toggles, shared counts, unique invite credits, self invites, private responses, withdrawal, validation and origin checks.');

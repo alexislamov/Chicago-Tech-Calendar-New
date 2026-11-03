@@ -878,6 +878,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 @media (max-width:900px){.legend-panel{display:none}.layout.is-map .side{order:1}}
 @media (max-width:520px){.logo-text{display:inline;font-size:17px}nav.main button{padding:8px 7px;font-size:14px}}
 </style>
+<link rel="stylesheet" href="community.css">
 </head>
 <body>
 <header class="top">
@@ -888,6 +889,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     <nav class="main" aria-label="Main">
       <button data-view="events" aria-current="page">Events</button>
       <button data-view="groups">Groups</button>
+      <button data-view="connections">My connections</button>
       <button data-view="saved">Saved<span class="count" id="savedCount" hidden>0</span></button>
       <button data-view="submit"><span class="lbl-long">Submit an </span>event</button>
     </nav>
@@ -895,6 +897,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 </header>
 
 <main>
+  <section id="view-connections" hidden></section>
   <section id="view-list">
     <div class="wrap hero" id="hero">
       <div class="eyebrow">Chicago · tech, AI &amp; security · last checked <span class="checked"></span></div>
@@ -1128,6 +1131,7 @@ function renderList(){
       <div class="ev-time">${e.allDay?"All day":e.start?fmtTime(e.start):"TBA"}<small>${e.allDay?"":e.end?fmtTime(e.end):e.start?"":"see listing"}</small></div>
       <div style="min-width:0"><h3>${esc(e.title)}</h3>
         <div class="meta"><span class="ev-org">${esc(e.host)}</span><span>${e.mode==="Virtual"?"Virtual":esc(e.area||"In person")}</span>${e.note?`<span class="note-tag">${esc(e.note)}</span>`:""}</div>
+        <div class="community-summary" data-community-summary="${esc(e.id)}">${window.canopyCommunity?window.canopyCommunity.summary(e.id):"Community counts unavailable"}</div>
         <div class="tags"><span class="tag type">${esc(e.type)}</span>${isFree(e)?`<span class="tag free">Free</span>`:""}${topicTags(e)}</div>
       </div>
       <button class="save" data-save="${esc(e.id)}" aria-pressed="${saved.has(e.id)}" aria-label="${saved.has(e.id)?"Remove from saved":"Save event"}">${saved.has(e.id)?bookmark:bookmarkO}</button>
@@ -1278,7 +1282,7 @@ function openModal(id){
       ${e.link?`<a class="btn btn-primary" href="${esc(e.link)}" target="_blank" rel="noopener">Event page &amp; registration ↗</a>`:""}
       <a class="btn btn-ghost" href="${gcalLink(e)}" target="_blank" rel="noopener">Add to Google Calendar</a>
       <button class="btn btn-ghost" data-save="${esc(e.id)}">${saved.has(e.id)?"Saved ✓":"Save event"}</button>
-    </div>`;
+    </div>${Community.panel(e.id)}`;
   $("#scrim").hidden=false;$("#modal .x").focus();
 }
 const closeModal=()=>{$("#scrim").hidden=true};
@@ -1292,6 +1296,8 @@ function setView(v){
   state.view=v;
   document.querySelectorAll("nav.main button").forEach(b=>{if(b.dataset.view===v)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
   $("#view-list").hidden=!(v==="events"||v==="saved");
+  $("#view-connections").hidden=v!=="connections";
+  if(v==="connections")Community.renderJournal();
   $("#view-groups").hidden=v!=="groups";
   $("#view-submit").hidden=v!=="submit";
   $("#hero").hidden=v==="saved";
@@ -1345,5 +1351,7 @@ $("#subForm").addEventListener("submit",e=>{
 render();
 </script>
 
+<div id="communityMessage" class="community-message" role="status" hidden></div>
+<script src="community.js"></script>
 </body>
 </html>
