@@ -1292,7 +1292,7 @@ function openModal(id){
       <a class="btn btn-ghost" href="${gcalLink(e)}" target="_blank" rel="noopener">Add to Google Calendar</a>
       <button class="btn btn-ghost" data-outlook="${esc(e.id)}" title="Download an .ics file to open or import in Outlook">Add to Outlook Calendar</button>
       <button class="btn btn-ghost" data-save="${esc(e.id)}">${saved.has(e.id)?"Saved ✓":"Save event"}</button>
-    </div><p class="auto-note">Outlook downloads a calendar file (.ics). Open it in Outlook or import it from Add calendar. Events without a posted start time use an all-day reminder.</p>${Community.panel(e.id)}`;
+    </div><p class="outlook-note">Outlook downloads a calendar file (.ics). Open it in Outlook or import it from Add calendar. Events without a posted start time use an all-day reminder.</p>${Community.panel(e.id)}`;
   $("#scrim").hidden=false;$("#modal .x").focus();
 }
 const closeModal=()=>{$("#scrim").hidden=true};

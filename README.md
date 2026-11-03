@@ -163,4 +163,4 @@ Submit an Event supports up to five co-hosts and partners, each with a role. Par
 
 ## Daily news and Outlook Calendar
 
-A six-story daily news brief appears below the event statistics. Visitors can automatically connect articles with upcoming events using shared subjects, or enable broader topic matches. Outlook buttons download importable calendar files. See [NEWS-AND-CALENDAR.md](NEWS-AND-CALENDAR.md) for feeds, update timing and matching behavior.
+A six-story daily news brief appears below the event statistics. Outlook buttons download importable calendar files. See [NEWS-AND-CALENDAR.md](NEWS-AND-CALENDAR.md) for feeds, update timing.

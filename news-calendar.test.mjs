@@ -18,11 +18,6 @@ assert.equal(parseFeed(feed('bleepingcomputer.com').replace(date,'Fri, 01 Jan 19
 const atom=`<feed><entry><title>AI agents</title><link rel="alternate" href="https://blog.google/article"/><updated>${new Date(now).toISOString()}</updated><summary>AI news</summary></entry></feed>`;assert.equal(parseFeed(atom,SOURCES[3],now).length,1);
 const pool=SOURCES.flatMap((s,i)=>Array.from({length:3},(_,j)=>({...parsed[0],sourceId:s.id,source:s.name,link:`https://${s.host}/${i}-${j}`,title:`News ${i} ${j}`,topics:s.topics.length?s.topics:['ai'],published:new Date(now-i*36e5-j*36e5).toISOString()})));
 const six=selectStories(pool,now);assert.equal(six.length,6);assert.ok(new Set(six.map(x=>x.sourceId)).size>=5);assert.ok(six.some(x=>x.topics.includes('ai')));assert.ok(six.every(x=>six.filter(y=>y.sourceId===x.sourceId).length<=2));
-const article=parsed[0],e={id:'one',title:'AI agent identity workshop',desc:'Cloud access management',date:'2026-11-10',topics:['ai','sec']};
-assert.equal(globalThis.CanopyNews.related(article,[e],{today:'2026-11-02'}).length,1);
-assert.equal(globalThis.CanopyNews.related(article,[{...e,date:'2026-10-01'}],{today:'2026-11-02'}).length,0);
-assert.equal(globalThis.CanopyNews.related(article,[{...e,title:'Cybersecurity social',desc:''}],{today:'2026-11-02'}).length,0);
-assert.equal(globalThis.CanopyNews.related(article,[{...e,title:'Cybersecurity social',desc:''}],{today:'2026-11-02',broad:true}).length,1);
 const db=new DatabaseSync(':memory:');db.exec(readFileSync(new URL('./news-schema.sql',import.meta.url),'utf8'));
 const env={COMMUNITY:{prepare(sql){return {bind(...args){this.args=args;return this},async first(){return db.prepare(sql).get(...(this.args||[]))},async all(){return {results:db.prepare(sql).all(...(this.args||[]))}},async run(){return db.prepare(sql).run(...(this.args||[]))}}}}};
 let calls=0;const fetcher=async url=>{calls++;const source=SOURCES.find(x=>x.url===url);return new Response(feed(source.host,'AI security news '+source.id))};
@@ -31,4 +26,4 @@ await refreshNews(env,{now:now+60000,fetcher});assert.equal(calls,7,'same-day ch
 const last=db.prepare('SELECT payload FROM news_brief').get().payload;
 await refreshNews(env,{now:now+864e5,fetcher:async()=>{throw Error('down')}});assert.equal(db.prepare('SELECT payload FROM news_brief').get().payload,last,'total failure keeps last successful brief');
 assert.ok((await (await newsResponse(env)).json()).articles.length===6);
-console.log('Passed: Outlook winter/summer times, overnight/all-day events, escaping/folding; RSS/Atom parsing, safety/age filtering, source diversity, relevant event matching, daily refresh and failure fallback.');
+console.log('Passed: Outlook winter/summer times, overnight/all-day events, escaping/folding; RSS/Atom parsing, safety/age filtering, source diversity, daily refresh and failure fallback.');
