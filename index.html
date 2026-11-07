@@ -894,6 +894,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 </style>
 <link rel="stylesheet" href="community.css">
 <link rel="stylesheet" href="evolution.css">
+<link rel="stylesheet" href="chooser.css">
 </head>
 <body>
 <a class="skip-link" href="#eventDiscovery">Skip to events</a>
@@ -941,6 +942,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
             <input id="q" type="search" placeholder="Search events, groups, venues" aria-label="Search events">
           </label>
+          <button type="button" class="help-choose" id="helpChoose" aria-haspopup="dialog" aria-controls="chooseDialog" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"/></svg>Help me choose</button>
           <button class="chip mobile-filter-toggle" id="mobileFilterToggle" aria-expanded="false" aria-controls="fGroup fType fMode">Filters</button>
           <select id="fGroup" class="sel" aria-label="Group"><option value="">All groups</option></select>
           <select id="fType" class="sel" aria-label="Event type"><option value="">All types</option></select>
@@ -1426,5 +1428,7 @@ render();
 <script src="collaboration.js"></script>
 <script src="news.js"></script>
 <script src="evolution.js"></script>
+<script src="chooser-core.js"></script>
+<script src="chooser.js"></script>
 </body>
 </html>
