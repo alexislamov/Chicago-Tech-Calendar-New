@@ -26,7 +26,7 @@ const Community = (() => {
       if(el)el.textContent=data?.totals?Number(data.totals[key]||0).toLocaleString():'—';
     }
     const note=document.getElementById('activityNote');
-    if(note)note.textContent=data?.totals?'Community totals count distinct browsers across all events; a person can appear in more than one total. Invitations count copied links; delivery is not confirmed.':'Community totals are temporarily unavailable.';
+    if(note){note.hidden=Boolean(data?.totals);note.textContent=data?.totals?'':'Community totals are temporarily unavailable.';}
     document.querySelectorAll('[data-community-summary]').forEach(el=>el.textContent=summary(el.dataset.communitySummary));
     const box=document.querySelector('.community-box');
     if(box) {box.querySelector('[data-community-count]').textContent=summary(activeEvent);box.querySelectorAll('[data-response]').forEach(b=>{b.disabled=!data||busy;b.setAttribute('aria-pressed',current(activeEvent)===b.dataset.response)})}
