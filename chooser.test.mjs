@@ -22,3 +22,5 @@ r=await chooserRoute(req({useClaude:true}),env,{events,now,fetcher:async()=>new 
 for(let i=0;i<10;i++)assert.equal(await allowance(env.COMMUNITY,'limit-test','ip-test',now),true);assert.equal(await allowance(env.COMMUNITY,'limit-test','ip-test',now),false);
 assert.ok(!db.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().some(x=>/preferences|prompt/.test(x.name)));
 console.log('Passed: hard constraints, ended/deadline exclusion, budget honesty, feedback, Claude opt-in, verified IDs, duplicates, private-note exclusion, secret safety, provider fallback and rate limits.');
+
+for(const [status,message,issue] of [[400,'Your credit balance is too low','provider_billing'],[401,'invalid x-api-key','provider_authentication'],[404,'model unavailable','provider_model'],[400,'unsupported anthropic-version','provider_api_version']]){const result=await chooserRoute(req({useClaude:true}),env,{events,now,fetcher:async()=>new Response(JSON.stringify({error:{message}}),{status})});const body=await result.json();assert.equal(body.issue,issue);assert.ok(!JSON.stringify(body).includes(message));}
