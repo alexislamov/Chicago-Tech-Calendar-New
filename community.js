@@ -29,7 +29,7 @@ const Community = (() => {
     root.closest('.popular-panel').hidden=false;
     root.innerHTML=ranked.length?`<ol class="popular-list">${ranked.map((c,i)=>{
       const e=available.get(c.event);
-      return `<li><button type="button" data-popular="${esc(e.id)}"><span class="popular-rank">${i+1}</span><span><strong>${esc(e.title)}</strong><small>${esc(parseDate(e.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}))} · ${Number(c.score).toLocaleString()} interactions</small><small>${Number(c.clicks)} clicks · ${Number(c.saves)} saves · ${Number(c.invites)} invitations</small></span></button></li>`;
+      return `<li><button type="button" data-popular="${esc(e.id)}"><span class="popular-rank">${i+1}</span><span><strong>${esc(e.title)}</strong><small>${esc(parseDate(e.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}))} · ${Number(c.score).toLocaleString()} ${c.score===1?'interaction':'interactions'}</small><small>${Number(c.clicks)} ${c.clicks===1?'click':'clicks'} · ${Number(c.saves)} ${c.saves===1?'save':'saves'} · ${Number(c.invites)} ${c.invites===1?'invitation':'invitations'}</small></span></button></li>`;
     }).join('')}</ol>`:'<p class="popular-empty">Click an event, save it, or invite a friend. The five upcoming events with the most activity will appear here.</p>';
   }
   async function trackAction(id,status){try{data=await api({event:id,status});refresh()}catch{}}

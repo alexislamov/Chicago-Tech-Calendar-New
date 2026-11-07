@@ -1,4 +1,4 @@
-const NEWS_VERSION=2;
+const NEWS_VERSION=3;
 export const SOURCES=[
  {id:'bleeping',name:'BleepingComputer',url:'https://www.bleepingcomputer.com/feed/',topics:['sec'],host:'bleepingcomputer.com'},
  {id:'hackernews',name:'The Hacker News',url:'https://feeds.feedburner.com/TheHackersNews',topics:['sec'],host:'thehackernews.com'},
@@ -26,7 +26,7 @@ export function parseFeed(xml,source,now=Date.now()){
   const description=plain(tag(entry,'description')||tag(entry,'summary')||tag(entry,'content:encoded')||tag(entry,'content')).replace(/^This story originally appeared[\s\S]*?sign up here\.\s*/i,'').replace(/\s+The post [\s\S]*$/i,'').replace(/\s*\[\.\.\.\]\s*/g,' ').trim();
   const excerpt=description.split(/\s+/).slice(0,24).join(' ');
   const summary=(excerpt.length>190?excerpt.slice(0,190).replace(/\s+\S*$/,''):excerpt)+(description.length>190||description.split(/\s+/).length>24?'…':'');
-  const text=title+' '+description.slice(0,1000),topics=[...new Set([...source.topics,...Object.entries(groups).filter(([,pattern])=>pattern.test(text)).map(([key])=>key)])];
+  const text=title+' '+description.slice(0,1000);if(source.id==='ars'&&!/\b(technology|computing|computer|software|hardware|semiconductor|chips?|processor|internet|browser|cloud|cybersecurity|AI|quantum|robot|developer|smartphone|linux|windows|apple|microsoft|google|nvidia)\b/i.test(text))return null;const topics=[...new Set([...source.topics,...Object.entries(groups).filter(([,pattern])=>pattern.test(text)).map(([key])=>key)])];
   if(!topics.length)return null;
   return {id:link.href,title,summary:summary||'Read the publisher’s report for the full details.',link:link.href,source:source.name,sourceId:source.id,published:new Date(date).toISOString(),topics};
  }).filter(Boolean).slice(0,40);
