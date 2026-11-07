@@ -4,7 +4,7 @@ The orange button beside search opens an accessible side panel. Visitors choose 
 
 ## Enable Claude
 
-In Cloudflare Workers & Pages, select `chicago-tech-calendar`, open Settings → Variables and Secrets, and add `ANTHROPIC_API_KEY` as a Secret. Save and deploy. Never put the key into source, browser code or chat. Optional `CLAUDE_MODEL` overrides the default `claude-haiku-5-5`. The service uses Anthropic Messages API version `2026-10-21`, forced tool output, disabled thinking and 1,200 maximum output tokens. API billing belongs to the Anthropic account. Configure an account spending limit in Anthropic as well.
+In Cloudflare Workers & Pages, select `chicago-tech-calendar`, open Settings → Variables and Secrets, and add `ANTHROPIC_API_KEY` as a Secret. Save and deploy. Never put the key into source, browser code or chat. Optional `CLAUDE_MODEL` overrides the default `claude-haiku-5-5`. The service uses Anthropic Messages API version `2023-06-01` with the `x-api-key` authentication header, forced tool output, disabled thinking and 1,200 maximum output tokens. API billing belongs to the Anthropic account. Configure an account spending limit in Anthropic as well.
 
 `GET /api/choose/status` reports only whether the key is configured. Check the panel after deployment and use Find my matches: the result label must say Chosen for you by Claude to confirm a real provider call. A configured key alone does not prove credentials, credits, or model access work. Missing credentials, timeouts, limits or malformed output fall back to explicitly labeled catalog matches. Free-text filtering without Claude recognizes only common phrases; use form controls for precise constraints.
 
