@@ -1,26 +1,13 @@
 globalThis.CanopyNews=(()=>{
- let refresh=()=>{};
- if(typeof document!=='undefined'){
-  let brief=null,loading=false;
-  const root=document.getElementById('dailyNews');
-  root.innerHTML=`<div class="news-heading"><h2 class="eyebrow news-label">YOUR DAILY NEWS BRIEF</h2><p id="newsUpdated" role="status">Loading the daily brief…</p></div><div id="newsCards" class="news-grid"></div><p id="newsWarning" class="news-note" role="status"></p><details class="news-sources"><summary>Sources &amp; selection</summary><p>We check publisher RSS feeds daily after 6am Chicago time and select up to six recent stories for freshness, topic coverage and source variety. Failed feeds retain their last available stories; stale briefs are labeled.</p><ul id="newsSources"></ul></details>`;
-  function render(){
-   if(!brief)return;
-   const cards=document.getElementById('newsCards');
-   cards.innerHTML=brief.articles.length?brief.articles.map(a=>{
-    return `<article class="news-card"><div class="news-main"><h3><a href="${esc(a.link)}" target="_blank" rel="noopener noreferrer">${esc(a.title)} ↗</a></h3><div class="news-source">${esc(a.source)} · ${new Date(a.published).toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'America/Chicago'})}</div><p class="news-excerpt" title="${esc(a.summary)}">${esc(a.summary)}</p></div></article>`;
-   }).join(''):'<p>No recent stories are available yet. <button type="button" data-news-retry>Try again</button></p>';
-  }
-  async function load(){if(loading)return;loading=true;try{
-   const res=await fetch('/api/news');if(!res.ok)throw Error();brief=await res.json();
-   const date=brief.updated?new Date(brief.updated).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:'America/Chicago'}):null;
-   document.getElementById('newsUpdated').textContent=date?`Updated ${date} CT${brief.stale?' · Update delayed':''}`:'Waiting for the first daily update';
-   const warning=[];if(brief.stale)warning.push('Showing the last available brief while the refresh recovers.');if(brief.unavailableSources?.length)warning.push('Some feeds were unavailable at the last refresh.');if(brief.articles.length<6)warning.push(`Showing ${brief.articles.length} recent stories; unavailable slots are not filled with old or invented news.`);
-   document.getElementById('newsWarning').textContent=warning.join(' ');
-   document.getElementById('newsSources').innerHTML=(brief.sources||[]).map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.name)}</a></li>`).join('');render();
-  }catch{document.getElementById('newsUpdated').textContent='Daily brief temporarily unavailable';document.getElementById('newsCards').innerHTML='<p>Please try again. <button type="button" data-news-retry>Reload news</button></p>'}finally{loading=false}}
-  root.addEventListener('click',e=>{if(e.target.closest('[data-news-retry]'))load()});
-  refresh=load;
- }
- return {load:()=>refresh()};
+ if(typeof document==='undefined')return {load:()=>{}};
+ const root=document.getElementById('dailyNews');if(!root)return {load:()=>{}};
+ let articles=[],index=0,loading=false,paused=matchMedia('(prefers-reduced-motion: reduce)').matches,hover=false;
+ const labels={sec:'Cyber',ai:'AI',tech:'Tech',quantum:'Quantum'};
+ root.innerHTML='<div class="ticker-label"><strong>Latest news</strong><small>Cyber · AI · Tech · Quantum</small></div><div class="ticker-story" id="tickerStory">Loading headlines…</div><div class="ticker-controls"><button type="button" data-news-prev aria-label="Previous headline">‹</button><button type="button" data-news-pause aria-label="Pause news ticker">Pause</button><button type="button" data-news-next aria-label="Next headline">›</button></div>';
+ function render(){const a=articles[index];if(!a)return;const category=['quantum','ai','sec','tech'].find(t=>a.topics?.includes(t));document.getElementById('tickerStory').innerHTML=`<a href="${esc(a.link)}" target="_blank" rel="noopener noreferrer">${esc(a.title)} ↗</a><small>${esc(labels[category]||'Tech')} · ${esc(a.source)} · ${new Date(a.published).toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'America/Chicago'})} · ${index+1}/${articles.length}</small>`;const b=root.querySelector('[data-news-pause]');b.textContent=paused?'Play':'Pause';b.setAttribute('aria-label',paused?'Play news ticker':'Pause news ticker');root.querySelectorAll('[data-news-prev],[data-news-next]').forEach(b=>b.disabled=articles.length<2)}
+ async function load(){if(loading)return;loading=true;try{const r=await fetch('/api/news');if(!r.ok)throw Error();const d=await r.json();articles=(d.articles||[]).filter(a=>{try{return new URL(a.link).protocol==='https:'}catch{return false}});index=index%Math.max(1,articles.length);if(!articles.length)throw Error();root.title=d.updated?`News checked ${new Date(d.updated).toLocaleString()}${d.stale?' · Update delayed':''}`:'';render()}catch{if(!articles.length)document.getElementById('tickerStory').innerHTML='Headlines temporarily unavailable. <button type="button" data-news-retry>Retry</button>'}finally{loading=false}}
+ root.addEventListener('click',e=>{if(e.target.closest('[data-news-retry]'))load();if(e.target.closest('[data-news-pause]')){paused=!paused;render()}if(articles.length&&(e.target.closest('[data-news-next]')||e.target.closest('[data-news-prev]'))){index=(index+(e.target.closest('[data-news-next]')?1:-1)+articles.length)%articles.length;render()}});
+ root.addEventListener('mouseenter',()=>hover=true);root.addEventListener('mouseleave',()=>hover=false);
+ setInterval(()=>{if(!paused&&!hover&&!document.hidden&&!root.contains(document.activeElement)&&articles.length>1){index=(index+1)%articles.length;render()}},8000);
+ setInterval(()=>{if(!document.hidden)load()},600000);load();return {load};
 })();

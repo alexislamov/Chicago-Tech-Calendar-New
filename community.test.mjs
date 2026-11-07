@@ -47,6 +47,15 @@ db.prepare("UPDATE event_clicks SET clicked_at=datetime('now','-8 days') WHERE e
 assert.equal((await call(a)).clicks.some(x=>x.event==='event-popular'),false);
 await call(a,{event:'event-popular',status:'clicked'});
 assert.equal((await call(a)).clicks.find(x=>x.event==='event-popular').views,1,'returning visitor counts in the new window');
+// Ranking combines distinct clicks, active saves, and deduplicated invitations.
+await call(a,{event:'event-popular',status:'saved'});
+await call(a,{event:'event-popular',status:'invited'});
+let ranked=(await call(a)).popular.find(x=>x.event==='event-popular');
+assert.equal(ranked.clicks,2);assert.equal(ranked.saves,1);assert.equal(ranked.invites,1);assert.equal(ranked.score,4);
+await call(a,{event:'event-popular',status:'saved'});
+assert.equal((await call(a)).popular.find(x=>x.event==='event-popular').score,4);
+await call(a,{event:'event-popular',status:'unsaved'});
+assert.equal((await call(a)).popular.find(x=>x.event==='event-popular').score,3);
 assert.equal((await call(a,{event:'x',status:'bad'})).status,400);
 assert.equal((await call(a,{event:'x',status:'going'},'https://other.example')).status,403);
 assert.equal((await call('invalid')).status,401);

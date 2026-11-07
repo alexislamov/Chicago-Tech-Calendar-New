@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Canopy · Chicago Tech Events</title>
-<meta name="description" content="Find Chicago tech, AI, security and quantum events. Browse meetups, workshops and conferences by date and topic.">
+<meta name="description" content="Discover tech, cybersecurity, AI, and quantum events across Chicago. All in one place.">
 <meta property="og:title" content="Canopy · Chicago Tech Events">
-<meta property="og:description" content="Find Chicago tech, AI, security and quantum events. Browse meetups, workshops and conferences by date and topic.">
+<meta property="og:description" content="Discover tech, cybersecurity, AI, and quantum events across Chicago. All in one place.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0d6b4c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -907,7 +907,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
       <button data-view="groups">Groups</button>
       
       <button data-view="connections">My activity</button>
-      <button data-view="news">News</button><button data-view="digest">Weekly picks</button><button data-view="saved">Saved<span class="count" id="savedCount" hidden>0</span></button>
+      <button data-view="saved">Saved<span class="count" id="savedCount" hidden>0</span></button>
       <details class="organizer-menu"><summary>For organizers</summary><button data-view="submit">Submit or update</button><button data-view="partners">Find partners</button></details>
     </nav>
   </div>
@@ -919,8 +919,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
   <section id="view-list">
     <div class="wrap hero" id="hero">
       <div class="eyebrow">Chicago · community event calendar · feeds refreshed <span class="checked"></span></div>
-      <h1>Find Chicago tech, AI, security and <em>quantum</em> events.</h1>
-      <p class="lede">Find your next meetup, workshop or conference. Explore by date, topic and location.</p>
+      <h1>Discover tech, cybersecurity, AI, and quantum events across Chicago. <em>All in one place.</em></h1>
+      <p class="lede">Find your next event, meetup, big idea, or career connection.</p>
       <div class="stats" aria-label="Calendar and community totals">
         <div class="stat"><b id="stMonth">0</b><span>events in the next 30 days</span></div>
         <div class="stat"><b id="stFree">0</b><span>listed as free</span></div>
@@ -935,6 +935,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 
     <div class="filters" id="eventDiscovery" tabindex="-1">
       <div class="wrap">
+        <section id="dailyNews" class="news-ticker" aria-label="Latest cyber, AI, tech and quantum news"></section>
         <div class="filter-row">
           <label class="search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
@@ -972,8 +973,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
       </div>
       <aside class="side">
         <section class="panel popular-panel" aria-labelledby="popularTitle">
-          <h4 id="popularTitle">Most viewed this week</h4>
-          <p class="popular-period">Upcoming events · past 7 days</p>
+          <h4 id="popularTitle">Top 5 popular events</h4>
+          <p class="popular-period">Upcoming events · clicks + saves + invitations</p>
           <div id="popularEvents" aria-live="polite"><p class="popular-empty">Loading popular events…</p></div>
         </section>
         <div class="panel">
@@ -1039,8 +1040,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
       </form>
     </div>
   </section>
-<section id="view-news" hidden><div class="wrap"><h1>Tech news</h1><section id="dailyNews" class="news-brief" aria-label="Daily cybersecurity and AI news"></section></div></section>
-<section id="view-digest" hidden><div class="wrap" id="digestRoot"></div></section>
 <section id="view-admin" hidden><div class="wrap" id="adminRoot"></div></section>
 </main>
 
@@ -1365,7 +1364,7 @@ function setView(v){
   $("#view-groups").hidden=v!=="groups";
   $("#view-submit").hidden=v!=="submit";
   $("#hero").hidden=v==="saved";
-  for(const other of ["news","digest","admin"])$("#view-"+other).hidden=v!==other;
+  for(const other of ["admin"])$("#view-"+other).hidden=v!==other;
   window.CanopyEvolution?.viewChanged(v);
   render();window.scrollTo({top:0});
 }

@@ -24,13 +24,13 @@ const Community = (() => {
     const root=document.getElementById('popularEvents');if(!root)return;
     if(!data){root.innerHTML='<p class="popular-empty">Popular events are temporarily unavailable.</p>';return;}
     const available=new Map(upcoming().map(e=>[e.id,e]));
-    const ranked=(data.clicks||[]).filter(c=>available.has(c.event)&&c.views>0)
-      .sort((a,b)=>b.views-a.views||a.event.localeCompare(b.event)).slice(0,5);
-    root.closest('.popular-panel').hidden=ranked.length<3;
+    const ranked=(data.popular||[]).filter(c=>available.has(c.event)&&c.score>0)
+      .sort((a,b)=>b.score-a.score||a.event.localeCompare(b.event)).slice(0,5);
+    root.closest('.popular-panel').hidden=false;
     root.innerHTML=ranked.length?`<ol class="popular-list">${ranked.map((c,i)=>{
       const e=available.get(c.event);
-      return `<li><button type="button" data-popular="${esc(e.id)}"><span class="popular-rank">${i+1}</span><span><strong>${esc(e.title)}</strong><small>${esc(parseDate(e.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}))} · ${Number(c.views).toLocaleString()} ${c.views===1?'view':'views'}</small></span></button></li>`;
-    }).join('')}</ol>`:'<p class="popular-empty">Discover an event to get things started. The most viewed upcoming events will appear here.</p>';
+      return `<li><button type="button" data-popular="${esc(e.id)}"><span class="popular-rank">${i+1}</span><span><strong>${esc(e.title)}</strong><small>${esc(parseDate(e.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}))} · ${Number(c.score).toLocaleString()} interactions</small><small>${Number(c.clicks)} clicks · ${Number(c.saves)} saves · ${Number(c.invites)} invitations</small></span></button></li>`;
+    }).join('')}</ol>`:'<p class="popular-empty">Click an event, save it, or invite a friend. The five upcoming events with the most activity will appear here.</p>';
   }
   async function trackAction(id,status){try{data=await api({event:id,status});refresh()}catch{}}
   const tracked=new Set();

@@ -44,7 +44,12 @@ export async function onRequest({request,env}) {
       (SELECT COUNT(DISTINCT visitor) FROM responses WHERE status='going') AS going,
       (SELECT COUNT(*) FROM (SELECT visitor FROM invitations UNION SELECT inviter AS visitor FROM referrals)) AS invited`).first();
     const clicks=await env.COMMUNITY.prepare("SELECT event, COUNT(*) AS views FROM event_clicks WHERE clicked_at >= datetime('now','-7 days') GROUP BY event ORDER BY views DESC, event ASC").all();
-    return json({counts:counts.results,mine:mine.results,inviteCode:user,joined:credits.total,totals,clicks:clicks.results});
+    const popular=await env.COMMUNITY.prepare(`WITH activity AS (
+      SELECT event,COUNT(*) clicks,0 saves,0 invites FROM event_clicks GROUP BY event
+      UNION ALL SELECT event,0,COUNT(*),0 FROM event_actions WHERE kind='saved' GROUP BY event
+      UNION ALL SELECT event,0,0,COUNT(*) FROM (SELECT event,visitor FROM invitations UNION SELECT event,inviter AS visitor FROM referrals) GROUP BY event
+    ) SELECT event,SUM(clicks) clicks,SUM(saves) saves,SUM(invites) invites,SUM(clicks+saves+invites) score FROM activity GROUP BY event ORDER BY score DESC,event ASC`).all();
+    return json({counts:counts.results,mine:mine.results,inviteCode:user,joined:credits.total,totals,clicks:clicks.results,popular:popular.results});
   } catch {return json({error:'Could not update community activity. Please try again.'},500)}
 }
 
