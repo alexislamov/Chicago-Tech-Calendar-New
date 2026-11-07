@@ -35,6 +35,18 @@ assert.equal((await call(a)).totals.invited,2,'repeat and cross-event shares cou
 await call(b,{event:'event-two',status:'none'});
 await call(b,{event:'event-three',status:'none'});
 assert.equal((await call(a)).totals.going,1,'withdrawals update global totals');
+// Popularity is distinct event viewers in the last seven days, independent of RSVPs.
+await call(a,{event:'event-popular',status:'clicked'});
+await call(a,{event:'event-popular',status:'clicked'});
+let popularity=await call(b,{event:'event-popular',status:'clicked'});
+assert.equal(popularity.clicks.find(x=>x.event==='event-popular').views,2);
+assert.equal(popularity.mine.some(x=>x.event==='event-popular'),false);
+await call(b,{event:'event-less-popular',status:'clicked'});
+assert.equal((await call(a)).clicks[0].event,'event-popular');
+db.prepare("UPDATE event_clicks SET clicked_at=datetime('now','-8 days') WHERE event=?").run('event-popular');
+assert.equal((await call(a)).clicks.some(x=>x.event==='event-popular'),false);
+await call(a,{event:'event-popular',status:'clicked'});
+assert.equal((await call(a)).clicks.find(x=>x.event==='event-popular').views,1,'returning visitor counts in the new window');
 assert.equal((await call(a,{event:'x',status:'bad'})).status,400);
 assert.equal((await call(a,{event:'x',status:'going'},'https://other.example')).status,403);
 assert.equal((await call('invalid')).status,401);

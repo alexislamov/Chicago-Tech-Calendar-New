@@ -20,7 +20,25 @@ const Community = (() => {
     activeEvent=id;
     return `<section class="community-box" aria-label="Go together"><h4>Go together</h4><p data-community-count>${summary(id)}</p><small>Your response is separate from organizer registration. One response per browser; counts are community estimates.</small><div class="community-actions"><button data-response="interested" aria-pressed="${current(id)==='interested'}" ${!data?'disabled':''}>Interested</button><button data-response="going" aria-pressed="${current(id)==='going'}" ${!data?'disabled':''}>Going</button><button data-invite>Invite a friend</button><button data-log>Log a connection</button></div><div id="inviteLink" hidden></div></section>`;
   }
+  function renderPopular() {
+    const root=document.getElementById('popularEvents');if(!root)return;
+    if(!data){root.innerHTML='<p class="popular-empty">Popular events are temporarily unavailable.</p>';return;}
+    const available=new Map(upcoming().map(e=>[e.id,e]));
+    const ranked=(data.clicks||[]).filter(c=>available.has(c.event)&&c.views>0)
+      .sort((a,b)=>b.views-a.views||a.event.localeCompare(b.event)).slice(0,5);
+    root.innerHTML=ranked.length?`<ol class="popular-list">${ranked.map((c,i)=>{
+      const e=available.get(c.event);
+      return `<li><button type="button" data-popular="${esc(e.id)}"><span class="popular-rank">${i+1}</span><span><strong>${esc(e.title)}</strong><small>${esc(parseDate(e.date).toLocaleDateString(undefined,{month:'short',day:'numeric'}))} · ${Number(c.views).toLocaleString()} ${c.views===1?'view':'views'}</small></span></button></li>`;
+    }).join('')}</ol>`:'<p class="popular-empty">Discover an event to get things started. The most viewed upcoming events will appear here.</p>';
+  }
+  const tracked=new Set();
+  async function trackClick(id) {
+    if(!identity||tracked.has(id)||!events.some(e=>e.id===id))return;
+    tracked.add(id);
+    try{const next=await api({event:id,status:'clicked'});data=next;refresh()}catch{tracked.delete(id)}
+  }
   function refresh() {
+    renderPopular();
     for(const [id,key] of [['stInterested','interested'],['stGoing','going'],['stInvited','invited']]) {
       const el=document.getElementById(id);
       if(el)el.textContent=data?.totals?Number(data.totals[key]||0).toLocaleString():'—';
@@ -49,6 +67,7 @@ const Community = (() => {
   }
   document.addEventListener('click',async ev=>{
     const t=ev.target;
+    const popular=t.closest('[data-popular]');if(popular){openModal(popular.dataset.popular);return;}
     if(t.closest('[data-response]')) {
       if(busy||!data)return;busy=true;refresh();
       const desired=t.closest('[data-response]').dataset.response,id=activeEvent;
@@ -95,7 +114,7 @@ const Community = (() => {
     if(!response.ok)throw new Error(result.error||'Could not submit your event. Please try again.');
     return result;
   }
-  return {panel,summary,renderJournal,init,submitEvent};
+  return {panel,summary,renderJournal,init,submitEvent,trackClick};
 })();
 window.canopyCommunity=Community;
 Community.init();

@@ -13,3 +13,9 @@ CREATE TABLE IF NOT EXISTS invitations (
   event TEXT NOT NULL, visitor TEXT NOT NULL,
   PRIMARY KEY(event,visitor)
 );
+
+CREATE TABLE IF NOT EXISTS event_clicks (
+  event TEXT NOT NULL, visitor TEXT NOT NULL,
+  clicked_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(event,visitor)
+);

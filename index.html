@@ -774,6 +774,15 @@ select.sel{padding:10px 12px;border:1px solid var(--line);border-radius:8px;back
 .empty{padding:48px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
 .empty strong{display:block;color:var(--ink);font:700 20px var(--display);font-stretch:85%;margin-bottom:6px}
 
+/* Popular events use the existing sidebar panel and Save accent. */
+.popular-period,.popular-empty{font-size:12px;color:var(--muted);margin:0 0 12px}
+.popular-list{list-style:none;padding:0;margin:0}
+.popular-list li+li{border-top:1px solid var(--line)}
+.popular-list button{display:flex;gap:10px;align-items:flex-start;width:100%;padding:12px 0;background:none;border:0;text-align:left;color:var(--ink);font:inherit;cursor:pointer}
+.popular-list button:hover strong{text-decoration:underline}
+.popular-rank{display:grid;place-items:center;flex:0 0 24px;height:24px;border-radius:5px;background:var(--peach);color:#2a1206;font:600 12px var(--mono)}
+.popular-list strong{display:block;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+.popular-list small{display:block;margin-top:4px;font-size:11px;color:var(--muted)}
 /* sidebar */
 .side{display:flex;flex-direction:column;gap:20px;min-width:0}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
@@ -957,6 +966,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
         </div>
       </div>
       <aside class="side">
+        <section class="panel popular-panel" aria-labelledby="popularTitle">
+          <h4 id="popularTitle">Top 5 popular events</h4>
+          <p class="popular-period">Most viewed · past 7 days</p>
+          <div id="popularEvents" aria-live="polite"><p class="popular-empty">Loading popular events…</p></div>
+        </section>
         <div class="panel">
           <div class="cal-head">
             <button id="calPrev" aria-label="Previous month">‹</button>
@@ -1283,7 +1297,7 @@ function gcalLink(e){
   return "https://calendar.google.com/calendar/render?"+p;
 }
 
-function openModal(id){
+function openModal(id,track=true){
   const e=events.find(x=>x.id===id);if(!e)return;
   const d=parseDate(e.date);
   const groupNames=(e.orgs||[]).filter(o=>GROUPS[o]).map(o=>esc(GROUPS[o].name)).join(", ");
@@ -1303,12 +1317,13 @@ function openModal(id){
       <button class="btn btn-ghost" data-save="${esc(e.id)}">${saved.has(e.id)?"Saved ✓":"Save event"}</button>
     </div><p class="outlook-note">Outlook downloads a calendar file (.ics). Open it in Outlook or import it from Add calendar. Events without a posted start time use an all-day reminder.</p>${Community.panel(e.id)}`;
   $("#scrim").hidden=false;$("#modal .x").focus();
+  if(track)window.canopyCommunity?.trackClick(e.id);
 }
 const closeModal=()=>{$("#scrim").hidden=true};
 
 function toggleSave(id){
   saved.has(id)?saved.delete(id):saved.add(id);store.set("canopy-chi-v4-saved",[...saved]);
-  render();if(!$("#scrim").hidden)openModal(id);
+  render();if(!$("#scrim").hidden)openModal(id,false);
 }
 
 function setView(v){
