@@ -21,6 +21,12 @@ const Community = (() => {
     return `<section class="community-box" aria-label="Go together"><h4>Go together</h4><p data-community-count>${summary(id)}</p><small>Your response is separate from organizer registration. One response per browser; counts are community estimates.</small><div class="community-actions"><button data-response="interested" aria-pressed="${current(id)==='interested'}" ${!data?'disabled':''}>Interested</button><button data-response="going" aria-pressed="${current(id)==='going'}" ${!data?'disabled':''}>Going</button><button data-invite>Invite a friend</button><button data-log>Log a connection</button></div><div id="inviteLink" hidden></div></section>`;
   }
   function refresh() {
+    for(const [id,key] of [['stInterested','interested'],['stGoing','going'],['stInvited','invited']]) {
+      const el=document.getElementById(id);
+      if(el)el.textContent=data?.totals?Number(data.totals[key]||0).toLocaleString():'—';
+    }
+    const note=document.getElementById('activityNote');
+    if(note)note.textContent=data?.totals?'Community totals count distinct browsers across all events; a person can appear in more than one total. Invitations count copied links; delivery is not confirmed.':'Community totals are temporarily unavailable.';
     document.querySelectorAll('[data-community-summary]').forEach(el=>el.textContent=summary(el.dataset.communitySummary));
     const box=document.querySelector('.community-box');
     if(box) {box.querySelector('[data-community-count]').textContent=summary(activeEvent);box.querySelectorAll('[data-response]').forEach(b=>{b.disabled=!data||busy;b.setAttribute('aria-pressed',current(activeEvent)===b.dataset.response)})}
@@ -51,7 +57,10 @@ const Community = (() => {
     if(t.closest('[data-invite]')) {
       const url=new URL(location.href);url.search='';url.hash='';url.searchParams.set('event',activeEvent);if(data)url.searchParams.set('invite',data.inviteCode);
       const container=document.getElementById('inviteLink');container.hidden=false;container.innerHTML=`<label>Send this event to a friend<input class="invite-field" readonly aria-label="Invitation link" value="${esc(url.href)}"></label><small>${data?'When a friend responds, your invite milestone updates.':'Event sharing works now. Invite milestones require the community service.'}</small>`;
-      try{await navigator.clipboard.writeText(url.href);message('Invitation link copied.')}catch{container.querySelector('input').select();message('Copy the invitation link below.')}return;
+      try{await navigator.clipboard.writeText(url.href);message('Invitation link copied.');await recordInvitation(activeEvent)}catch{container.querySelector('input').select();container.insertAdjacentHTML('beforeend','<button type="button" data-copy-invite>Copy invitation link</button>');message('Copy the invitation link below.')}return;
+    }
+    if(t.closest('[data-copy-invite]')) {
+      try{await navigator.clipboard.writeText(document.querySelector('#inviteLink input').value);message('Invitation link copied.');await recordInvitation(activeEvent)}catch{message('Select and copy the invitation link.')}return;
     }
     if(t.closest('[data-log]')){const id=activeEvent;closeModal();setView('connections');renderJournal(id);document.querySelector('[name=person]').focus()}
     const follow=t.closest('[data-follow]');if(follow){if(saveJournal(journal.map(x=>x.id===follow.dataset.follow?{...x,followed:!x.followed}:x)))renderJournal()}
@@ -72,6 +81,12 @@ const Community = (() => {
     const entry={linkedin,id:crypto.randomUUID(),person,note,event,eventTitle:events.find(x=>x.id===event)?.title||'',followup:f.get('followup'),followed:false};
     if(saveJournal([entry,...journal])){renderJournal();message('Connection saved privately in this browser.')}
   });
+  async function recordInvitation(id) {
+    if(!data)return;
+    try{data=await api({event:id,status:'invited'});refresh()}catch{message('Invitation link copied. Activity totals could not refresh.')}
+  }
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
+  setInterval(()=>{if(!document.hidden)load()},60000);
   async function init(){await load();if(invitedEvent){const event=events.find(x=>x.id===invitedEvent);if(event)openModal(event.id);else message('This invited event is no longer listed. Explore upcoming events instead.')}}
   async function submitEvent(event) {
     if(!identity)throw new Error('Enable browser storage to submit an event.');

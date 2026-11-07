@@ -10,6 +10,8 @@ export async function onRequest({request,env}) {
   if (!token || !/^[a-f0-9-]{36}$/.test(token)) return json({error:'Browser identity required'},401);
   const user = await digest(token);
   try {
+    // Idempotent setup keeps the existing D1 database compatible on deployment.
+    await env.COMMUNITY.prepare('CREATE TABLE IF NOT EXISTS invitations (event TEXT NOT NULL, visitor TEXT NOT NULL, PRIMARY KEY(event,visitor))').run();
     if(request.method==='POST') {
       if(request.headers.get('Origin')!==new URL(request.url).origin) return json({error:'Invalid origin'},403);
       if(Number(request.headers.get('Content-Length'))>4096) return json({error:'Request too large'},413);
@@ -17,18 +19,23 @@ export async function onRequest({request,env}) {
       let body; try {body=JSON.parse(raw)} catch {return json({error:"Invalid JSON"},400)}
       if(!body || typeof body!=="object")return json({error:"Invalid response"},400);
       const {event,status,ref}=body;
-      if(typeof event!=='string'||!event.length||event.length>1000||!['interested','going','none'].includes(status)) return json({error:'Invalid response'},400);
-      if(status==='none') await env.COMMUNITY.prepare('DELETE FROM responses WHERE event = ? AND visitor = ?').bind(event,user).run();
+      if(typeof event!=='string'||!event.length||event.length>1000||!['interested','going','none','invited'].includes(status)) return json({error:'Invalid response'},400);
+      if(status==='invited') await env.COMMUNITY.prepare('INSERT OR IGNORE INTO invitations(event,visitor) VALUES(?,?)').bind(event,user).run();
+      else if(status==='none') await env.COMMUNITY.prepare('DELETE FROM responses WHERE event = ? AND visitor = ?').bind(event,user).run();
       else await env.COMMUNITY.prepare('INSERT INTO responses(event,visitor,status) VALUES(?,?,?) ON CONFLICT(event,visitor) DO UPDATE SET status=excluded.status').bind(event,user,status).run();
       // One credit per referred browser/event. Never credit a share click or self-invite.
-      if(status!=='none' && typeof ref==='string' && /^[a-f0-9]{64}$/.test(ref) && ref!==user) {
+      if(['interested','going'].includes(status) && typeof ref==='string' && /^[a-f0-9]{64}$/.test(ref) && ref!==user) {
         await env.COMMUNITY.prepare('INSERT OR IGNORE INTO referrals(event,visitor,inviter) VALUES(?,?,?)').bind(event,user,ref).run();
       }
     }
     const counts=await env.COMMUNITY.prepare("SELECT event, SUM(status='interested') AS interested, SUM(status='going') AS going FROM responses GROUP BY event").all();
     const mine=await env.COMMUNITY.prepare('SELECT event,status FROM responses WHERE visitor = ?').bind(user).all();
     const credits=await env.COMMUNITY.prepare('SELECT COUNT(DISTINCT r.visitor) AS total FROM referrals r JOIN responses s ON r.event=s.event AND r.visitor=s.visitor WHERE r.inviter = ?').bind(user).first();
-    return json({counts:counts.results,mine:mine.results,inviteCode:user,joined:credits.total});
+    const totals=await env.COMMUNITY.prepare(`SELECT
+      (SELECT COUNT(DISTINCT visitor) FROM responses WHERE status='interested') AS interested,
+      (SELECT COUNT(DISTINCT visitor) FROM responses WHERE status='going') AS going,
+      (SELECT COUNT(*) FROM (SELECT visitor FROM invitations UNION SELECT inviter AS visitor FROM referrals)) AS invited`).first();
+    return json({counts:counts.results,mine:mine.results,inviteCode:user,joined:credits.total,totals});
   } catch {return json({error:'Could not update community activity. Please try again.'},500)}
 }
 

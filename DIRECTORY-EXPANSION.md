@@ -1,5 +1,9 @@
-# Directory expansion — November 3, 2026
+# Directory expansion — November 6, 2026
 
-Published five priority communities and six announced listings using organizer sources linked in data.js. Quantum is the only new topic. CQE and QC Ware share one multi-day conference record; exports include December 8–10. Gartner attendance is eligibility-based and Evanta remains searchable. Techstars deadline is an Opportunity, with program milestones clearly identified. No attendance totals or recurring schedules inferred.
+The regular directory now contains 97 groups. All 32 former queue entries are directory cards with descriptions, source links and topic assignments; the five priority organizations and their previously announced events remain in place. Existing categories and card layout are retained. Quantum is the only additional topic line. ChicagoJS remains an alias of Digital Delivery Chicago.
 
-The 32 remaining candidates are in CANOPY_EXPANSION_QUEUE, displayed collapsed in Groups and assigned existing topics. Confirm organizer identity and current calendars before promotion to active groups/events. Preserve distinct chapters and co-hosts, verify ACFE through the association, and resolve CNCF and JS Tek/PHP Tek identities before publishing.
+New groups without confirmed event dates link to their organizer/source and say to check the organizer for upcoming events. No new recurring event dates or attendance claims were inferred.
+
+The hero shows Interested, Going and Invited a friend alongside the existing three totals. All six numbers use the orange Save color. Community totals count distinct anonymous browser identities per category across all events, so categories may overlap. Invitations count successfully copied links and historical referral inviters, not confirmed message delivery. Repeated copies and activity across multiple events count once per browser/category. RSVP toggles do not erase invitation history or change because a link is copied.
+
+The API creates its additive invitations table idempotently in the existing D1 database. The schema file includes it for fresh installations. No existing responses, referrals or private connection notes are migrated or removed. Activity refreshes after actions, on return to the tab and every minute while visible. Unavailable counts display a dash, never a fabricated zero.

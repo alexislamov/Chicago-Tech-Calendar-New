@@ -725,7 +725,12 @@ nav.main .count{font:500 11px var(--mono);background:var(--peach);color:#2a1206;
 .hero h1{font:900 clamp(40px,7.4vw,92px)/.92 var(--display);font-stretch:68%;letter-spacing:-.015em;margin:12px 0 18px;text-wrap:balance;max-width:14ch}
 .hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--peach) 62%);padding:0 .06em}
 .hero p.lede{font-size:18px;color:var(--muted);max-width:56ch;margin:0}
-.stats{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.stat{min-width:0}
+.stat b{width:max-content;max-width:100%;padding:4px 9px;border-radius:6px;background:var(--peach);color:#2a1206}
+.stats-note{font-size:11px;color:var(--muted);margin:10px 0 0;max-width:85ch}
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}}
+@media(max-width:380px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .stat b{display:block;font:800 34px/1 var(--display);font-stretch:75%;font-variant-numeric:tabular-nums}
 .stat span{font-size:13px;color:var(--muted)}
 
@@ -905,11 +910,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
       <div class="eyebrow">Chicago · tech, AI &amp; security · last checked <span class="checked"></span></div>
       <h1>Every Chicago tech, AI and security event on <em>one</em> calendar.</h1>
       <p class="lede">Chapter meetings, meetups, workshops, pitch nights and conferences from security associations, AI communities, developer groups and startup hubs. Every listing links to the organizer's official page.</p>
-      <div class="stats">
+      <div class="stats" aria-label="Calendar and community totals">
         <div class="stat"><b id="stMonth">0</b><span>events in the next 30 days</span></div>
         <div class="stat"><b id="stFree">0</b><span>listed as free</span></div>
         <div class="stat"><b id="stGroups">0</b><span>groups tracked</span></div>
+        <div class="stat" title="Distinct browser identities with at least one current Interested response"><b id="stInterested" aria-live="polite">—</b><span>interested</span></div>
+        <div class="stat" title="Distinct browser identities with at least one current Going response"><b id="stGoing" aria-live="polite">—</b><span>going</span></div>
+        <div class="stat" title="Distinct browser identities that copied an invitation link or brought a friend who responded"><b id="stInvited" aria-live="polite">—</b><span>invited a friend</span></div>
       </div>
+      <p class="stats-note" id="activityNote">Community totals are loading.</p>
       <section id="dailyNews" class="news-brief" aria-label="Daily cybersecurity and AI news"></section>
     </div>
 
@@ -1233,7 +1242,7 @@ function renderGroups(){
         <div class="actions">${n?`<button class="btn btn-primary" data-group="${k}">See events</button>`:""}<a class="btn btn-ghost" href="${g.url}" target="_blank" rel="noopener">Official site ↗</a></div></article>`;
     }).join("")}</div></section>`;
   }).join("");
-  $("#ggroups").innerHTML=(html||`<div class="empty"><strong>No groups match</strong>Try another search.</div>`)+`<details class="gsec"><summary class="gsec-h">Expansion queue · ${(window.CANOPY_EXPANSION_QUEUE||[]).length} candidates</summary><p>Organizer and calendar verification pending. These are candidates, not confirmed events.</p><div class="ggrid">${(window.CANOPY_EXPANSION_QUEUE||[]).filter(g=>!q||[g.name,g.note,...g.topics.map(t=>TOPICS[t].label)].join(" ").toLowerCase().includes(q)).map(g=>`<article class="gcard"><div class="focus">Pending verification</div><h4>${esc(g.name)}</h4><div class="tags">${topicTags(g)}</div><p>${esc(g.note)}</p></article>`).join("")}</div></details>`;
+  $("#ggroups").innerHTML=html||`<div class="empty"><strong>No groups match</strong>Try another search.</div>`;
 }
 
 function renderStats(){

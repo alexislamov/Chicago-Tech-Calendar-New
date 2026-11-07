@@ -7,6 +7,39 @@
 window.CANOPY_CHECKED = "Oct 1, 2026";
 
 window.CANOPY_GROUPS = {
+  wisp:{"cat": "Security & GRC", "name": "WISP Chicago Region", "topics": ["sec", "privacy", "career"], "focus": "Women in security & privacy", "desc": "Chicago regional community of Women in Security & Privacy, connecting practitioners across cybersecurity and data privacy.", "url": "https://www.wisporg.com/", "status": "Check organizer for upcoming events"},
+  asis:{"cat": "Security & GRC", "name": "ASIS Chicago Chapter", "topics": ["sec", "lead"], "focus": "Physical & converged security", "desc": "Local ASIS chapter for security professionals, including Women in Security and NextGen programming.", "url": "https://asischicago.starchapter.com/", "status": "Check organizer for upcoming events"},
+  acfe:{"cat": "Security & GRC", "name": "Greater Chicago Chapter ACFE", "topics": ["grc", "career"], "focus": "Fraud examination", "desc": "Chicago chapter of the Association of Certified Fraud Examiners, focused on fraud prevention, detection and investigation.", "url": "https://acfechicago.org/", "status": "Check organizer for upcoming events"},
+  acams:{"cat": "Security & GRC", "name": "ACAMS Chicago Chapter", "topics": ["grc", "career"], "focus": "Anti-financial crime", "desc": "Local professional community for anti-money laundering, financial crime prevention and compliance.", "url": "https://www.acams.org/en/chapters/united-states-midwest/chicago-chapter", "status": "Check organizer for upcoming events"},
+  iianw:{"cat": "Security & GRC", "name": "IIA Northwest Metro Chicago", "topics": ["grc", "career"], "focus": "Internal audit · northwest suburbs", "desc": "A separate Institute of Internal Auditors chapter serving professionals in northwest metropolitan Chicago.", "url": "https://www.theiia.org/NorthwestMetroChicago", "status": "Check organizer for upcoming events"},
+  mlops:{"cat": "AI & Data", "name": "MLOps Community — Chicago", "topics": ["ai", "data", "dev"], "focus": "Machine learning in production", "desc": "Chicago MLOps community for practitioners building, deploying and operating machine learning systems.", "url": "https://mlops.community/", "status": "Check organizer for upcoming events"},
+  pydata:{"cat": "AI & Data", "name": "PyData Chicago", "topics": ["data", "ai", "dev"], "focus": "Open-source data tools", "desc": "Chicago community for open-source data analysis, scientific computing and machine learning.", "url": "https://www.meetup.com/PyDataChi/", "status": "Check organizer for upcoming events"},
+  powerbi:{"cat": "AI & Data", "name": "Chicago Fabric / Power BI User Group", "topics": ["data"], "focus": "Analytics · Microsoft Fabric", "desc": "Local user community for Microsoft Fabric, Power BI, business intelligence and analytics.", "url": "https://www.meetup.com/chicagolandpowerbi/", "status": "Check organizer for upcoming events"},
+  tableau:{"cat": "AI & Data", "name": "Chicago Tableau User Group (ChiTUG)", "topics": ["data"], "focus": "Data visualization · Tableau", "desc": "Chicago Tableau community sharing visualization techniques, analytics practices and user experiences.", "url": "https://usergroups.tableau.com/chicago-tableau-user-group", "status": "Check organizer for upcoming events"},
+  foundry:{"cat": "AI & Data", "name": "Chicago Microsoft Foundry User Group", "topics": ["ai", "data", "dev"], "focus": "AI applications · Microsoft Foundry", "desc": "Chicago user community for building AI applications and agents with Microsoft Foundry.", "url": "https://www.meetup.com/chicago-microsoft-foundry-user-group/", "status": "Check organizer for upcoming events"},
+  powerplatform:{"cat": "Developers", "name": "Chicago Microsoft Power Platform Users Group", "topics": ["dev", "data"], "focus": "Low-code · business applications", "desc": "User community for Microsoft Power Platform, business applications, automation and analytics.", "url": "https://www.meetup.com/cmppug/", "status": "Check organizer for upcoming events"},
+  cjug:{"cat": "Developers", "name": "Chicago Java Users Group (CJUG)", "topics": ["dev"], "focus": "Java · JVM", "desc": "Chicago Java community for technical talks, open-source collaboration and professional connections.", "url": "https://cjug.org/", "status": "Check organizer for upcoming events"},
+  kotlin:{"cat": "Developers", "name": "Chicago Kotlin Users Group", "topics": ["dev"], "focus": "Kotlin · JVM", "desc": "Chicago Kotlin community, including joint programming with other local developer groups.", "url": "https://luma.com/99e93315", "status": "Check organizer for upcoming events"},
+  illinoisjug:{"cat": "Developers", "name": "Illinois Java Users Group", "topics": ["dev"], "focus": "Java · northwest suburbs", "desc": "Java user community serving the northwest suburbs, separate from the Chicago Java Users Group.", "url": "https://www.meetup.com/illinoisjugnorthwest/", "status": "Check organizer for upcoming events"},
+  ruby:{"cat": "Developers", "name": "ChicagoRuby", "topics": ["dev"], "focus": "Ruby · Rails", "desc": "Chicago-area community of developers and designers working with Ruby, Rails and related technologies.", "url": "https://chicagoruby.org/", "status": "Check organizer for upcoming events"},
+  dotnetdev:{"cat": "Developers", "name": "Chicago .NET Developers", "topics": ["dev"], "focus": "Microsoft .NET · downtown", "desc": "Downtown Chicago developer community focused on .NET and related software engineering technologies.", "url": "https://www.meetup.com/chicagodevnet/", "status": "Check organizer for upcoming events"},
+  cnug:{"cat": "Developers", "name": "The Chicago .NET Users Group (CNUG)", "topics": ["dev"], "focus": "Microsoft .NET", "desc": "Established Chicago-area .NET user group for learning and sharing development practices.", "url": "https://www.meetup.com/The-Chicago-NET-Users-Group/", "status": "Check organizer for upcoming events"},
+  cncf:{"cat": "Developers", "name": "Cloud Native Chicago", "topics": ["data", "dev"], "focus": "CNCF · Kubernetes", "desc": "Official CNCF community group for cloud-native technologies and Kubernetes in Chicagoland.", "url": "https://community.cncf.io/chicago/", "status": "Check organizer for upcoming events"},
+  cloudnativeai:{"cat": "Developers", "name": "Chicago Cloud Native x AI", "topics": ["data", "ai", "dev"], "focus": "Cloud-native platforms · AI", "desc": "Chicago technical group exploring the intersection of cloud-native infrastructure and AI.", "url": "https://www.meetup.com/chicago-cloud-native-x-ai-tech-group/", "status": "Check organizer for upcoming events"},
+  react:{"cat": "Developers", "name": "React Chicago", "topics": ["dev"], "focus": "React · web applications", "desc": "Chicago community for React web developers, with technical talks and knowledge sharing.", "url": "https://www.meetup.com/react-chicago/", "status": "Check organizer for upcoming events"},
+  jstek:{"cat": "Conferences", "name": "JS Tek", "topics": ["dev"], "focus": "JavaScript conference", "desc": "Chicago-area JavaScript conference programming associated with the Tek conference community.", "url": "https://ti.to/phptek/jstek-2026", "status": "Check organizer for upcoming events"},
+  phptek:{"cat": "Conferences", "name": "PHP Tek", "topics": ["dev"], "focus": "PHP conference", "desc": "PHP developer conference with Chicago-area editions and technical sessions.", "url": "https://tek.phparch.com/", "status": "Check organizer for upcoming events"},
+  apln:{"cat": "IT Leadership", "name": "APLN Chicago", "topics": ["pm", "lead"], "focus": "Agile · product delivery", "desc": "Agile Project Leadership Network community for agile leadership, product delivery and collaboration.", "url": "https://www.meetup.com/apln-chicago/", "status": "Check organizer for upcoming events"},
+  aiga:{"cat": "Product & Design", "name": "AIGA Chicago", "topics": ["pm", "career"], "focus": "Design · creative community", "desc": "Chicago AIGA chapter connecting designers through professional development, critiques and community events.", "url": "https://chicago.aiga.org/", "status": "Check organizer for upcoming events"},
+  ixda:{"cat": "Product & Design", "name": "IxDA Chicago", "topics": ["pm"], "focus": "Interaction design · UX research", "desc": "Chicago interaction design community for UX, research, product and related practices.", "url": "https://www.meetup.com/IxDAChicago/", "status": "Check organizer for upcoming events"},
+  camps:{"cat": "Product & Design", "name": "Chicago Camps", "topics": ["pm"], "focus": "UX Camp · design learning", "desc": "Chicago-based organizer of UX and design learning events, including online UX Camp editions.", "url": "https://www.chicagocamps.org/", "status": "Check organizer for upcoming events"},
+  womenproduct:{"cat": "Product & Design", "name": "Women in Product — Chicago", "topics": ["pm", "lead", "career"], "focus": "Women in product", "desc": "Chicago chapter community supporting women working in product management and leadership.", "url": "https://www.womenpm.org/", "status": "Check organizer for upcoming events"},
+  productalliance:{"cat": "Product & Design", "name": "Chicago Product Alliance", "topics": ["pm", "lead"], "focus": "Product community · collaboration", "desc": "Chicago product community collaborating with local product management networks on shared programming.", "url": "https://www.meetup.com/chipma/events/310013112/", "status": "Check organizer for upcoming events"},
+  polsky:{"cat": "Startups & Innovation", "name": "Polsky Center (UChicago)", "topics": ["startup", "lead", "quantum"], "focus": "Entrepreneurship · research commercialization", "desc": "University of Chicago entrepreneurship and innovation center, including Polsky Exchange workshops and startup programs.", "url": "https://polsky.uchicago.edu/", "status": "Check organizer for upcoming events"},
+  fintex:{"cat": "Startups & Innovation", "name": "FinTEx", "topics": ["startup", "data"], "focus": "Financial technology", "desc": "Chicago fintech community connecting financial services innovators, entrepreneurs and ecosystem partners.", "url": "https://blog.1871.com/1871-and-fintex-expand-fintech-offerings-with-strategic-partnership-", "status": "Check organizer for upcoming events"},
+  startout:{"cat": "Startups & Innovation", "name": "StartOut — Chicago", "topics": ["startup", "lead", "career"], "focus": "LGBTQ+ founders", "desc": "Chicago community of StartOut, supporting LGBTQ+ entrepreneurs through connections, resources and founder programming.", "url": "https://startout.org/", "status": "Check organizer for upcoming events"},
+  himss:{"cat": "IT Leadership", "name": "HIMSS Greater Illinois Chapter", "topics": ["data", "lead", "sec"], "focus": "Health IT · digital health", "desc": "Greater Illinois HIMSS chapter for healthcare information technology, digital transformation and health IT leadership.", "url": "https://greaterillinois.himsschapter.org/", "status": "Check organizer for upcoming events"},
+
   cqe:{"cat": "AI & Data", "name": "Chicago Quantum Exchange", "focus": "Quantum · research · commercialization", "topics": ["quantum", "startup"], "desc": "Chicago quantum research and industry community. Co-hosts Q2B26 x Chicago Quantum Summit with QC Ware.", "url": "https://chicagoquantum.org/2026-summit"},
   evanta:{"cat": "Security & GRC", "name": "Gartner Chicago CISO Community", "aliases": ["Evanta", "Gartner C-Level Communities"], "topics": ["sec", "grc", "lead"], "focus": "Security leadership · eligibility-based", "desc": "Peer community for senior security executives, formerly Evanta. Attendance is eligibility-based; membership applications are vetted by the organizer.", "url": "https://www.evanta.com/ciso/chicago"},
   futurecon:{"cat": "Conferences", "name": "FutureCon Chicago", "topics": ["sec", "grc", "ai"], "focus": "Cybersecurity · hybrid conference", "desc": "Announced Chicago-area cybersecurity conference editions for practitioners and security leaders. January 14, 2027 is at Chicago Marriott Oak Brook with virtual participation.", "url": "https://futureconevents.com/events/chicago-il-2027/"},
@@ -221,241 +254,13 @@ window.CANOPY_AREAS = {
 };
 
 // Expansion candidates are not confirmed active groups or scheduled events.
-window.CANOPY_EXPANSION_QUEUE = [
-  {
-    "name": "WISP Chicago",
-    "topics": [
-      "sec",
-      "privacy"
-    ],
-    "note": "Verify chapter calendar; distinguish physical security, fraud and financial crime in focus tags."
-  },
-  {
-    "name": "ASIS Chicago",
-    "topics": [
-      "sec"
-    ],
-    "note": "Physical and converged security. Verify the chapter calendar before publishing events."
-  },
-  {
-    "name": "Greater Chicago ACFE",
-    "topics": [
-      "grc"
-    ],
-    "note": "Fraud examination. Verify through the chapter or parent association, not host.io."
-  },
-  {
-    "name": "ACAMS Chicago",
-    "topics": [
-      "grc"
-    ],
-    "note": "Financial crime and anti-money laundering. Verify the chapter calendar."
-  },
-  {
-    "name": "IIA Northwest Metro Chicago",
-    "topics": [
-      "grc"
-    ],
-    "note": "Verify chapter calendar; distinguish physical security, fraud and financial crime in focus tags."
-  },
-  {
-    "name": "MLOps Community Chicago",
-    "topics": [
-      "ai",
-      "data"
-    ],
-    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
-  },
-  {
-    "name": "PyData Chicago",
-    "topics": [
-      "data",
-      "dev"
-    ],
-    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
-  },
-  {
-    "name": "Fabric / Power BI",
-    "topics": [
-      "data"
-    ],
-    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
-  },
-  {
-    "name": "ChiTUG",
-    "topics": [
-      "data"
-    ],
-    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
-  },
-  {
-    "name": "Microsoft Foundry",
-    "topics": [
-      "ai",
-      "dev"
-    ],
-    "note": "Verify current organizer and calendar; keep co-hosts distinct and shared events listed once."
-  },
-  {
-    "name": "Chicago Microsoft Power Platform Users Group",
-    "topics": [
-      "dev",
-      "data"
-    ],
-    "note": "Confirm distinct organizer identities; associate communities without merging them."
-  },
-  {
-    "name": "Chicago .NET Developers",
-    "topics": [
-      "dev"
-    ],
-    "note": "Confirm distinct organizer identities; associate communities without merging them."
-  },
-  {
-    "name": "CNUG",
-    "topics": [
-      "dev"
-    ],
-    "note": "Confirm distinct organizer identities; associate communities without merging them."
-  },
-  {
-    "name": "CJUG",
-    "topics": [
-      "dev"
-    ],
-    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
-  },
-  {
-    "name": "Chicago Kotlin",
-    "topics": [
-      "dev"
-    ],
-    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
-  },
-  {
-    "name": "Illinois JUG",
-    "topics": [
-      "dev"
-    ],
-    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
-  },
-  {
-    "name": "ChicagoRuby",
-    "topics": [
-      "dev"
-    ],
-    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
-  },
-  {
-    "name": "React Chicago",
-    "topics": [
-      "dev"
-    ],
-    "note": "Verify local organizer/calendar; retain separate chapters and React versus React Native identities."
-  },
-  {
-    "name": "Cloud Native Chicago",
-    "topics": [
-      "data",
-      "dev"
-    ],
-    "note": "Use official CNCF chapter as canonical; verify separate organizers before adding the other group."
-  },
-  {
-    "name": "Chicago Cloud Native x AI",
-    "topics": [
-      "data",
-      "ai"
-    ],
-    "note": "Use official CNCF chapter as canonical; verify separate organizers before adding the other group."
-  },
-  {
-    "name": "APLN Chicago",
-    "topics": [
-      "pm",
-      "lead"
-    ],
-    "note": "Verify current local organizer and calendar."
-  },
-  {
-    "name": "AIGA Chicago",
-    "topics": [
-      "pm"
-    ],
-    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
-  },
-  {
-    "name": "IxDA Chicago",
-    "topics": [
-      "pm"
-    ],
-    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
-  },
-  {
-    "name": "Chicago Camps",
-    "topics": [
-      "pm"
-    ],
-    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
-  },
-  {
-    "name": "Women in Product Chicago",
-    "topics": [
-      "pm"
-    ],
-    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
-  },
-  {
-    "name": "Chicago Product Alliance",
-    "topics": [
-      "pm"
-    ],
-    "note": "Verify local chapter/calendar; clearly label locally organized online events as virtual."
-  },
-  {
-    "name": "Polsky",
-    "topics": [
-      "startup",
-      "lead"
-    ],
-    "note": "Verify current local organizer; preserve fintech, LGBTQ+ founder and health IT focus tags."
-  },
-  {
-    "name": "FinTEx",
-    "topics": [
-      "startup",
-      "data"
-    ],
-    "note": "Verify current local organizer; preserve fintech, LGBTQ+ founder and health IT focus tags."
-  },
-  {
-    "name": "StartOut Chicago",
-    "topics": [
-      "startup",
-      "lead"
-    ],
-    "note": "Verify current local organizer; preserve fintech, LGBTQ+ founder and health IT focus tags."
-  },
-  {
-    "name": "HIMSS Greater Illinois",
-    "topics": [
-      "data",
-      "lead"
-    ],
-    "note": "Verify current local organizer; preserve fintech, LGBTQ+ founder and health IT focus tags."
-  },
-  {
-    "name": "JS Tek",
-    "topics": [
-      "dev"
-    ],
-    "note": "Verify separate or co-located brands before creating conference records."
-  },
-  {
-    "name": "PHP Tek",
-    "topics": [
-      "dev"
-    ],
-    "note": "Verify separate or co-located brands before creating conference records."
-  }
-];
+
+// Every directory group uses the current topic lines. Quantum is the only addition.
+const categoryTopics = {"Security & GRC":["sec","grc"],"AI & Data":["ai","data"],"Developers":["dev"],"Product & Design":["pm"],"IT Leadership":["lead"],"Startups & Innovation":["startup"],"Conferences":["sec"]};
+for (const group of Object.values(window.CANOPY_GROUPS)) {
+  group.topics ||= categoryTopics[group.cat];
+}
+window.CANOPY_GROUPS.jschi.aliases = ["ChicagoJS", "Chicago JavaScript", "js-chi"];
+Object.assign(window.CANOPY_GROUPS.devopsdays,{topics:["dev","data"]});
+Object.assign(window.CANOPY_GROUPS.aiweek,{topics:["ai","data"]});
+Object.assign(window.CANOPY_GROUPS.techweek,{topics:["startup","dev","lead"]});

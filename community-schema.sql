@@ -8,3 +8,8 @@ CREATE TABLE IF NOT EXISTS referrals (
   PRIMARY KEY(event,visitor)
 );
 CREATE INDEX IF NOT EXISTS referrals_inviter ON referrals(inviter);
+
+CREATE TABLE IF NOT EXISTS invitations (
+  event TEXT NOT NULL, visitor TEXT NOT NULL,
+  PRIMARY KEY(event,visitor)
+);
