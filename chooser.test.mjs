@@ -24,3 +24,9 @@ assert.ok(!db.prepare("SELECT name FROM sqlite_master WHERE type='table'").all()
 console.log('Passed: hard constraints, ended/deadline exclusion, budget honesty, feedback, Claude opt-in, verified IDs, duplicates, private-note exclusion, secret safety, provider fallback and rate limits.');
 
 for(const [status,message,issue] of [[400,'Your credit balance is too low','provider_billing'],[401,'invalid x-api-key','provider_authentication'],[404,'model unavailable','provider_model'],[400,'unsupported anthropic-version','provider_api_version']]){const result=await chooserRoute(req({useClaude:true}),env,{events,now,fetcher:async()=>new Response(JSON.stringify({error:{message}}),{status})});const body=await result.json();assert.equal(body.issue,issue);assert.ok(!JSON.stringify(body).includes(message));}
+// Prompt search sees every upcoming event, including dates beyond 30 days and old shortlist limits.
+const many=Array.from({length:55},(_,i)=>({...base,id:'prompt-'+i,date:i===54?'2026-12-20':'2026-11-10',topics:i===54?['quantum']:['ai']}));
+let promptPayload;
+const promptRequest=req({mode:'prompt',request:'Quantum events in December, not AI.',preferences:{topics:['ai'],when:'7'},useClaude:true});promptRequest.headers.set('Authorization','Bearer '+crypto.randomUUID());
+const promptResponse=await chooserRoute(promptRequest,env,{events:many,now,fetcher:async(url,options)=>{promptPayload=JSON.parse(JSON.parse(options.body).messages[0].content);return new Response(JSON.stringify({content:[{type:'tool_use',name:'choose_events',input:{recommendations:[{eventId:'prompt-54',reason:'Quantum event in December.'}]}}]}))}});
+const promptData=await promptResponse.json();assert.equal(promptData.engine,'claude');assert.equal(promptPayload.candidates.length,55);assert.equal(promptData.recommendations[0].eventId,'prompt-54');assert.equal(promptPayload.preferences.when,'all');assert.deepEqual(promptPayload.preferences.topics,[]);

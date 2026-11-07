@@ -1,6 +1,6 @@
 # Help me choose
 
-The orange button beside search opens an accessible side panel. Visitors choose topics, goals and optional budget/location/format/date/time limits, or describe a request. Up to three current catalog events are shown with reasons, Save, Invite a friend and feedback. Top 5 remains a separate popularity feature.
+The orange button beside search opens an accessible side panel with one prompt and one Find events button. Guidance suggests interests, goals, timing, location and budget. Claude interprets the prompt and selects up to three current catalog events, with reasons, Save, Invite a friend and feedback. Top 5 remains a separate popularity feature. No topic chips, dropdowns, example buttons or opt-in toggles stand between the prompt and its results. Ctrl/Cmd+Enter also submits the prompt.
 
 ## Enable Claude
 
@@ -10,12 +10,12 @@ In Cloudflare Workers & Pages, select `chicago-tech-calendar`, open Settings →
 
 ## Privacy and learning
 
-Remember my preferences is off by default. Preferences, feedback and viewed IDs remain in memory for the visit unless the visitor opts in. Saved-event and click-based affinity is used only with that opt-in. Likes carry more weight than saves; clicks are a weaker signal. Clear preferences & feedback deletes the guide’s local record without deleting saved events. Private connection notes are never read or transmitted. With Use Claude enabled, the request, normalized preferences and at most 40 short public event records are sent server-side to Anthropic. Requests, preferences, API responses and keys are not stored in D1 or logged by the application.
+A short notice links to Privacy and explains that the prompt is sent to Claude. Search text, likes and dismissals remain in memory for the visit; no persistent preference profile is loaded or saved by this interface. Private connection notes are never read or transmitted. The server sends the prompt and public upcoming event records to Anthropic. Requests, API responses and keys are not stored in D1 or logged by the application.
 
 ## Limits and grounding
 
 The service limits Claude calls to 10 per hashed browser per hour, 20 per hashed network per hour and 250 total per UTC day. D1 atomically reserves quota before each provider call. These are request limits, not identity verification; the global cap bounds calls even if browser IDs rotate. Rate-limit records contain only counters, hashes and expiry, and are cleaned on subsequent requests. No D1 migration is needed: the counter table is created on first Claude request.
 
-Only unexpired catalog events meeting selected hard filters are candidates. Unknown prices or times are excluded when the corresponding hard limit is selected. Application deadlines are excluded. Output IDs must be among the prefiltered candidates and duplicates are removed. Explanations are escaped as plain text. Organizer requirements and missing facts remain visible. Introductory suitability is a preference rather than a guarantee. No invented attendees, events, ticket availability or registration confirmations.
+Prompt mode searches all unexpired catalog events across all upcoming dates without the old 40-event shortlist or a 30-day default. Claude interprets explicit constraints, soft preferences and negations in the prompt. Legacy form requests retain their selected hard filters. Claude is instructed to treat unknown prices and times as unknown and honor explicit hard limits. Application deadlines are excluded. Output IDs must be among the prefiltered candidates and duplicates are removed. Explanations are escaped as plain text. Organizer requirements and missing facts remain visible. Introductory suitability is a preference rather than a guarantee. No invented attendees, events, ticket availability or registration confirmations.
 
-Run `node --test chooser.test.mjs community.test.mjs news-calendar.test.mjs evolution.test.mjs`, then `node build-site.mjs`. Check desktop and phone layouts, feedback, saving, invite copying, clearing, Escape/focus return, and provider fallback.
+Run `node --test chooser.test.mjs community.test.mjs news-calendar.test.mjs evolution.test.mjs`, then `node build-site.mjs`. Check desktop and phone layouts, prompt submission, feedback, saving, invite copying, Escape/focus return, provider fallback, and a natural-language query outside the next 30 days.
