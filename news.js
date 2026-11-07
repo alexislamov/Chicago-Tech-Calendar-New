@@ -1,4 +1,5 @@
 globalThis.CanopyNews=(()=>{
+ let refresh=()=>{};
  if(typeof document!=='undefined'){
   let brief=null,loading=false;
   const root=document.getElementById('dailyNews');
@@ -19,7 +20,7 @@ globalThis.CanopyNews=(()=>{
    document.getElementById('newsSources').innerHTML=(brief.sources||[]).map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.name)}</a></li>`).join('');render();
   }catch{document.getElementById('newsUpdated').textContent='Daily brief temporarily unavailable';document.getElementById('newsCards').innerHTML='<p>Please try again. <button type="button" data-news-retry>Reload news</button></p>'}finally{loading=false}}
   root.addEventListener('click',e=>{if(e.target.closest('[data-news-retry]'))load()});
-  load();
+  refresh=load;
  }
- return {};
+ return {load:()=>refresh()};
 })();

@@ -1,0 +1,584 @@
+{
+  "acams": {
+    "url": "https://www.acams.org/en/chapters/united-states-midwest/chicago-chapter",
+    "status": 403,
+    "checked": "2026-11-06",
+    "result": "restricted"
+  },
+  "wisp": {
+    "url": "https://www.wisporg.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "foundry": {
+    "url": "https://www.meetup.com/chicago-microsoft-foundry-user-group/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "powerbi": {
+    "url": "https://www.meetup.com/chicagolandpowerbi/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "mlops": {
+    "url": "https://mlops.community/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "pydata": {
+    "url": "https://www.meetup.com/PyDataChi/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "acfe": {
+    "url": "https://acfechicago.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "illinoisjug": {
+    "url": "https://www.meetup.com/illinoisjugnorthwest/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "powerplatform": {
+    "url": "https://www.meetup.com/cmppug/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "dotnetdev": {
+    "url": "https://www.meetup.com/chicagodevnet/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "asis": {
+    "url": "https://asischicago.starchapter.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "cloudnativeai": {
+    "url": "https://www.meetup.com/chicago-cloud-native-x-ai-tech-group/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "cjug": {
+    "url": "https://cjug.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "cnug": {
+    "url": "https://www.meetup.com/The-Chicago-NET-Users-Group/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "react": {
+    "url": "https://www.meetup.com/react-chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "apln": {
+    "url": "https://www.meetup.com/apln-chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "tableau": {
+    "url": "https://usergroups.tableau.com/chicago-tableau-user-group",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "kotlin": {
+    "url": "https://luma.com/99e93315",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "ixda": {
+    "url": "https://www.meetup.com/IxDAChicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "ruby": {
+    "url": "https://chicagoruby.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "cncf": {
+    "url": "https://ocgroups.dev/cncf",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "phptek": {
+    "url": "https://tek.phparch.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "polsky": {
+    "url": "https://polsky.uchicago.edu/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "fintex": {
+    "url": "https://www.linkedin.com/company/fintex-chicago",
+    "status": 403,
+    "checked": "2026-11-06",
+    "result": "restricted"
+  },
+  "startout": {
+    "url": "https://startout.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "jstek": {
+    "url": "https://ti.to/phptek/jstek-2026",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "cqe": {
+    "url": "https://chicagoquantum.org/2026-summit",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "iianw": {
+    "url": "https://www.theiia.org/NorthwestMetroChicago",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "himss": {
+    "url": "https://greaterillinois.himsschapter.org/",
+    "status": 403,
+    "checked": "2026-11-06",
+    "result": "restricted"
+  },
+  "aiga": {
+    "url": "https://chicago.aiga.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "evanta": {
+    "url": "https://www.evanta.com/ciso/chicago",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "womenproduct": {
+    "url": "https://womenpm.org/join-our-community/chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "futurecon": {
+    "url": "https://futureconevents.com/events/chicago-il-2027/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "productalliance": {
+    "url": "https://chicagoproduct.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "techstars": {
+    "url": "https://www.techstars.com/accelerators/chicago",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aicollective": {
+    "url": "https://luma.com/aic-chi-20260401-openclaw",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "issa": {
+    "url": "https://www.tickettailor.com/events/issachicago",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "isc2": {
+    "url": "https://isc2chicago.org/events/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "wicys": {
+    "url": "https://www.wicys.org/organizer/wicys-chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "camps": {
+    "url": "https://www.chicagocamps.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "owasp": {
+    "url": "https://owasp.org/chapters/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "isaca": {
+    "url": "https://engage.isaca.org/chicagochapter/events/calendar",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "burbsec": {
+    "url": "https://burbsec.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "dcgchicago": {
+    "url": "http://dcgchicago.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "iapp": {
+    "url": "https://iapp.org/community/iapp-chapters/chicago-il",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "bsides": {
+    "url": "https://bsides312.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "thotcon": {
+    "url": "https://www.thotcon.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "campit": {
+    "url": "https://campconferences.com/sponsoring/schedule/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "blueteamcon": {
+    "url": "https://blueteamcon.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "dc312": {
+    "url": "https://dc312.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "csa": {
+    "url": "https://circle.cloudsecurityalliance.org/chicago/home",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "secureworld": {
+    "url": "https://www.secureworld.io/events/chicago-il-2026",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "techweek": {
+    "url": "https://gotechchicago.com/week/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "enterpriseai": {
+    "url": "https://www.meetup.com/chicago-ai-llms/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aidevs": {
+    "url": "https://www.meetup.com/aittg-chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "chicagoml": {
+    "url": "https://www.meetup.com/chicago-ml/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aichicago": {
+    "url": "https://www.meetup.com/aichicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aimlentre": {
+    "url": "https://www.meetup.com/Chicago-AI-and-ML-Entrepreneurs/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "chibrrcon": {
+    "url": "https://chibrrcon2026.sched.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aicv": {
+    "url": "https://www.meetup.com/chicago-ai-machine-learning-data-science/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aipros": {
+    "url": "https://www.meetup.com/chicago-data-science-ml-ai-platform/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "analyticsclub": {
+    "url": "https://www.meetup.com/ac-ord/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "devopsdays": {
+    "url": "https://devopsdays.org/chicago",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "chipy": {
+    "url": "https://www.meetup.com/_chipy_/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "pyladies": {
+    "url": "https://www.meetup.com/Chicago-PyLadies/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "gdgcloud": {
+    "url": "https://www.meetup.com/google-developers-group-gdg-cloud-chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "infragard": {
+    "url": "https://chicagoinfragard.org/events/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "iia": {
+    "url": "https://www.theiia.org/en/chapters/united-states/illinois/chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aiweek": {
+    "url": "https://chicagoaiweek.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "jschi": {
+    "url": "https://www.meetup.com/js-chi/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "nodejs": {
+    "url": "https://www.meetup.com/Chicago-Nodejs/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "reactnative": {
+    "url": "https://www.meetup.com/react-native-chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "wdai": {
+    "url": "https://luma.com/womendefiningai",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "awschicago": {
+    "url": "https://www.chicagoaws.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "gdg": {
+    "url": "https://gdg.community.dev/events/details/google-gdg-chicago-presents-agentic-ai-builder-lab-with-google-cloud/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "chicagogo": {
+    "url": "https://www.meetup.com/chicagogo/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "producttank": {
+    "url": "https://www.meetup.com/producttank-chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "womendevs": {
+    "url": "https://www.meetup.com/womandevelopers/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "chipma": {
+    "url": "https://www.meetup.com/chipma/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "uxd": {
+    "url": "https://www.meetup.com/uxdchicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "ieee": {
+    "url": "https://ieeechicago.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "uxsyn": {
+    "url": "https://www.meetup.com/uxsynergies/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "gdi": {
+    "url": "https://www.meetup.com/Girl-Develop-It-Chicago-IL/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "womenux": {
+    "url": "https://www.meetup.com/chicago-women-ux-designers-in-tech/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "inspiher": {
+    "url": "https://www.meetup.com/InspiHER-Tech-Women-in-Information-Technology-Meetup/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "chihacknight": {
+    "url": "https://chihacknight.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "sim": {
+    "url": "https://www.sim-chicago.org/events/event_list.asp",
+    "status": 403,
+    "checked": "2026-11-06",
+    "result": "restricted"
+  },
+  "p33": {
+    "url": "https://gotechchicago.com/week/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "mhub": {
+    "url": "https://mhub.org/events",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "i1871": {
+    "url": "https://1871.com/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "techmixer": {
+    "url": "https://www.meetup.com/chicagotechmixer/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aitp": {
+    "url": "https://aitpchicago.com/Events",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "startupgrind": {
+    "url": "https://www.meetup.com/startup-grind-chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "figma": {
+    "url": "https://friends.figma.com/chicago/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "bdpa": {
+    "url": "https://www.chicagobdpa.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "cybersummit": {
+    "url": "https://cyberriskalliance.swoogo.com/chicago2026",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  },
+  "aitinkerers": {
+    "url": "https://chicago.aitinkerers.org/",
+    "status": 200,
+    "checked": "2026-11-06",
+    "result": "reachable"
+  }
+}

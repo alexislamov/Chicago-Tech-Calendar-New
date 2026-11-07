@@ -5,7 +5,7 @@ import {webcrypto} from 'node:crypto';
 globalThis.crypto ??= webcrypto;
 const {onRequest}=await import('./worker.mjs');
 const db=new DatabaseSync(':memory:');db.exec(readFileSync(new URL('./community-schema.sql',import.meta.url),'utf8'));
-const env={COMMUNITY:{prepare(sql){return {bind(...args){this.args=args;return this},async run(){return db.prepare(sql).run(...(this.args||[]))},async all(){return {results:db.prepare(sql).all(...(this.args||[]))}},async first(){return db.prepare(sql).get(...(this.args||[]))}}}}};
+const env={EVENT_CATALOG:[{id:'event-popular'},{id:'event-less-popular'}],COMMUNITY:{prepare(sql){return {bind(...args){this.args=args;return this},async run(){return db.prepare(sql).run(...(this.args||[]))},async all(){return {results:db.prepare(sql).all(...(this.args||[]))}},async first(){return db.prepare(sql).get(...(this.args||[]))}}}}};
 const a='aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa',b='bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb';
 async function call(token,body,origin='https://example.com') {const response=await onRequest({env,request:new Request('https://example.com/api/community',{method:body?'POST':'GET',headers:{Authorization:`Bearer ${token}`,Origin:origin},body:body?JSON.stringify(body):undefined})});return {status:response.status,...await response.json()}}
 const owner=await call(a);

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Canopy · Chicago Tech, AI &amp; Security Calendar</title>
-<meta name="description" content="Chicago's tech, AI and security events on one calendar: chapter meetings, meetups, workshops and conferences.">
-<meta property="og:title" content="Canopy · Chicago Tech, AI &amp; Security Calendar">
-<meta property="og:description" content="Chicago's tech, AI and security events on one calendar: chapter meetings, meetups, workshops and conferences.">
+<title>Canopy · Chicago Tech Events</title>
+<meta name="description" content="Find Chicago tech, AI, security and quantum events. Browse meetups, workshops and conferences by date and topic.">
+<meta property="og:title" content="Canopy · Chicago Tech Events">
+<meta property="og:description" content="Find Chicago tech, AI, security and quantum events. Browse meetups, workshops and conferences by date and topic.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0d6b4c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -893,8 +893,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 @media (max-width:520px){.logo-text{display:inline;font-size:17px}nav.main button{padding:8px 7px;font-size:14px}}
 </style>
 <link rel="stylesheet" href="community.css">
+<link rel="stylesheet" href="evolution.css">
 </head>
 <body>
+<a class="skip-link" href="#eventDiscovery">Skip to events</a>
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#events" data-view="events">
@@ -903,10 +905,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     <nav class="main" aria-label="Main">
       <button data-view="events" aria-current="page">Events</button>
       <button data-view="groups">Groups</button>
-      <button data-view="partners">Partner Requests</button>
-      <button data-view="connections">My Connections</button>
-      <button data-view="saved">Saved<span class="count" id="savedCount" hidden>0</span></button>
-      <button data-view="submit"><span class="lbl-long">Submit an </span>Event</button>
+      
+      <button data-view="connections">My activity</button>
+      <button data-view="news">News</button><button data-view="digest">Weekly picks</button><button data-view="saved">Saved<span class="count" id="savedCount" hidden>0</span></button>
+      <details class="organizer-menu"><summary>For organizers</summary><button data-view="submit">Submit or update</button><button data-view="partners">Find partners</button></details>
     </nav>
   </div>
 </header>
@@ -916,9 +918,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
   <section id="view-partners" hidden></section>
   <section id="view-list">
     <div class="wrap hero" id="hero">
-      <div class="eyebrow">Chicago · tech, AI &amp; security · last checked <span class="checked"></span></div>
-      <h1>Every Chicago tech, AI and security event on <em>one</em> calendar.</h1>
-      <p class="lede">Chapter meetings, meetups, workshops, pitch nights and conferences from security associations, AI communities, developer groups and startup hubs. Every listing links to the organizer's official page.</p>
+      <div class="eyebrow">Chicago · community event calendar · feeds refreshed <span class="checked"></span></div>
+      <h1>Find Chicago tech, AI, security and <em>quantum</em> events.</h1>
+      <p class="lede">Find your next meetup, workshop or conference. Explore by date, topic and location.</p>
       <div class="stats" aria-label="Calendar and community totals">
         <div class="stat"><b id="stMonth">0</b><span>events in the next 30 days</span></div>
         <div class="stat"><b id="stFree">0</b><span>listed as free</span></div>
@@ -928,29 +930,32 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
         <div class="stat" title="Distinct browser identities that copied an invitation link or brought a friend who responded"><b id="stInvited" aria-live="polite">—</b><span>invited a friend</span></div>
       </div>
       <p class="stats-note" id="activityNote">Community totals are loading.</p>
-      <section id="dailyNews" class="news-brief" aria-label="Daily cybersecurity and AI news"></section>
+
     </div>
 
-    <div class="filters">
+    <div class="filters" id="eventDiscovery" tabindex="-1">
       <div class="wrap">
         <div class="filter-row">
           <label class="search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
             <input id="q" type="search" placeholder="Search events, groups, venues" aria-label="Search events">
           </label>
+          <button class="chip mobile-filter-toggle" id="mobileFilterToggle" aria-expanded="false" aria-controls="fGroup fType fMode">Filters</button>
           <select id="fGroup" class="sel" aria-label="Group"><option value="">All groups</option></select>
           <select id="fType" class="sel" aria-label="Event type"><option value="">All types</option></select>
           <select id="fMode" class="sel" aria-label="Format">
             <option value="">In person &amp; virtual</option>
             <option value="In person">In person</option>
             <option value="Virtual">Virtual</option><option value="Hybrid">Hybrid</option>
-            <option value="free">Free only</option>
+
           </select>
           <div class="seg" role="group" aria-label="View">
             <button type="button" data-layout="list" aria-pressed="true">List</button>
             <button type="button" data-layout="map" aria-pressed="false">Map</button>
           </div>
         </div>
+        <div class="discovery-shortcuts" role="group" aria-label="Date shortcuts"><button class="chip" data-range="today">Today</button><button class="chip" data-range="weekend">This weekend</button><button class="chip" data-range="7">Next 7 days</button><button class="chip" data-range="30" aria-pressed="true">Next 30 days</button><button class="chip" data-range="all">All upcoming</button><label class="chip"><input id="freeOnly" type="checkbox"> Free</label><label class="chip"><input id="followingOnly" type="checkbox"> Following</label><button class="linkish" id="clearFilters">Clear filters</button></div>
+        <p id="resultCount" role="status"></p>
         <div class="chips" id="topicChips" role="group" aria-label="Topics"></div>
       </div>
     </div>
@@ -958,7 +963,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     <div class="wrap layout">
       <div style="min-width:0">
         <div class="filter-banner" id="groupBanner" hidden></div>
-        <div id="list" aria-live="polite"></div>
+        <div id="savedTools" hidden><p>Saved in this browser.</p><button class="btn btn-ghost" id="exportSaved">Add all saved events to calendar</button></div><div id="list" aria-live="polite"></div>
         <div id="mapWrap" hidden>
           <div class="map-tools"><button type="button" class="chip" data-zoom="all">Whole area</button><button type="button" class="chip" data-zoom="downtown">Downtown</button></div>
           <div id="map" role="region" aria-label="Map of event locations"></div>
@@ -967,8 +972,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
       </div>
       <aside class="side">
         <section class="panel popular-panel" aria-labelledby="popularTitle">
-          <h4 id="popularTitle">Top 5 popular events</h4>
-          <p class="popular-period">Most viewed · past 7 days</p>
+          <h4 id="popularTitle">Most viewed this week</h4>
+          <p class="popular-period">Upcoming events · past 7 days</p>
           <div id="popularEvents" aria-live="polite"><p class="popular-empty">Loading popular events…</p></div>
         </section>
         <div class="panel">
@@ -997,8 +1002,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     <div class="wrap groups">
       <div class="eyebrow">Groups we track</div>
       <h2>Chicago tech, AI &amp; security groups</h2>
-      <p>Associations, meetups, conferences and hubs across the Chicago area. We check each group's official calendar and list only events we can confirm. Missing a group? <button class="linkish" data-view="submit">Tell us about it</button>.</p>
-      <div class="gtools">
+      <p>Associations, meetups, conferences and hubs across the Chicago area. Browse communities and their source calendars. Each listing shows its current event coverage. Missing a group? <button class="linkish" data-view="submit" data-suggest-group>Tell us about it</button>.</p>
+      <div class="chips" id="groupTopics" role="group" aria-label="Filter groups by topic"></div><div class="gtools">
         <label class="search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
           <input id="gq" type="search" placeholder="Search groups" aria-label="Search groups">
@@ -1012,21 +1017,21 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
   <section id="view-submit" hidden>
     <div class="wrap submit">
       <div class="eyebrow">For organizers</div>
-      <h2>Submit an Event or group</h2>
+      <h2>Submit or update a listing</h2><div class="chips" role="group" aria-label="Submission type"><button class="chip" data-submit-kind="event" aria-pressed="true">Submit an event</button><button class="chip" data-submit-kind="group">Suggest a group</button><button class="chip" data-submit-kind="correction">Update or report an issue</button></div><div id="listingRequest"></div>
       <p>Running a chapter meeting, meetup, training or conference in the Chicago area? Add it here. Submissions go to our shared review queue. We check the details before adding an event to the public calendar. Our review team is notified of new submissions.</p>
       <form class="form" id="subForm">
         <label class="full">Event name<input id="sTitle" required placeholder="Q1 Chapter Meeting"></label>
         <label>Group<select id="sGroup"><option value="">Other / not listed</option></select></label>
         <label>Organizer name<input id="sOrg" required placeholder="ISSA Chicago"></label>
         <div class="full"><h3>Co-hosts and partners (optional)</h3><p>Add up to five organizations and their roles. List only partners who have agreed to take part; our review team will verify them.</p><div id="cohostRows"></div><button id="addCohost" type="button">Add a co-host or partner</button></div>
-        <label>Type<select id="sType"></select></label>
-        <label>Format<select id="sMode"><option>In person</option><option>Virtual</option></select></label>
+        <label>Type<select id="sType" required><option value="">Choose an event type</option></select></label>
+        <label>Format<select id="sMode"><option>In person</option><option>Virtual</option><option>Hybrid</option></select></label>
         <label>Date<input id="sDate" type="date" required></label>
-        <label>Start time<input id="sTime" type="time" value="17:30"></label>
+        <label>Start time (Central)<input id="sTime" type="time"></label><label>End time (optional)<input id="sEndTime" type="time"></label><label>End date (multi-day events)<input id="sEndDate" type="date"></label>
         <label>Venue<input id="sVenue" required placeholder="Venue name and address"></label>
         <label>Neighborhood or suburb<input id="sArea" placeholder="The Loop"></label>
-        <label>Price<input id="sPrice" placeholder="Free, or members free / non-members $25"></label>
-        <label>Event link<input id="sLink" type="url" placeholder="https://"></label>
+        <label>Audience / experience level (optional)<input id="sAudience" placeholder="For example: beginner-friendly or senior IT leaders"></label><label>Registration / eligibility (optional)<input id="sEligibility" placeholder="For example: open to all; registration required"></label><label>Price<input id="sPrice" placeholder="Free, or members free / non-members $25"></label>
+        <label>Event source link<input id="sLink" type="url" required placeholder="https://"></label>
         <div class="full"><div style="font-size:13px;font-weight:600;margin-bottom:6px">Topics</div><div class="check-row" id="sTopics"></div></div>
         <label class="full">Short description<textarea id="sDesc" placeholder="What will people learn or do?"></textarea></label>
         <div class="full actions"><button class="btn btn-primary" type="submit">Submit for review</button><button class="btn btn-ghost" type="button" data-view="events">Cancel</button></div>
@@ -1034,6 +1039,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
       </form>
     </div>
   </section>
+<section id="view-news" hidden><div class="wrap"><h1>Tech news</h1><section id="dailyNews" class="news-brief" aria-label="Daily cybersecurity and AI news"></section></div></section>
+<section id="view-digest" hidden><div class="wrap" id="digestRoot"></div></section>
+<section id="view-admin" hidden><div class="wrap" id="adminRoot"></div></section>
 </main>
 
 <div class="scrim" id="scrim" hidden>
@@ -1043,22 +1051,23 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 <footer>
   <div class="wrap">
     <span>Canopy · a community calendar for Chicago's tech, AI and security scene</span>
-    <span class="sample-note">Checked against official listings <span class="checked"></span>. Confirm details before you go.</span>
+    <span class="sample-note">Feed refresh: <span class="checked"></span>. Verify details with the organizer.</span>
   </div>
-</footer>
+<div class="wrap"><a href="/privacy">Privacy</a> · <a href="/admin">Staff</a></div></footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
 <script>window.CANOPY_COUNTIES={"type":"FeatureCollection","features":[{"type":"Feature","properties":{"n":"DeKalb"},"geometry":{"type":"Polygon","coordinates":[[[-88.9412,42.1523],[-88.7043,42.154],[-88.5895,42.154],[-88.5895,42.0664],[-88.6002,42.0664],[-88.6002,41.7193],[-88.6038,41.6317],[-88.9376,41.6282],[-88.9412,41.892],[-88.9376,42.0646],[-88.9412,42.1523]]]}},{"type":"Feature","properties":{"n":"Kendall"},"geometry":{"type":"Polygon","coordinates":[[[-88.6002,41.7193],[-88.2628,41.7245],[-88.2521,41.4633],[-88.5966,41.4573],[-88.6038,41.6317],[-88.6002,41.7193]]]}},{"type":"Feature","properties":{"n":"Grundy"},"geometry":{"type":"Polygon","coordinates":[[[-88.5966,41.4573],[-88.2521,41.4633],[-88.2449,41.2013],[-88.2413,41.1145],[-88.2521,41.1145],[-88.5859,41.1085],[-88.5966,41.4573]]]}},{"type":"Feature","properties":{"n":"Kenosha"},"geometry":{"type":"Polygon","coordinates":[[[-88.3059,42.611],[-88.1875,42.6119],[-88.1875,42.6694],[-87.807,42.6677],[-87.8213,42.6162],[-87.7998,42.4916],[-88.1982,42.4959],[-88.3059,42.495],[-88.3059,42.611]]]}},{"type":"Feature","properties":{"n":"McHenry"},"geometry":{"type":"Polygon","coordinates":[[[-88.7079,42.4933],[-88.3059,42.495],[-88.1982,42.4959],[-88.1982,42.154],[-88.2377,42.154],[-88.5895,42.154],[-88.7043,42.154],[-88.7079,42.4933]]]}},{"type":"Feature","properties":{"n":"Kane"},"geometry":{"type":"Polygon","coordinates":[[[-88.5895,42.154],[-88.2377,42.154],[-88.2377,42.0672],[-88.2628,42.0664],[-88.2628,41.9865],[-88.2628,41.7245],[-88.6002,41.7193],[-88.6002,42.0664],[-88.5895,42.0664],[-88.5895,42.154]]]}},{"type":"Feature","properties":{"n":"Lake"},"geometry":{"type":"Polygon","coordinates":[[[-87.527,41.2984],[-87.527,41.4702],[-87.5234,41.7081],[-87.4696,41.6729],[-87.4265,41.6901],[-87.4014,41.6772],[-87.4229,41.6428],[-87.326,41.6231],[-87.2219,41.6239],[-87.2183,41.2417],[-87.2758,41.2185],[-87.326,41.1858],[-87.4158,41.1626],[-87.4409,41.1738],[-87.527,41.1661],[-87.527,41.2984]]]}},{"type":"Feature","properties":{"n":"Racine"},"geometry":{"type":"Polygon","coordinates":[[[-88.3059,42.8421],[-88.069,42.8429],[-87.8285,42.8421],[-87.7675,42.7845],[-87.7819,42.7081],[-87.807,42.6677],[-88.1875,42.6694],[-88.1875,42.6119],[-88.3059,42.611],[-88.3059,42.8421]]]}},{"type":"Feature","properties":{"n":"Cook"},"geometry":{"type":"Polygon","coordinates":[[[-88.2377,42.154],[-88.1982,42.154],[-87.7603,42.1523],[-87.6814,42.0758],[-87.6706,42.0294],[-87.6239,41.91],[-87.6096,41.8456],[-87.5593,41.7657],[-87.5306,41.7485],[-87.5234,41.7081],[-87.527,41.4702],[-87.789,41.4702],[-87.7926,41.5587],[-87.9111,41.5569],[-87.9111,41.6437],[-88.0259,41.6411],[-88.0295,41.6858],[-87.9685,41.6867],[-87.9147,41.7167],[-87.9218,41.8619],[-87.9218,41.9942],[-88.2628,41.9865],[-88.2628,42.0664],[-88.2377,42.0672],[-88.2377,42.154]]]}},{"type":"Feature","properties":{"n":"Will"},"geometry":{"type":"Polygon","coordinates":[[[-88.2628,41.7245],[-88.0295,41.7287],[-88.0295,41.6858],[-88.0259,41.6411],[-87.9111,41.6437],[-87.9111,41.5569],[-87.7926,41.5587],[-87.789,41.4702],[-87.527,41.4702],[-87.527,41.2984],[-88.0152,41.2923],[-88.0116,41.2056],[-88.2449,41.2013],[-88.2521,41.4633],[-88.2628,41.7245]]]}},{"type":"Feature","properties":{"n":"Porter"},"geometry":{"type":"Polygon","coordinates":[[[-87.2219,41.6239],[-87.1214,41.6454],[-86.9312,41.7107],[-86.9312,41.2365],[-86.9671,41.2193],[-87.0604,41.2691],[-87.1322,41.2863],[-87.1932,41.2657],[-87.2183,41.2417],[-87.2219,41.6239]]]}},{"type":"Feature","properties":{"n":"Lake"},"geometry":{"type":"Polygon","coordinates":[[[-88.1982,42.4959],[-87.7998,42.4916],[-87.807,42.3851],[-87.8357,42.3017],[-87.7998,42.2081],[-87.7603,42.1523],[-88.1982,42.154],[-88.1982,42.4959]]]}},{"type":"Feature","properties":{"n":"Walworth"},"geometry":{"type":"Polygon","coordinates":[[[-88.7761,42.8429],[-88.5428,42.8429],[-88.3059,42.8421],[-88.3059,42.611],[-88.3059,42.495],[-88.7079,42.4933],[-88.7761,42.4925],[-88.7797,42.7545],[-88.7761,42.8429]]]}},{"type":"Feature","properties":{"n":"DuPage"},"geometry":{"type":"Polygon","coordinates":[[[-88.2628,41.9865],[-87.9218,41.9942],[-87.9218,41.8619],[-87.9147,41.7167],[-87.9685,41.6867],[-88.0295,41.6858],[-88.0295,41.7287],[-88.2628,41.7245],[-88.2628,41.9865]]]}}]};</script>
-<script src="data.js"></script>
-<script src="auto-events.js"></script>
+<script src="catalog.js"></script>
+<script src="calendar.js"></script>
+<script src="event-utils.js"></script>
 
 <script>
-const GROUPS = window.CANOPY_GROUPS || {};
+const GROUPS = window.CANOPY_CATALOG?.groups || window.CANOPY_GROUPS || {};
 const MANUAL = window.CANOPY_EVENTS || [];
 const AUTO = (window.CANOPY_AUTO && window.CANOPY_AUTO.events) || [];
 const normT = s=>String(s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
 // Hand-entered events win; auto events that duplicate one (same date, matching title) are dropped.
-const EVENTS = MANUAL.concat(AUTO.filter(a=>!MANUAL.some(m=>m.date===a.date&&(normT(m.title).includes(normT(a.title))||normT(a.title).includes(normT(m.title))))));
+const EVENTS = window.CANOPY_CATALOG?.events || MANUAL.concat(AUTO.filter(a=>!MANUAL.some(m=>m.date===a.date&&(normT(m.title).includes(normT(a.title))||normT(a.title).includes(normT(m.title))))));
 const TOPICS = {
   quantum:{label:"Quantum",c:"--t-quantum"},
   sec:{label:"Security",c:"--t-sec"}, grc:{label:"GRC & Audit",c:"--t-data"}, privacy:{label:"Privacy",c:"--t-web"},
@@ -1067,9 +1076,9 @@ const TOPICS = {
 };
 const CATS = ["Security & GRC","AI & Data","Developers","Product & Design","IT Leadership","Startups & Innovation","Conferences"];
 
-(()=>{let label=window.CANOPY_CHECKED||"";const u=window.CANOPY_AUTO&&window.CANOPY_AUTO.updated;if(u){const d=new Date(u);if(!isNaN(d))label=d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}document.querySelectorAll(".checked").forEach(el=>el.textContent=label)})();
+(()=>{let label=window.CANOPY_CHECKED||"";const u=window.CANOPY_CATALOG?.updated||(window.CANOPY_AUTO&&window.CANOPY_AUTO.updated);if(u){const d=new Date(u);if(!isNaN(d))label=d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}document.querySelectorAll(".checked").forEach(el=>el.textContent=label)})();
 
-const today = new Date(); today.setHours(0,0,0,0);
+const today = new Date(CanopyEvents.day()+"T00:00:00");
 const addDays = (d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 const ymd = d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 
@@ -1078,10 +1087,10 @@ const store = {
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 };
 const evKey = e=>`${e.date}|${e.start}|${e.title}`;
-let events = EVENTS.map(e=>({...e,id:evKey(e)})).concat(store.get("canopy-chi-v4-submitted",[]));
+let events = EVENTS.map(e=>({...e,id:e.id||evKey(e)})).concat(store.get("canopy-chi-v4-submitted",[]));
 let saved = new Set(store.get("canopy-chi-v4-saved",[]));
 
-const state = {layout:"list",view:"events",q:"",type:"",group:"",mode:"",topics:new Set(),day:null,calMonth:new Date(today.getFullYear(),today.getMonth(),1),gq:"",cat:""};
+const state = {layout:"list",view:"events",q:"",type:"",group:"",mode:"",topics:new Set(),day:null,calMonth:new Date(today.getFullYear(),today.getMonth(),1),gq:"",cat:"",gTopic:"",range:"30",free:false,followed:false};
 
 const $ = s=>document.querySelector(s);
 const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -1089,9 +1098,9 @@ const parseDate = s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m
 const fmtTime = t=>{if(!t)return "";let [h,m]=t.split(":").map(Number);const ap=h>=12?"pm":"am";h=h%12||12;return `${h}:${String(m).padStart(2,"0")}${ap}`};
 const timeRange = e=>e.endDate?`${parseDate(e.date).toLocaleDateString(undefined,{month:"short",day:"numeric"})} – ${parseDate(e.endDate).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}`:e.allDay?"All day":!e.start?"Time not posted":e.end?`${fmtTime(e.start)} – ${fmtTime(e.end)}`:`Starts ${fmtTime(e.start)}`;
 const relLabel = d=>{const diff=Math.round((d-today)/864e5);return diff===0?"Today":diff===1?"Tomorrow":diff<7?"This week":diff<14?"Next week":""};
-const upcoming = ()=>events.filter(e=>parseDate(e.date)>=today);
+const upcoming = ()=>events.filter(e=>CanopyEvents.phase(e)!=="ended");
 const groupCount = k=>upcoming().filter(e=>(e.orgs||[]).includes(k)).length;
-const isFree = e=>/^free$/i.test(e.price||"");
+const isFree = CanopyEvents.free;
 
 // selects
 [...new Set(events.map(e=>e.type))].sort().forEach(t=>{$("#fType").add(new Option(t,t));$("#sType").add(new Option(t,t))});
@@ -1117,11 +1126,14 @@ Object.entries(TOPICS).forEach(([k,t])=>{
 
 function matches(e){
   if(state.view==="saved"&&!saved.has(e.id))return false;
-  if(parseDate(e.date)<today)return false;
+  if(CanopyEvents.phase(e)==="ended")return false;
+  if(state.view!=="saved"&&!state.day&&!CanopyEvents.overlaps(e,CanopyEvents.range(state.range)))return false;
+  if(state.free&&!isFree(e))return false;
+  if(state.followed&&!window.CanopyEvolution?.isFollowed(e))return false;
   if(state.type&&e.type!==state.type)return false;
   if(state.group&&!(e.orgs||[]).includes(state.group))return false;
-  if(state.mode==="free"){if(!isFree(e))return false}else if(state.mode&&e.mode!==state.mode)return false;
-  if(state.day&&e.date!==state.day)return false;
+  if(state.mode==="free"){if(!isFree(e))return false}else if(state.mode&&e.mode!==state.mode&&!(e.mode==="Hybrid"&&["In person","Virtual"].includes(state.mode)))return false;
+  if(state.day&&!CanopyEvents.overlaps(e,[state.day,CanopyEvents.shift(state.day,1)]))return false;
   if(state.topics.size&&!e.topics.some(t=>state.topics.has(t)))return false;
   if(state.q){const q=state.q.toLowerCase();const names=(e.orgs||[]).map(o=>GROUPS[o]?.name||"").join(" ");if(![e.title,e.host,names,cohostSummary(e),e.venue,e.area,e.type].join(" ").toLowerCase().includes(q))return false}
   return true;
@@ -1138,6 +1150,8 @@ function renderList(){
   if(state.group&&GROUPS[state.group]){banner.hidden=false;banner.innerHTML=`Showing events for <b>${esc(GROUPS[state.group].name)}</b><button id="clearGroup">Show all groups</button>`}
   else banner.hidden=true;
   const list=sorted().filter(matches);
+  $("#resultCount").textContent=`${list.length} event${list.length===1?"":"s"} match your filters · Central time`;
+  $("#savedTools").hidden=state.view!=="saved";
   const el=$("#list");
   const showMap=state.layout==="map";
   el.hidden=showMap; $("#mapWrap").hidden=!showMap;
@@ -1152,18 +1166,18 @@ function renderList(){
         : `<div class="empty"><strong>No events match</strong>Try clearing a filter or picking another date.</div>`;
     return;
   }
-  const byDay={};list.forEach(e=>(byDay[e.date]=byDay[e.date]||[]).push(e));
+  const byDay={};list.forEach(e=>{const day=state.day||(e.date<CanopyEvents.day()?CanopyEvents.day():e.date);(byDay[day]=byDay[day]||[]).push(e)});
   el.innerHTML=Object.entries(byDay).map(([date,evs])=>{
     const d=parseDate(date);
     const head=d.toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"});
     return `<section class="day"><div class="day-head"><h2>${head}</h2><span class="rel">${relLabel(d)}</span><span class="n">${evs.length} event${evs.length>1?"s":""}</span></div>
-    ${evs.map(e=>`<article class="ev" data-id="${esc(e.id)}" tabindex="0">
+    ${evs.map(e=>`<article class="ev" data-id="${esc(e.id)}">
       <div class="ev-time">${e.allDay?"All day":e.start?fmtTime(e.start):"TBA"}<small>${e.allDay?"":e.end?fmtTime(e.end):e.start?"":"see listing"}</small></div>
-      <div style="min-width:0"><h3>${esc(e.title)}</h3>
-        <div class="meta"><span class="ev-org">${esc(e.host)}</span><span>${e.mode==="Virtual"?"Virtual":esc(e.area||"In person")}</span>${e.note?`<span class="note-tag">${esc(e.note)}</span>`:""}</div>
+      <div style="min-width:0"><h3><button class="event-title" type="button">${esc(CanopyEvents.title(e))}</button></h3>
+        <div class="meta"><span class="event-phase">${CanopyEvents.phase(e)==="happening"?"Happening now":e.date<CanopyEvents.day()?"Continues today":""}</span><span class="ev-org">${esc(e.host)}</span><span>${e.mode==="Virtual"?"Virtual":esc(e.area||"In person")}</span>${e.note?`<span class="note-tag">${esc(e.note)}</span>`:""}</div>
         ${e.cohosts?.length?`<div class="cohost-summary">With ${esc(cohostSummary(e))}</div>`:""}
-        <div class="community-summary" data-community-summary="${esc(e.id)}">${window.canopyCommunity?window.canopyCommunity.summary(e.id):"Community counts unavailable"}</div>
-        <div class="tags"><span class="tag type">${esc(e.type)}</span>${isFree(e)?`<span class="tag free">Free</span>`:""}${topicTags(e)}</div>
+        <div class="community-summary" data-community-summary="${esc(e.id)}">${window.canopyCommunity?window.canopyCommunity.summary(e.id,true):"Community counts unavailable"}</div>
+        <div class="tags"><span class="tag type">${esc(e.type)}</span><span class="tag ${isFree(e)?"free":""}">${esc(CanopyEvents.price(e))}</span>${topicTags(e)}</div>
       </div>
       <button class="save" data-save="${esc(e.id)}" aria-pressed="${saved.has(e.id)}" aria-label="${saved.has(e.id)?"Remove from saved":"Save event"}">${saved.has(e.id)?bookmark:bookmarkO}</button>
     </article>`).join("")}</section>`;
@@ -1171,8 +1185,8 @@ function renderList(){
 }
 
 
-const PLACES = window.CANOPY_PLACES || {};
-const AREA_PTS = window.CANOPY_AREAS || {};
+const PLACES = window.CANOPY_CATALOG?.places || window.CANOPY_PLACES || {};
+const AREA_PTS = window.CANOPY_CATALOG?.areas || window.CANOPY_AREAS || {};
 const PLACE_KEYS = Object.keys(PLACES).sort((a,b)=>b.length-a.length);
 function locate(e){
   if(e.mode==="Virtual")return null;
@@ -1199,7 +1213,15 @@ function popupHtml(s){
   const e0=s.evs[0];
   return `<div class="pop"><div class="pop-venue">${esc(e0.venue)}</div>${s.approx?'<div class="pop-approx">Approximate location</div>':""}<ul>${s.evs.slice(0,8).map(e=>`<li><button type="button" data-open="${esc(e.id)}"><span>${parseDate(e.date).toLocaleDateString(undefined,{month:"short",day:"numeric"})}${e.start?" · "+fmtTime(e.start):""}</span>${esc(e.title)}</button></li>`).join("")}</ul>${s.evs.length>8?`<div class="pop-more">+${s.evs.length-8} more. Use the list view or filters to see them.</div>`:""}</div>`;
 }
-function renderMap(list){
+let leafletReady;
+async function renderMap(list){
+  if(!window.L){
+    $("#map").innerHTML='<p>Loading map…</p>';
+    try{await (leafletReady ||= new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';script.onload=resolve;script.onerror=()=>{leafletReady=null;reject(new Error('Map unavailable'))};document.head.append(script)}))}catch{}
+    if(state.layout!=="map")return;
+    list=sorted().filter(matches);
+    $("#map").replaceChildren();
+  }
   if(!window.L){$("#map").innerHTML='<div class="empty"><strong>Map unavailable</strong>The map couldn\'t load. Check your connection and reload the page.</div>';$("#mapNote").textContent="";return}
   initMap(); markerLayer.clearLayers();
   const spots={}; let virt=0, missing=0, mapped=0;
@@ -1247,13 +1269,13 @@ function zoomTo(which){
 function renderGroups(){
   const q=state.gq.toLowerCase();
   const html=CATS.filter(c=>!state.cat||state.cat===c).map(c=>{
-    const items=Object.entries(GROUPS).filter(([,g])=>g.cat===c&&(!q||[g.name,...(g.aliases||[]),g.focus,g.desc,...(g.topics||[]).map(t=>TOPICS[t]?.label||t)].join(" ").toLowerCase().includes(q))).sort((a,b)=>groupCount(b[0])-groupCount(a[0])||a[1].name.localeCompare(b[1].name));
+    const items=Object.entries(GROUPS).filter(([,g])=>g.cat===c&&(!state.gTopic||g.topics?.includes(state.gTopic))&&(!q||[g.name,...(g.aliases||[]),g.focus,g.desc,...(g.topics||[]).map(t=>TOPICS[t]?.label||t)].join(" ").toLowerCase().includes(q))).sort((a,b)=>groupCount(b[0])-groupCount(a[0])||a[1].name.localeCompare(b[1].name));
     if(!items.length)return "";
     return `<section class="gsec"><h3 class="gsec-h">${c}<span>${items.length}</span></h3><div class="ggrid">${items.map(([k,g])=>{
       const n=groupCount(k);
       return `<article class="gcard"><div class="focus">${esc(g.focus)}</div><h4>${esc(g.name)}</h4>${g.topics?`<div class="tags">${topicTags(g)}</div>`:""}<p>${esc(g.desc)}</p>
-        <div class="gstatus ${n?"":"none"}"><span class="pip"></span>${n?`${n} upcoming event${n>1?"s":""} on Canopy`:esc(g.status||"No confirmed events right now")}</div>
-        <div class="actions">${n?`<button class="btn btn-primary" data-group="${k}">See events</button>`:""}<a class="btn btn-ghost" href="${g.url}" target="_blank" rel="noopener">Official site ↗</a></div></article>`;
+        <p class="group-verification">${g.reviewedAt?`Source link reviewed ${esc(g.reviewedAt)}`:"Event dates need review"}</p><div class="gstatus ${n?"":"none"}"><span class="pip"></span>${n?`${n} upcoming event${n>1?"s":""} on Canopy`:esc(g.status||"Calendar needs review")}</div>
+        <div class="actions">${n?`<button class="btn btn-primary" data-group="${k}">See events</button>`:""}<a class="btn btn-ghost" href="${g.url}" target="_blank" rel="noopener">${esc(g.sourceLabel||"Website / calendar")} ↗</a><button class="linkish" data-follow-group="${k}" aria-pressed="false">Follow</button><button class="linkish" data-report-group="${k}">Report an issue</button></div></article>`;
     }).join("")}</div></section>`;
   }).join("");
   $("#ggroups").innerHTML=html||`<div class="empty"><strong>No groups match</strong>Try another search.</div>`;
@@ -1261,8 +1283,8 @@ function renderGroups(){
 
 function renderStats(){
   const up=upcoming();
-  $("#stMonth").textContent=up.filter(e=>parseDate(e.date)<addDays(today,30)).length;
-  $("#stFree").textContent=up.filter(isFree).length;
+  $("#stMonth").textContent=up.filter(e=>CanopyEvents.overlaps(e,CanopyEvents.range("30"))).length;
+  $("#stFree").textContent=up.filter(e=>CanopyEvents.overlaps(e,CanopyEvents.range("30"))&&isFree(e)).length;
   $("#stGroups").textContent=Object.keys(GROUPS).length;
   $("#savedCount").textContent=saved.size;$("#savedCount").hidden=!saved.size;
 }
@@ -1270,7 +1292,7 @@ function renderStats(){
 function renderCal(){
   const m=state.calMonth, y=m.getFullYear(), mo=m.getMonth();
   $("#calTitle").textContent=m.toLocaleDateString(undefined,{month:"long",year:"numeric"});
-  const days=new Set(events.map(e=>e.date));
+  const days=new Set();for(const e of upcoming()){let d=e.date;for(let i=0;i<90&&d<=(e.endDate||e.date);i++,d=CanopyEvents.shift(d,1))days.add(d)}
   const first=new Date(y,mo,1).getDay(), n=new Date(y,mo+1,0).getDate();
   let h=["S","M","T","W","T","F","S"].map(d=>`<span class="dow">${d}</span>`).join("");
   for(let i=0;i<first;i++)h+="<span></span>";
@@ -1282,7 +1304,7 @@ function renderCal(){
   $("#calClear").hidden=!state.day;
 }
 
-function render(){renderStats();renderList();renderCal();renderGroups()}
+function render(){renderStats();if(["events","saved"].includes(state.view)){renderList();renderCal()}if(state.view==="groups")renderGroups()}
 
 function gcalLink(e){
   const d=e.date.replace(/-/g,"");
@@ -1290,7 +1312,8 @@ function gcalLink(e){
   if(e.start&&!e.allDay){
     const st=d+"T"+e.start.replace(":","")+"00";
     let en=e.end;if(!en){const [h,m]=e.start.split(":").map(Number);en=`${String(Math.min(h+1,23)).padStart(2,"0")}:${String(m).padStart(2,"0")}`}
-    dates=`${st}/${d}T${en.replace(":","")}00`;
+    const endDay=e.endDate||(en<=e.start?CanopyEvents.shift(e.date,1):e.date);
+    dates=`${st}/${endDay.replace(/-/g,"")}T${en.replace(":","")}00`;
   }else{dates=`${d}/${ymd(addDays(parseDate(e.endDate||e.date),1)).replace(/-/g,"")}`}
   const loc=e.mode==="Virtual"?"Online":/see event page/i.test(e.venue)?`${e.area||"Chicago"}, IL`:`${e.venue}${e.area&&!/Loop|Fulton|River|Pilsen|Logan|Village/.test(e.area)?", "+e.area:""}, IL`;
   const p=new URLSearchParams({action:"TEMPLATE",text:e.title,dates,details:`${e.desc||""}\n\nHosted by ${e.host}${e.link?`\n${e.link}`:""}`,location:loc,ctz:"America/Chicago"});
@@ -1299,27 +1322,32 @@ function gcalLink(e){
 
 function openModal(id,track=true){
   const e=events.find(x=>x.id===id);if(!e)return;
+  if($("#scrim").hidden)modalOpener=document.activeElement;
   const d=parseDate(e.date);
   const groupNames=(e.orgs||[]).filter(o=>GROUPS[o]).map(o=>esc(GROUPS[o].name)).join(", ");
   $("#modal").innerHTML=`<button class="x" aria-label="Close">×</button>
     <div class="tags"><span class="tag type">${esc(e.type)}</span>${topicTags(e)}</div>
-    <h3 id="mTitle">${esc(e.title)}</h3><p class="org">Hosted by ${esc(e.host)}</p>
+    <h3 id="mTitle">${esc(CanopyEvents.title(e))}</h3><p class="org">Hosted by ${esc(e.host)}</p>
     <dl class="dl"><dt>When</dt><dd>${d.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"})}<br>${timeRange(e)}${e.start?" CT":""}${e.note?`<br><span class="note-tag">${esc(e.note)}</span>`:""}</dd>
     <dt>Where</dt><dd>${esc(e.venue)}${e.area&&e.mode!=="Virtual"?`<br><span style="color:var(--muted)">${esc(e.area)}</span>`:""}</dd>
-    <dt>Price</dt><dd>${e.price?esc(e.price):"See the event page"}</dd>
+    <dt>Price</dt><dd>${esc(CanopyEvents.price(e))}</dd>
     ${groupNames?`<dt>Groups</dt><dd>${groupNames}</dd>`:""}</dl>
-    <p class="desc">${esc(e.desc||"")}</p>${e.auto?`<p class="auto-note">Added automatically from the organizer's calendar feed. Check the event page for final details.</p>`:""}
+    <p><strong>Audience:</strong> ${esc(e.audience||"Check the organizer for audience and experience level.")}</p><p><strong>Registration:</strong> ${esc(e.eligibility||"Check registration and eligibility with the organizer.")}</p><p class="desc">${esc(e.desc||"")}</p>${e.auto?`<p class="auto-note">Added automatically from the organizer's calendar feed. Check the event page for final details.</p>`:""}
     ${e.cohosts?.length?`<section class="cohost-detail"><h4>Co-hosts &amp; partners</h4>${e.cohosts.map(h=>`<p><strong>${esc(h.name)}</strong> · ${esc(h.role)}</p>`).join("")}</section>`:""}
     <div class="actions">
-      ${e.link?`<a class="btn btn-primary" href="${esc(e.link)}" target="_blank" rel="noopener">Event page &amp; registration ↗</a>`:""}
+      ${e.link?`<a class="btn btn-primary" data-registration="${esc(e.id)}" href="${esc(e.link)}" target="_blank" rel="noopener">Register with organizer ↗</a>`:""}
       <a class="btn btn-ghost" href="${gcalLink(e)}" target="_blank" rel="noopener">Add to Google Calendar</a>
       <button class="btn btn-ghost" data-outlook="${esc(e.id)}" title="Download an .ics file to open or import in Outlook">Add to Outlook Calendar</button>
       <button class="btn btn-ghost" data-save="${esc(e.id)}">${saved.has(e.id)?"Saved ✓":"Save event"}</button>
-    </div><p class="outlook-note">Outlook downloads a calendar file (.ics). Open it in Outlook or import it from Add calendar. Events without a posted start time use an all-day reminder.</p>${Community.panel(e.id)}`;
+      <button class="btn btn-ghost" data-copy-event="${esc(e.id)}">Copy event link</button><button class="linkish" data-report-event="${esc(e.id)}">Report an issue</button>
+    </div><details class="outlook-note"><summary>Calendar help</summary><p>Download the Outlook file and open or import it in your calendar. Unknown start times use an all-day reminder. If the end time is missing, the calendar uses a one-hour placeholder.</p></details><div id="relatedEvents"></div>${Community.panel(e.id)}`;
   $("#scrim").hidden=false;$("#modal .x").focus();
+  document.querySelector("main").inert=true;
+  window.CanopyEvolution?.eventOpened(e);
   if(track)window.canopyCommunity?.trackClick(e.id);
 }
-const closeModal=()=>{$("#scrim").hidden=true};
+let modalOpener=null;
+const closeModal=()=>{$("#scrim").hidden=true;document.querySelector('main').inert=false;document.querySelector('header')?.removeAttribute('inert');modalOpener?.focus();};
 
 function toggleSave(id){
   saved.has(id)?saved.delete(id):saved.add(id);store.set("canopy-chi-v4-saved",[...saved]);
@@ -1337,10 +1365,11 @@ function setView(v){
   $("#view-groups").hidden=v!=="groups";
   $("#view-submit").hidden=v!=="submit";
   $("#hero").hidden=v==="saved";
-  if(v==="submit"&&!$("#sDate").value)$("#sDate").value=ymd(addDays(today,14));
+  for(const other of ["news","digest","admin"])$("#view-"+other).hidden=v!==other;
+  window.CanopyEvolution?.viewChanged(v);
   render();window.scrollTo({top:0});
 }
-function setGroup(k){state.group=k;$("#fGroup").value=k;}
+function setGroup(k){state.group=k;$("#fGroup").value=k;if(k){state.range="all";document.querySelectorAll("[data-range]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.range==="all"))}}
 
 document.addEventListener("click",ev=>{
   const t=ev.target;
@@ -1374,8 +1403,8 @@ $("#subForm").addEventListener("submit",async e=>{
   e.preventDefault();
   const topics=[...document.querySelectorAll("[data-stopic][aria-pressed='true']")].map(b=>b.dataset.stopic);
   const g=$("#sGroup").value, mode=$("#sMode").value, start=$("#sTime").value;
-  let end="";if(start){const [h,m]=start.split(":").map(Number);end=`${String(Math.min(h+2,23)).padStart(2,"0")}:${String(m).padStart(2,"0")}`}
-  const ne={date:$("#sDate").value,start,end,title:$("#sTitle").value,host:$("#sOrg").value,orgs:g?[g]:[],type:$("#sType").value,venue:$("#sVenue").value,area:mode==="Virtual"?"Virtual":$("#sArea").value,mode,topics:topics.length?topics:["dev"],price:$("#sPrice").value,desc:$("#sDesc").value,link:$("#sLink").value,note:"Your submission"};
+  const end=$("#sEndTime").value;
+  const ne={audience:$("#sAudience").value,eligibility:$("#sEligibility").value,endDate:$("#sEndDate").value,date:$("#sDate").value,start,end,title:$("#sTitle").value,host:$("#sOrg").value,orgs:g?[g]:[],type:$("#sType").value,venue:$("#sVenue").value,area:mode==="Virtual"?"Virtual":$("#sArea").value,mode,topics,price:$("#sPrice").value,desc:$("#sDesc").value,link:$("#sLink").value,note:"Your submission"};
   ne.cohosts=[...document.querySelectorAll('#cohostRows fieldset')].map(row=>({name:row.querySelector('[data-host-name]').value.trim(),role:row.querySelector('[data-host-role]').value,groupId:row.querySelector('[data-host-group]').value}));
   const button=e.target.querySelector('[type="submit"]'),status=$("#submissionStatus");
   if(button.disabled)return;
@@ -1394,9 +1423,9 @@ render();
 </script>
 
 <div id="communityMessage" class="community-message" role="status" hidden></div>
-<script src="calendar.js"></script>
 <script src="community.js"></script>
 <script src="collaboration.js"></script>
 <script src="news.js"></script>
+<script src="evolution.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+import {serviceRoute,sendWeeklyDigests} from './site-services.mjs';
+import catalog from './catalog.mjs';
 import {refreshNews,newsResponse} from './news-service.mjs';
 import {notify,retryNotifications} from './notifications.mjs';
 import {partnerRequests} from './partners.mjs';
@@ -13,6 +15,7 @@ export async function onRequest({request,env}) {
     // Idempotent setup keeps the existing D1 database compatible on deployment.
     await env.COMMUNITY.prepare('CREATE TABLE IF NOT EXISTS invitations (event TEXT NOT NULL, visitor TEXT NOT NULL, PRIMARY KEY(event,visitor))').run();
     await env.COMMUNITY.prepare('CREATE TABLE IF NOT EXISTS event_clicks (event TEXT NOT NULL, visitor TEXT NOT NULL, clicked_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(event,visitor))').run();
+    await env.COMMUNITY.prepare("CREATE TABLE IF NOT EXISTS event_actions(event TEXT NOT NULL,visitor TEXT NOT NULL,kind TEXT NOT NULL,created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(event,visitor,kind))").run();
     if(request.method==='POST') {
       if(request.headers.get('Origin')!==new URL(request.url).origin) return json({error:'Invalid origin'},403);
       if(Number(request.headers.get('Content-Length'))>4096) return json({error:'Request too large'},413);
@@ -20,8 +23,11 @@ export async function onRequest({request,env}) {
       let body; try {body=JSON.parse(raw)} catch {return json({error:"Invalid JSON"},400)}
       if(!body || typeof body!=="object")return json({error:"Invalid response"},400);
       const {event,status,ref}=body;
-      if(typeof event!=='string'||!event.length||event.length>1000||!['interested','going','none','invited','clicked'].includes(status)) return json({error:'Invalid response'},400);
-      if(status==='clicked') await env.COMMUNITY.prepare('INSERT INTO event_clicks(event,visitor) VALUES(?,?) ON CONFLICT(event,visitor) DO UPDATE SET clicked_at=CURRENT_TIMESTAMP').bind(event,user).run();
+      if(typeof event!=='string'||!event.length||event.length>1000||!['interested','going','none','invited','clicked','registration','saved','unsaved'].includes(status)) return json({error:'Invalid response'},400);
+      if(['clicked','registration','saved','unsaved'].includes(status)&&!(env.EVENT_CATALOG||catalog.events).some(e=>e.id===event))return json({error:'Unknown event'},400);
+      if(status==='unsaved')await env.COMMUNITY.prepare("DELETE FROM event_actions WHERE event=? AND visitor=? AND kind='saved'").bind(event,user).run();
+      else if(['registration','saved'].includes(status))await env.COMMUNITY.prepare('INSERT INTO event_actions(event,visitor,kind) VALUES(?,?,?) ON CONFLICT(event,visitor,kind) DO UPDATE SET created_at=CURRENT_TIMESTAMP').bind(event,user,status).run();
+      else if(status==='clicked') await env.COMMUNITY.prepare('INSERT INTO event_clicks(event,visitor) VALUES(?,?) ON CONFLICT(event,visitor) DO UPDATE SET clicked_at=CURRENT_TIMESTAMP').bind(event,user).run();
       else if(status==='invited') await env.COMMUNITY.prepare('INSERT OR IGNORE INTO invitations(event,visitor) VALUES(?,?)').bind(event,user).run();
       else if(status==='none') await env.COMMUNITY.prepare('DELETE FROM responses WHERE event = ? AND visitor = ?').bind(event,user).run();
       else await env.COMMUNITY.prepare('INSERT INTO responses(event,visitor,status) VALUES(?,?,?) ON CONFLICT(event,visitor) DO UPDATE SET status=excluded.status').bind(event,user,status).run();
@@ -54,14 +60,15 @@ export async function submitEvent({request,env}) {
     const raw=await request.text();if(raw.length>16000)return json({error:'Submission too large'},413);
     let body;try{body=JSON.parse(raw)}catch{return json({error:'Invalid submission'},400)}
     if(!body||typeof body!=='object')return json({error:'Invalid submission'},400);
-    const limits={title:180,host:180,date:10,start:5,end:5,type:80,venue:500,area:100,mode:30,price:150,desc:3000,link:1500};
+    const limits={audience:500,eligibility:500,endDate:10,title:180,host:180,date:10,start:5,end:5,type:80,venue:500,area:100,mode:30,price:150,desc:3000,link:1500};
     const event={};
     for(const [key,max] of Object.entries(limits)) {
       if(body[key]!=null&&typeof body[key]!=='string')return json({error:'Invalid '+key},400);
       event[key]=(body[key]||'').trim();if(event[key].length>max)return json({error:key+' is too long'},400);
     }
-    if(!event.title||!event.host||!event.venue||!event.type||!['In person','Virtual'].includes(event.mode))return json({error:'Complete the event name, organizer, venue, type and format.'},400);
+    if(!event.title||!event.host||!event.venue||!event.type||!['In person','Virtual','Hybrid'].includes(event.mode))return json({error:'Complete the event name, organizer, venue, type and format.'},400);
     if(!/^\d{4}-\d{2}-\d{2}$/.test(event.date)||Number.isNaN(Date.parse(event.date))||new Date(event.date).toISOString().slice(0,10)!==event.date)return json({error:'Enter a valid event date.'},400);
+    if(event.endDate&&(!/^\d{4}-\d{2}-\d{2}$/.test(event.endDate)||Number.isNaN(Date.parse(event.endDate))||new Date(event.endDate).toISOString().slice(0,10)!==event.endDate||event.endDate<event.date))return json({error:'Enter an end date on or after the start date.'},400);
     for(const field of ['start','end'])if(event[field]&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(event[field]))return json({error:'Enter a valid event time.'},400);
     if(event.link){let url;try{url=new URL(event.link)}catch{return json({error:'Enter a valid event URL.'},400)}if(!['https:','http:'].includes(url.protocol)||url.username||url.password)return json({error:'Use an http or https event URL.'},400)}
     const allowed=['sec','grc','privacy','ai','data','dev','pm','startup','lead','career','quantum'];
@@ -90,8 +97,10 @@ export async function submitEvent({request,env}) {
 }
 
 export default {
-  async scheduled(controller,env,ctx){ctx.waitUntil(Promise.allSettled([retryNotifications(env),refreshNews(env)]));},
+  async scheduled(controller,env,ctx){ctx.waitUntil(Promise.allSettled([retryNotifications(env),refreshNews(env),sendWeeklyDigests(env)]));},
   async fetch(request, env,ctx) {
+    const service=await serviceRoute(request,env);if(service)return service;
+    if(new URL(request.url).pathname==='/admin')return Response.redirect(new URL('/#admin',request.url),302);
     if (new URL(request.url).pathname === '/api/news') {
       if(request.method!=='GET')return json({error:'Method not allowed'},405);
       try{return await newsResponse(env,ctx)}catch{return json({error:'Daily brief temporarily unavailable'},503)}

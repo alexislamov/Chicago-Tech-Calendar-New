@@ -19,8 +19,8 @@ globalThis.CanopyCalendar=(()=>{
   const allDay=event.allDay||!event.start;
   let timing;
   if(allDay)timing=['DTSTART;VALUE=DATE:'+event.date.replace(/-/g,''),'DTEND;VALUE=DATE:'+dayAfter(event.endDate||event.date).replace(/-/g,'')];
-  else{const start=utc(event.date,event.start);const end=event.end?utc(event.end<=event.start?dayAfter(event.date):event.date,event.end):start+36e5;timing=['DTSTART:'+stamp(start),'DTEND:'+stamp(end)]}
-  const description=[event.desc,event.note,'Hosted by '+event.host,(event.cohosts||[]).map(x=>x.name+' ('+x.role+')').join('; '),event.link,!event.start?'Start time not posted. This is an all-day reminder; confirm the time with the organizer.':'Confirm details and registration with the organizer.'].filter(Boolean).join('\n\n');
+  else{const start=utc(event.date,event.start);const end=event.endDate?utc(event.endDate,event.end||'23:59'):event.end?utc(event.end<=event.start?dayAfter(event.date):event.date,event.end):start+36e5;timing=['DTSTART:'+stamp(start),'DTEND:'+stamp(end)]}
+  const description=[event.desc,event.note,event.start&&!event.end&&!event.endDate?'End time not posted. This calendar uses a one-hour placeholder; confirm with the organizer.':'','Hosted by '+event.host,(event.cohosts||[]).map(x=>x.name+' ('+x.role+')').join('; '),event.link,!event.start?'Start time not posted. This is an all-day reminder; confirm the time with the organizer.':'Confirm details and registration with the organizer.'].filter(Boolean).join('\n\n');
   const uid=encodeURIComponent(event.id||event.date+'|'+event.title)+'@chitech.events';
   return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Canopy//Chicago Tech Calendar//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT','UID:'+uid,'DTSTAMP:'+stamp(now),...timing,'SUMMARY:'+escape(event.title),'DESCRIPTION:'+escape(description),'LOCATION:'+escape(event.mode==='Virtual'?'Online':event.venue||event.area||'Chicago'),...(event.link?['URL:'+String(event.link).replace(/[\r\n]/g,'')]:[]),'END:VEVENT','END:VCALENDAR'].map(fold).join('\r\n')+'\r\n';
  }

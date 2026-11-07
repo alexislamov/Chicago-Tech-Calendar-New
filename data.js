@@ -264,3 +264,33 @@ window.CANOPY_GROUPS.jschi.aliases = ["ChicagoJS", "Chicago JavaScript", "js-chi
 Object.assign(window.CANOPY_GROUPS.devopsdays,{topics:["dev","data"]});
 Object.assign(window.CANOPY_GROUPS.aiweek,{topics:["ai","data"]});
 Object.assign(window.CANOPY_GROUPS.techweek,{topics:["startup","dev","lead"]});
+
+// Source-specific topic and link review. No event details are inferred from link checks.
+for(const g of Object.values(window.CANOPY_GROUPS)){
+  const url=new URL(g.url);
+  g.sourceLabel=url.hostname==='blog.1871.com'?'Source article':url.pathname.includes('/events/')||url.hostname==='luma.com'||url.hostname==='ti.to'?'Event source':'Website / calendar';
+}
+for(const g of Object.values(window.CANOPY_GROUPS)){
+ if(g.name==='CAMP IT Conferences'){g.url='https://campconferences.com/sponsoring/schedule/';g.sourceLabel='Organizer calendar';g.desc='Half-day seminars for IT and security leaders on topics including AI security, identity and breach response.';g.topics=['sec','lead'];g.reviewedAt='2026-11-06';}
+ if(g.name==='Chicago Product Alliance'){g.url='https://chicagoproduct.org/';g.sourceLabel='Official website';g.reviewedAt='2026-11-06';}
+ if(g.name==='Women in Product — Chicago'){g.url='https://womenpm.org/join-our-community/chicago/';g.sourceLabel='Chapter website';g.reviewedAt='2026-11-06';}
+ if(g.name==='BurbSec')g.topics=['sec'];
+ if(g.name==='IAPP Chicago KnowledgeNet')g.topics=['privacy','grc'];
+ if(g.name==='ISACA Chicago')g.topics=['grc','career'];
+ if(g.name==='IIA Chicago')g.topics=['grc'];
+ if(g.name==='CSA Chicago')g.topics=['sec','data'];
+ if(g.name==='ISC2 Chicago')g.topics=['sec','career'];
+ if(g.name==='WiCyS Chicago')g.topics=['sec','career'];
+ if(g.name==='IEEE Chicago Section')g.topics=['dev','data'];
+}
+Object.assign(window.CANOPY_GROUPS.dc312,{url:'https://dc312.org/',sourceLabel:'Official website',reviewedAt:'2026-11-06',desc:'Invitation-only Chicago hacker community. Check access requirements with the organizer.',status:'Invitation only · no public dates confirmed'});
+Object.assign(window.CANOPY_GROUPS.owasp,{url:'https://owasp.org/chapters/',sourceLabel:'OWASP chapter directory',status:'Chapter calendar needs review'});
+Object.assign(window.CANOPY_GROUPS.cncf,{url:'https://ocgroups.dev/cncf',sourceLabel:'CNCF community directory',status:'Chicago calendar needs review'});
+Object.assign(window.CANOPY_GROUPS.fintex,{url:'https://www.linkedin.com/company/fintex-chicago',sourceLabel:'Organization profile',reviewedAt:'2026-11-06',status:'No current event dates confirmed'});
+
+for(const event of window.CANOPY_EVENTS){
+ if(event.orgs?.includes('cqe')){event.audience='Quantum researchers, industry, government and startup communities';event.eligibility='Registration required; confirm available ticket options with the organizer.';}
+ if(event.orgs?.includes('evanta')){event.audience='Senior security executives';event.eligibility='Application-based community; the organizer vets membership and event eligibility.';}
+ if(event.orgs?.includes('futurecon'))event.audience='Cybersecurity practitioners and IT security leaders';
+ if(event.orgs?.includes('techstars')){event.audience='Early-stage startup founders';if(event.type==='Program')event.eligibility='Selected companies only; this is a program milestone.';}
+}

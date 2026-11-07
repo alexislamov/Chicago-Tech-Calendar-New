@@ -164,3 +164,7 @@ Submit an Event supports up to five co-hosts and partners, each with a role. Par
 ## Daily news and Outlook Calendar
 
 A six-story daily news brief appears below the event statistics. Outlook buttons download importable calendar files. See [NEWS-AND-CALENDAR.md](NEWS-AND-CALENDAR.md) for feeds, update timing.
+
+## Discovery, follows, weekly picks and staff tools
+
+See [EVOLUTION-SETUP.md](EVOLUTION-SETUP.md) for the event-first navigation, stable event pages, calendar subscriptions, reviewed corrections, private performance dashboard and Resend/Cloudflare Access activation. Run `node build-site.mjs` before local tests; generated public assets are not committed. Existing community identities and event IDs are retained.
