@@ -11,3 +11,15 @@
 .top nav.main>.organizer-menu[open]>summary::after{transform:translateY(2px) rotate(225deg)}
 .event-top nav{align-items:center;gap:4px}
 @media(max-width:640px){.top nav.main>button,.top nav.main>a.archive-nav,.top nav.main>.organizer-menu>summary,.event-top nav>a{font-size:12px;padding:10px 8px}}
+
+.archive-main .event-heading h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--peach) 62%);padding:0 .06em}
+.event-top nav{flex-wrap:wrap;justify-content:flex-end}
+.event-organizer-menu{position:relative}
+.event-organizer-menu>summary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 12px;border-radius:8px;font:500 13px/24px var(--body);color:var(--muted);white-space:nowrap;list-style:none;cursor:pointer}
+.event-organizer-menu>summary::-webkit-details-marker{display:none}
+.event-organizer-menu>summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+.event-organizer-menu[open]>summary{background:var(--chip);color:var(--ink)}
+.event-organizer-menu>div{position:absolute;right:0;top:100%;z-index:10;min-width:180px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px #0002}
+.event-organizer-menu>div>a{display:block;padding:10px 12px;font:500 13px/24px var(--body);color:var(--ink);text-decoration:none;white-space:nowrap;border-radius:6px}
+.event-organizer-menu>div>a:hover{background:var(--chip)}
+@media(max-width:640px){.event-top .event-wrap{flex-wrap:wrap}.event-top nav{width:100%;justify-content:flex-start;gap:4px}.event-organizer-menu>summary{font-size:12px;padding:10px 8px}}
