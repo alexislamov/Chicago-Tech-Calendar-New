@@ -937,28 +937,23 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     <div class="filters" id="eventDiscovery" tabindex="-1">
       <div class="wrap">
         <section id="dailyNews" class="news-ticker" aria-label="Latest cyber, AI, tech and quantum news"></section>
-        <div class="filter-row">
+        <div class="filter-row discovery-primary">
           <label class="search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
             <input id="q" type="search" placeholder="Search events, groups, venues" aria-label="Search events">
           </label>
-          <button type="button" class="help-choose" id="helpChoose" aria-haspopup="dialog" aria-controls="chooseDialog" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"/></svg>Help me choose</button>
-          <button class="chip mobile-filter-toggle" id="mobileFilterToggle" aria-expanded="false" aria-controls="fGroup fType fMode">Filters</button>
           <select id="fGroup" class="sel" aria-label="Group"><option value="">All groups</option></select>
           <select id="fType" class="sel" aria-label="Event type"><option value="">All types</option></select>
-          <select id="fMode" class="sel" aria-label="Format">
-            <option value="">In person &amp; virtual</option>
-            <option value="In person">In person</option>
-            <option value="Virtual">Virtual</option><option value="Hybrid">Hybrid</option>
-
-          </select>
-          <div class="seg" role="group" aria-label="View">
-            <button type="button" data-layout="list" aria-pressed="true">List</button>
-            <button type="button" data-layout="map" aria-pressed="false">Map</button>
-          </div>
+          <select id="fMode" class="sel" aria-label="Format"><option value="">In person &amp; virtual</option><option value="In person">In person</option><option value="Virtual">Virtual</option><option value="Hybrid">Hybrid</option></select>
+          <button type="button" class="help-choose" id="helpChoose" aria-haspopup="dialog" aria-controls="chooseDialog" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"/></svg>Help me choose</button>
         </div>
-        <div class="discovery-shortcuts" role="group" aria-label="Date shortcuts"><button class="chip" data-range="today">Today</button><button class="chip" data-range="weekend">This weekend</button><button class="chip" data-range="7">Next 7 days</button><button class="chip" data-range="30" aria-pressed="true">Next 30 days</button><button class="chip" data-range="all">All upcoming</button><label class="chip"><input id="freeOnly" type="checkbox"> Free</label><label class="chip"><input id="followingOnly" type="checkbox"> Following</label><button class="linkish" id="clearFilters">Clear filters</button></div>
-        <div class="chips" id="topicChips" role="group" aria-label="Topics"></div>
+        <div class="discovery-toolbar" aria-label="Refine events and choose view">
+          <select id="fDate" class="sel" aria-label="Date range"><option value="today">Today</option><option value="weekend">This weekend</option><option value="7">Next 7 days</option><option value="30" selected>Next 30 days</option><option value="all">All upcoming</option><option value="day" hidden>Selected day</option></select>
+          <details class="discovery-menu" id="topicMenu"><summary><span id="topicMenuLabel">All topics</span><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 8 4 4 4-4"/></svg></summary><div class="discovery-popover"><p>Choose one or more topics</p><div id="topicChips" role="group" aria-label="Topics"></div></div></details>
+          <details class="discovery-menu" id="extraMenu"><summary><span id="extraMenuLabel">More filters</span><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 8 4 4 4-4"/></svg></summary><div class="discovery-popover discovery-options"><label><input id="freeOnly" type="checkbox"><span>Free events only</span></label><label><input id="followingOnly" type="checkbox"><span>Groups &amp; topics I follow</span></label></div></details>
+          <button type="button" class="linkish" id="clearFilters">Clear filters</button>
+          <div class="discovery-view"><span>Explore as</span><div class="seg" role="group" aria-label="Event view"><button type="button" data-layout="list" aria-pressed="true"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 5h10M7 10h10M7 15h10M3 5h1M3 10h1M3 15h1"/></svg>List</button><button type="button" data-layout="map" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m2 5 5-2 6 2 5-2v12l-5 2-6-2-5 2V5ZM7 3v12m6-10v12"/></svg>Map</button></div></div>
+        </div>
       </div>
     </div>
 
@@ -1146,6 +1141,7 @@ const cohostSummary = e=>(e.cohosts||[]).map(h=>`${h.name} (${h.role})`).join(" 
 const topicTags = e=>e.topics.filter(t=>TOPICS[t]).map(t=>`<span class="tag"><span class="dot" style="background:var(${TOPICS[t].c})"></span>${TOPICS[t].label}</span>`).join("");
 
 function renderList(){
+  window.CanopyDiscovery?.sync();
   const banner=$("#groupBanner");
   if(state.group&&GROUPS[state.group]){banner.hidden=false;banner.innerHTML=`Showing events for <b>${esc(GROUPS[state.group].name)}</b><button id="clearGroup">Show all groups</button>`}
   else banner.hidden=true;

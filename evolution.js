@@ -16,7 +16,7 @@ window.CanopyEvolution=(()=>{
  function resetFilters(){Object.assign(state,{q:'',group:'',type:'',mode:'',day:null,range:'30',free:false,followed:false});state.topics.clear();for(const id of ['q','fGroup','fType','fMode'])document.getElementById(id).value='';for(const id of ['freeOnly','followingOnly'])document.getElementById(id).checked=false;document.querySelectorAll('[data-topic]').forEach(b=>b.setAttribute('aria-pressed','false'));syncRanges();render()}
  const syncRanges=()=>document.querySelectorAll('[data-range]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.range===state.range));
  document.getElementById('clearFilters').onclick=resetFilters;
- document.getElementById('mobileFilterToggle').onclick=ev=>{const open=document.getElementById('eventDiscovery').classList.toggle('filters-expanded');ev.currentTarget.setAttribute('aria-expanded',open)};
+ document.getElementById('fDate').onchange=ev=>{if(ev.target.value==='day')return;state.range=ev.target.value;state.day=null;render()};
  document.getElementById('freeOnly').onchange=e=>{state.free=e.target.checked;renderList()};
  document.getElementById('followingOnly').onchange=e=>{state.followed=e.target.checked;renderList()};
  document.getElementById('exportSaved').onclick=()=>{const selected=events.filter(e=>saved.has(e.id));if(!selected.length)return alert('Save an event first.');const items=selected.map(e=>CanopyCalendar.serialize(e).match(/BEGIN:VEVENT[\s\S]*END:VEVENT/)[0]);download('BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Canopy//Saved Events//EN\r\n'+items.join('\r\n')+'\r\nEND:VCALENDAR\r\n','canopy-saved.ics','text/calendar')};
@@ -60,3 +60,20 @@ window.CanopyEvolution=(()=>{
 CanopyEvolution.viewChanged(state.view);
 
 try{const pending=sessionStorage.getItem('canopy-correction');if(pending){sessionStorage.removeItem('canopy-correction');const data=JSON.parse(pending);document.querySelector('[data-submit-kind=correction]').click();document.querySelector('#listingForm [name=target]').value=data.target;document.querySelector('#listingForm [name=source]').value=data.source}}catch{}
+
+/* Keep compact filter menus in sync with calendar, group and topic selections. */
+window.CanopyDiscovery=(()=>{
+ const menus=[...document.querySelectorAll('.discovery-menu')];
+ function sync(){
+  const date=document.getElementById('fDate');date.value=state.day?'day':state.range;
+  const selected=Object.keys(TOPICS).filter(id=>state.topics.has(id));
+  document.getElementById('topicMenuLabel').textContent=selected.length===1?TOPICS[selected[0]].label:selected.length?'Topics · '+selected.length:'All topics';
+  document.getElementById('topicMenu').classList.toggle('has-selection',!!selected.length);
+  const count=Number(state.free)+Number(state.followed);document.getElementById('extraMenuLabel').textContent='More filters'+(count?' · '+count:'');document.getElementById('extraMenu').classList.toggle('has-selection',!!count);
+  document.querySelectorAll('#topicChips [data-topic]').forEach(b=>b.setAttribute('aria-pressed',state.topics.has(b.dataset.topic)));
+ }
+ for(const menu of menus)menu.addEventListener('toggle',()=>{if(menu.open)for(const other of menus)if(other!==menu)other.open=false});
+ document.addEventListener('click',ev=>{for(const menu of menus)if(!menu.contains(ev.target))menu.open=false});
+ document.addEventListener('keydown',ev=>{if(ev.key==='Escape')for(const menu of menus)if(menu.open){menu.open=false;menu.querySelector('summary').focus()}});
+ sync();return{sync};
+})();
