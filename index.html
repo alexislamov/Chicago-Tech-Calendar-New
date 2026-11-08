@@ -938,6 +938,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
       <div class="wrap">
         <section id="dailyNews" class="news-ticker" aria-label="Latest cyber, AI, tech and quantum news"></section>
         <div class="filter-row discovery-primary">
+          <button type="button" class="help-choose" id="helpChoose" aria-haspopup="dialog" aria-controls="chooseDialog" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"/></svg>Help me choose</button>
           <label class="search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
             <input id="q" type="search" placeholder="Search events, groups, venues" aria-label="Search events">
@@ -945,7 +946,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
           <select id="fGroup" class="sel" aria-label="Group"><option value="">All groups</option></select>
           <select id="fType" class="sel" aria-label="Event type"><option value="">All types</option></select>
           <select id="fMode" class="sel" aria-label="Format"><option value="">In person &amp; virtual</option><option value="In person">In person</option><option value="Virtual">Virtual</option><option value="Hybrid">Hybrid</option></select>
-          <button type="button" class="help-choose" id="helpChoose" aria-haspopup="dialog" aria-controls="chooseDialog" aria-expanded="false"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"/></svg>Help me choose</button>
         </div>
         <div class="discovery-toolbar" aria-label="Refine events and choose view">
           <select id="fDate" class="sel" aria-label="Date range"><option value="today">Today</option><option value="weekend">This weekend</option><option value="7">Next 7 days</option><option value="30" selected>Next 30 days</option><option value="all">All upcoming</option><option value="day" hidden>Selected day</option></select>
