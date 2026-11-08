@@ -13,7 +13,7 @@ globalThis.CanopyChooserCore=(()=>{
  const cost=e=>{if(CanopyEvents.free(e))return 0;const p=String(e.price||'').trim();return /^\$\d+(?:\.\d{1,2})?$/.test(p)?Number(p.slice(1)):null};
  const downtown=e=>/\b(loop|downtown|river north|west loop|south loop|streeterville|magnificent mile)\b/i.test((e.area||'')+' '+(e.venue||''));
  function fits(e,p,now=Date.now()){
-  if(CanopyEvents.phase(e,now)==='ended'||/application deadline/i.test(e.type+' '+e.note))return false;
+  if(e.unlisted||CanopyEvents.phase(e,now)==='ended'||/application deadline/i.test(e.type+' '+e.note))return false;
   if(!CanopyEvents.overlaps(e,CanopyEvents.range(p.when,now)))return false;
   if(p.topics.length&&!p.topics.some(t=>e.topics?.includes(t)))return false;
   if(p.format!=='any'&&e.mode!==p.format)return false;

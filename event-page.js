@@ -8,11 +8,11 @@
  const refresh=()=>{const yes=saved().has(e.id);document.getElementById('pageSave').textContent=yes?'Saved ✓':'Save event';document.getElementById('pageSave').setAttribute('aria-pressed',yes)};
  refresh();api('clicked').catch(()=>{});
  document.getElementById('pageSave').onclick=()=>{try{const s=saved();s.has(e.id)?s.delete(e.id):s.add(e.id);localStorage.setItem('canopy-chi-v4-saved',JSON.stringify([...s]));refresh();api(s.has(e.id)?'saved':'unsaved').catch(()=>{})}catch{status.textContent='Enable browser storage to save events.'}};
- document.getElementById('pageCalendar').onclick=()=>CanopyCalendar.download(e);
+ const calendar=document.getElementById('pageCalendar');if(calendar)calendar.onclick=()=>CanopyCalendar.download(e);
  const copy=async url=>{try{await navigator.clipboard.writeText(url);status.textContent='Link copied.';return true}catch{prompt('Copy this event link:',url);return false}};
  document.getElementById('pageCopy').onclick=()=>copy(e.url);
  document.querySelector('[data-registration]')?.addEventListener('click',()=>api('registration').catch(()=>{}));
  document.querySelectorAll('[data-page-response]').forEach(b=>b.onclick=()=>api(mine===b.dataset.pageResponse?'none':b.dataset.pageResponse).catch(()=>status.textContent='Could not save your response. Please try again.'));
- document.getElementById('pageInvite').onclick=async()=>{let url=e.url;try{const d=await api();url+='?invite='+d.inviteCode}catch{}if(await copy(url))api('invited').catch(()=>{})};
+ document.getElementById('pageInvite').onclick=async()=>{let url=e.url;try{const d=await api();url+='?invite='+d.inviteCode}catch{}if(await copy(url)&&!e.ended)api('invited').catch(()=>{})};
  document.getElementById('pageReport').onclick=()=>sessionStorage.setItem('canopy-correction',JSON.stringify({target:e.title,source:e.url}));
 })();

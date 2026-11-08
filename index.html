@@ -895,6 +895,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
 <link rel="stylesheet" href="community.css">
 <link rel="stylesheet" href="evolution.css">
 <link rel="stylesheet" href="chooser.css">
+<link rel="stylesheet" href="event-pages.css">
 </head>
 <body>
 <a class="skip-link" href="#eventDiscovery">Skip to events</a>
@@ -905,6 +906,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
     </a>
     <nav class="main" aria-label="Main">
       <button data-view="events" aria-current="page">Events</button>
+      <a class="archive-nav" href="/past-events">Past events</a>
       <button data-view="groups">Groups</button>
       
       <button data-view="connections">My activity</button>
@@ -1093,7 +1095,7 @@ const parseDate = s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m
 const fmtTime = t=>{if(!t)return "";let [h,m]=t.split(":").map(Number);const ap=h>=12?"pm":"am";h=h%12||12;return `${h}:${String(m).padStart(2,"0")}${ap}`};
 const timeRange = e=>e.endDate?`${parseDate(e.date).toLocaleDateString(undefined,{month:"short",day:"numeric"})} – ${parseDate(e.endDate).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})}`:e.allDay?"All day":!e.start?"Time not posted":e.end?`${fmtTime(e.start)} – ${fmtTime(e.end)}`:`Starts ${fmtTime(e.start)}`;
 const relLabel = d=>{const diff=Math.round((d-today)/864e5);return diff===0?"Today":diff===1?"Tomorrow":diff<7?"This week":diff<14?"Next week":""};
-const upcoming = ()=>events.filter(e=>CanopyEvents.phase(e)!=="ended");
+const upcoming = ()=>events.filter(e=>!e.unlisted&&CanopyEvents.phase(e)!=="ended");
 const groupCount = k=>upcoming().filter(e=>(e.orgs||[]).includes(k)).length;
 const isFree = CanopyEvents.free;
 
@@ -1121,7 +1123,7 @@ Object.entries(TOPICS).forEach(([k,t])=>{
 
 function matches(e){
   if(state.view==="saved"&&!saved.has(e.id))return false;
-  if(CanopyEvents.phase(e)==="ended")return false;
+  if(e.unlisted||CanopyEvents.phase(e)==="ended")return false;
   if(state.view!=="saved"&&!state.day&&!CanopyEvents.overlaps(e,CanopyEvents.range(state.range)))return false;
   if(state.free&&!isFree(e))return false;
   if(state.followed&&!window.CanopyEvolution?.isFollowed(e))return false;
@@ -1327,9 +1329,10 @@ function openModal(id,track=true){
     <dt>Where</dt><dd>${esc(e.venue)}${e.area&&e.mode!=="Virtual"?`<br><span style="color:var(--muted)">${esc(e.area)}</span>`:""}</dd>
     <dt>Price</dt><dd>${esc(CanopyEvents.price(e))}</dd>
     ${groupNames?`<dt>Groups</dt><dd>${groupNames}</dd>`:""}</dl>
-    <p><strong>Audience:</strong> ${esc(e.audience||"Check the organizer for audience and experience level.")}</p><p><strong>Registration:</strong> ${esc(e.eligibility||"Check registration and eligibility with the organizer.")}</p><p class="desc">${esc(e.desc||"")}</p>${e.auto?`<p class="auto-note">Added automatically from the organizer's calendar feed. Check the event page for final details.</p>`:""}
+    <p><strong>Audience:</strong> ${esc(e.audience||"Check the organizer for audience and experience level.")}</p><p><strong>Registration:</strong> ${esc(e.eligibility||"Check registration and eligibility with the organizer.")}</p><p class="desc">${esc((e.desc||"").length>500?e.desc.slice(0,500).trim()+"…":e.desc||"")}</p>${e.auto?`<p class="auto-note">Added automatically from the organizer's calendar feed. Check the event page for final details.</p>`:""}
     ${e.cohosts?.length?`<section class="cohost-detail"><h4>Co-hosts &amp; partners</h4>${e.cohosts.map(h=>`<p><strong>${esc(h.name)}</strong> · ${esc(h.role)}</p>`).join("")}</section>`:""}
     <div class="actions">
+      <a class="btn btn-ghost" href="/events/${esc(e.slug)}">View full event ↗</a>
       ${e.link?`<a class="btn btn-primary" data-registration="${esc(e.id)}" href="${esc(e.link)}" target="_blank" rel="noopener">Register with organizer ↗</a>`:""}
       <a class="btn btn-ghost" href="${gcalLink(e)}" target="_blank" rel="noopener">Add to Google Calendar</a>
       <button class="btn btn-ghost" data-outlook="${esc(e.id)}" title="Download an .ics file to open or import in Outlook">Add to Outlook Calendar</button>

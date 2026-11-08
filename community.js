@@ -76,7 +76,7 @@ const Community = (() => {
       try{data=await api({event:id,status:current(id)===desired?'none':desired,ref:invitedEvent===id?ref:null});message('Response saved. Register with the organizer if required.')}catch(e){message(e.message)}finally{busy=false;refresh()}return;
     }
     if(t.closest('[data-invite]')) {
-      const url=new URL(location.href);url.search='';url.hash='';url.searchParams.set('event',activeEvent);if(data)url.searchParams.set('invite',data.inviteCode);
+      const event=events.find(e=>e.id===activeEvent),url=new URL(event?.slug?'/events/'+event.slug:'/',location.origin);if(!event?.slug)url.searchParams.set('event',activeEvent);if(data)url.searchParams.set('invite',data.inviteCode);
       const container=document.getElementById('inviteLink');container.hidden=false;container.innerHTML=`<label>Send this event to a friend<input class="invite-field" readonly aria-label="Invitation link" value="${esc(url.href)}"></label><small>${data?'When a friend responds, your invite milestone updates.':'Event sharing works now. Invite milestones require the community service.'}</small>`;
       try{await navigator.clipboard.writeText(url.href);message('Invitation link copied.');await recordInvitation(activeEvent)}catch{container.querySelector('input').select();container.insertAdjacentHTML('beforeend','<button type="button" data-copy-invite>Copy invitation link</button>');message('Copy the invitation link below.')}return;
     }

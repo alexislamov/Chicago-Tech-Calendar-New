@@ -5,6 +5,7 @@
 // Test with a saved file:  node scripts/update-events.mjs --file some.ics
 
 import fs from "node:fs/promises";
+import {fileURLToPath} from "node:url";import {resolve} from "node:path";
 
 const ROOT = new URL("../", import.meta.url);
 const OUT = new URL("auto-events.js", ROOT);
@@ -124,7 +125,7 @@ function toEvent(v, feed, win) {
   if (!title) return null;
 
   const location = unescapeText(v.LOCATION?.value || "").replace(/\s+/g, " ").trim();
-  const desc = shorten(stripHtml(unescapeText(v.DESCRIPTION?.value || "")));
+  const desc = shorten(stripHtml(unescapeText(v.DESCRIPTION?.value || "")),6000);
   const hay = `${title} ${desc}`;
   const virtual = /\b(online|virtual|zoom|webinar|livestream|google meet|teams)\b/i.test(`${location} ${title}`) && !/\bhybrid\b/i.test(location);
 
@@ -158,6 +159,7 @@ function toEvent(v, feed, win) {
   if (start.allDay) ev.allDay = true;
   if (free) ev.price = "Free";
   if (note) ev.note = note;
+  if(endRaw&&endRaw.date>start.date){const last=start.allDay?new Date(Date.parse(endRaw.date+"T12:00:00Z")-864e5).toISOString().slice(0,10):endRaw.date;if(last>start.date)ev.endDate=last;if(!start.allDay)ev.end=endRaw.time;}
   return ev;
 }
 
@@ -254,4 +256,5 @@ async function main() {
   if (report.every(r => r.startsWith("FAILED"))) { console.error("Every feed failed."); process.exitCode = 1; }
 }
 
-main();
+export {parseICS,toEvent};
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))main();

@@ -37,11 +37,14 @@ jobs:
       - name: Check group source links
         run: node scripts/check-group-links.mjs
 
+      - name: Preserve event history and permanent URLs
+        run: node build-site.mjs
+
       - name: Save changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add auto-events.js geocache.json group-link-audit.json
+          git add auto-events.js geocache.json group-link-audit.json event-archive.json event-identities.json
           if git diff --cached --quiet; then
             echo "No new events today."
             exit 0
