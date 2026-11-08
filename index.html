@@ -958,7 +958,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
           </div>
         </div>
         <div class="discovery-shortcuts" role="group" aria-label="Date shortcuts"><button class="chip" data-range="today">Today</button><button class="chip" data-range="weekend">This weekend</button><button class="chip" data-range="7">Next 7 days</button><button class="chip" data-range="30" aria-pressed="true">Next 30 days</button><button class="chip" data-range="all">All upcoming</button><label class="chip"><input id="freeOnly" type="checkbox"> Free</label><label class="chip"><input id="followingOnly" type="checkbox"> Following</label><button class="linkish" id="clearFilters">Clear filters</button></div>
-        <p id="resultCount" role="status"></p>
         <div class="chips" id="topicChips" role="group" aria-label="Topics"></div>
       </div>
     </div>
@@ -1151,7 +1150,6 @@ function renderList(){
   if(state.group&&GROUPS[state.group]){banner.hidden=false;banner.innerHTML=`Showing events for <b>${esc(GROUPS[state.group].name)}</b><button id="clearGroup">Show all groups</button>`}
   else banner.hidden=true;
   const list=sorted().filter(matches);
-  $("#resultCount").textContent=`${list.length} event${list.length===1?"":"s"} match your filters · Central time`;
   $("#savedTools").hidden=state.view!=="saved";
   const el=$("#list");
   const showMap=state.layout==="map";
