@@ -22,7 +22,7 @@ const catalog={events,groups,updated:auto.updated,places:ctx.window.CANOPY_PLACE
 await writeFile(new URL('catalog.mjs',root),'export default '+JSON.stringify(catalog)+';\n');
 await mkdir(new URL('public/',root),{recursive:true});
 await writeFile(new URL('public/catalog.js',root),'window.CANOPY_CATALOG='+JSON.stringify(catalog)+';');
-for(const file of ['index.html','data.js','auto-events.js','community.js','community.css','collaboration.js','calendar.js','news.js','event-utils.js','evolution.js','evolution.css','event-page.js','chooser-core.js','chooser.js','chooser.css','event-pages.css'])await copyFile(new URL(file,root),new URL('public/'+file,root));
+for(const file of ['index.html','data.js','auto-events.js','community.js','community.css','collaboration.js','calendar.js','news.js','event-utils.js','evolution.js','evolution.css','event-page.js','chooser-core.js','chooser.js','chooser.css','event-pages.css','people.css','people.js'])await copyFile(new URL(file,root),new URL('public/'+file,root));
 console.log(`Prepared ${events.length} events and ${Object.keys(groups).length} groups.`);
 
 const page=await readFile(new URL('index.html',root),'utf8'),start=page.indexOf('/* Layout:');

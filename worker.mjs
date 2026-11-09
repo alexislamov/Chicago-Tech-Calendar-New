@@ -1,3 +1,4 @@
+import {peopleRoute} from './people-service.mjs';
 import {chooserRoute} from './chooser-service.mjs';
 import {serviceRoute,sendWeeklyDigests} from './site-services.mjs';
 import catalog from './catalog.mjs';
@@ -105,6 +106,7 @@ export async function submitEvent({request,env}) {
 export default {
   async scheduled(controller,env,ctx){ctx.waitUntil(Promise.allSettled([retryNotifications(env),refreshNews(env),sendWeeklyDigests(env)]));},
   async fetch(request, env,ctx) {
+    const people=await peopleRoute(request,env);if(people)return people;
     if(new URL(request.url).pathname.startsWith('/api/choose')){const choice=await chooserRoute(request,env);if(choice)return choice;}
     const service=await serviceRoute(request,env);if(service)return service;
     if(new URL(request.url).pathname==='/admin')return Response.redirect(new URL('/#admin',request.url),302);
