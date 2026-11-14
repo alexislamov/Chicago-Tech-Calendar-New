@@ -2713,6 +2713,32 @@
       "slug": "c724dab5328c8624"
     },
     {
+      "date": "2026-12-09",
+      "start": "12:00",
+      "end": "13:00",
+      "title": "AI Webinar (Diagrid and AWS) - Durable Execution for Agents",
+      "host": "Chicago Enterprise AI",
+      "orgs": [
+        "enterpriseai",
+        "aidevs"
+      ],
+      "type": "Talk",
+      "venue": "Online",
+      "area": "Virtual",
+      "mode": "Virtual",
+      "topics": [
+        "ai",
+        "grc",
+        "data"
+      ],
+      "desc": "Chicago Enterprise AI **Important**: Register on the [event website](https://www.aicamp.ai/event/eventdetails/W2026120910) to receive the joining link. (rsvp on meetup will NOT receive anything). This is virtual event for our AI global community, please double-check your local time. Can't make it live? Register anyway to receive the webinar recording. Welcome to the AI Deep Dive Series (Virtual) with Diagrid and AWS. Join us for deep dive tech talks on AI, GenAI, LLMs, Agentic AI, hands-on experiences on code labs, workshops, and networking with speakers & fellow developers from all over the world. This is virtual event for our AI global community, please double-check your local time. Can't make it live? Register anyway to receive the webinar recording. **Tech Talk: Agents That Won’t Quit: Durable Execution on Amazon Bedrock AgentCore** **Speaker:** * Mark Fussell, Co-founder & CEO, Diagrid * Yaron Schneider, Co-founder & CTO, Diagrid * Jean Malha, Principal Specialist Solutions Architect, AWS **Abstract:** Amazon Bedrock AgentCore gives agents secure, isolated compute, managed identity, memory and access to Bedrock models. Agents that run multi-step tasks over minutes or hours depend on external models, tools and APIs, where timeouts, rate limits, errors and redeployments are a normal part of operating at scale. These agents require durable execution. This session adds Diagrid Catalyst as the agentic durable execution layer on AgentCore, so agent runs complete reliably and every step is verifiable. With durable execution, an agent interrupted mid-task, by a failed tool call, a timeout or a redeploy, resumes from its last completed step, without re-running completed model calls or tool calls. With verifiable execution, every step is cryptographically signed and traceable to the agent that ran it, producing a tamper-evident record that auditors and risk teams can check. You keep your existing Strands, LangGraph or Mastra code, run on AgentCore and Bedrock, and add one Diagrid package. **Who should attend** AI engineers, architects and platform teams building agents on AgentCore and Bedrock, especially teams in regulated industries such as financial services and healthcare that need an auditable record of agent actions. **Venue:** Virtual, join from anywhere **More virtual sessions:** * Dec 4th: AI Deep Dive with Google Ep 6.[ RSVP](https://www.aicamp.ai/event/eventdetails/W2026120409) *",
+      "link": "https://www.meetup.com/chicago-enterprise-ai/events/317425648/",
+      "feed": "enterpriseai",
+      "auto": true,
+      "id": "evt-7671fbbb0bb46277b121b594",
+      "slug": "2b36c0ce9ebee371"
+    },
+    {
       "date": "2026-12-10",
       "start": "17:00",
       "end": "20:00",
@@ -2762,6 +2788,30 @@
       "auto": true,
       "id": "evt-7e198ba67fe942e902c68606",
       "slug": "ad30a4b780c82a5d"
+    },
+    {
+      "date": "2026-12-10",
+      "start": "18:00",
+      "end": "21:00",
+      "title": "Burbsec North - Sponsors Welcome",
+      "host": "BurbSec",
+      "orgs": [
+        "burbsec"
+      ],
+      "type": "Meetup",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "sec",
+        "career"
+      ],
+      "desc": "BurbSec Chicago: The Midwest's Favorite Cybersecurity Events BurbSec North is the Northern Suburb offshoot of the famous Chicagoland BurbSec meetups. Information Security enthusiasts of all skill and career levels are welcome to join us for a few beers and complaints about work (or the lack thereof)! We average about 10-15 attendees each month, many of whom have been coming for years! Our location offers excellent beers as well as a full pub menu! Finally, don't forget to join the BurbSec chat servers! Our Discord service is very active. BurbSec Discord: ([https://discord.gg/VVYDZYmd2w](https://discord.gg/VVYDZYmd2w)) Bluesky: @north.burbsec.com Mastodon: @BurbSecNorth@infosec.exchange Twitter: ([https://twitter.com/burbsecnorth](https://twitter.com/burbsecnorth))",
+      "link": "https://www.meetup.com/burbsec/events/317417117/",
+      "feed": "burbsec",
+      "auto": true,
+      "id": "evt-a07f0d70163ca1249029033b",
+      "slug": "d4ff61fb7b27b1c6"
     },
     {
       "date": "2026-12-10",
@@ -2860,6 +2910,30 @@
       "auto": true,
       "id": "evt-d113d3721b104bcef613a990",
       "slug": "0c8732199af42f9f"
+    },
+    {
+      "date": "2026-12-08",
+      "start": "11:00",
+      "end": "13:00",
+      "title": "Dec 8 - How to Let Long-tail Guide Your 3D Annotation Workshop",
+      "host": "Chicago AI, ML and Computer Vision",
+      "orgs": [
+        "aicv"
+      ],
+      "type": "Workshop",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "ai",
+        "data"
+      ],
+      "desc": "Chicago AI, Machine Learning and Computer Vision Meetup Join us on Dec 8 for the “How to Let Long-tail Guide Your 3D Annotation” workshop with [Eric Hofesmann](https://www.linkedin.com/in/eric-hofesmann/). **Date, Time and Location** Dec 08, 2026 9:00 AM - 10:00 AM PST Online. **[Register for the Zoom!](https://voxel51.com/events/how-to-let-long-tail-guide-your-3d-annotation-december-8-2026)** Autonomous driving models rarely fail on the common case. They fail on the long-tail: the pedestrian stepping out from behind a parked truck or a construction zone that matches nothing in the training set. Each of those moments lives in synchronized multi-sensor data, made up of a LiDAR sweep, a ring of cameras, a timestamp, and a calibration. Fixing one means finding it, labeling it in 3D, and proving the next model handles it. In this live session, we will take long-tail driving scenarios from discovery to 3D labels to evaluation, and make the case that 3D ground truth should be built where your data lives, not exported away from it.",
+      "link": "https://www.meetup.com/chicago-ai-machine-learning-data-science/events/317415264/",
+      "feed": "aicv",
+      "auto": true,
+      "id": "evt-de06e5aea056970f362c059f",
+      "slug": "38077c90d8dc7a23"
     },
     {
       "date": "2026-12-05",
