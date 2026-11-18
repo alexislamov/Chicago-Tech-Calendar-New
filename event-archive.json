@@ -1929,7 +1929,7 @@
       "topics": [
         "dev"
       ],
-      "desc": "ChicaGo Gather with other gophers who write Go/Golang in Chicago. Watch lightning talks! Talk with humans! This event is for anyone who writes Go, has written Go, is interested in writing Go, or is interested in becoming a past writer of Go. **Registration is on Luma** Please register on Luma to get in: https://luma.com/ztikk9yq The venue has a capacity limit. **Talks** * Om Dange: Monolith to Go: 8 Services, 54% Savings * Daylam Tayari: On by Default: Go's Exposure to a Critical Linux Vulnerability Please fill out this survey for Om's \"Monolith to Go\" talk to help him tailor it to you: [https://tally.so/r/o9RVzx](https://tally.so/r/o9RVzx) **Schedule** * 5:30: Arrive and chat * 6:00: Lightning talks with Q&A * 7:00-7:30: Chat **Directions** Go to the main Harold Washington Library entrance at 400 S State. Take the elevator to the 8th floor, and go to the far right corner of that floor for Meeting Room A (8S 15).",
+      "desc": "ChicaGo Gather with other gophers who write Go/Golang in Chicago. Watch lightning talks! Talk with humans! This event is for anyone who writes Go, has written Go, is interested in writing Go, or is interested in becoming a past writer of Go. **Registration is on Luma** Please register on Luma to get in: https://luma.com/ztikk9yq The venue has a capacity limit. **Talks** * Om Dange: Monolith to Go: 8 Services, 54% Savings * Daylam Tayari: On by Default: Go's Exposure to a Critical Linux Vulnerability * Anushka Gupta: Lights CapsLock Action! A movie buff’s journey to discovering morse code Please fill out this survey for Om's \"Monolith to Go\" talk to help him tailor it to you: [https://tally.so/r/o9RVzx](https://tally.so/r/o9RVzx) **Schedule** * 5:30: Arrive and chat * 6:00: Lightning talks with Q&A * 7:00-7:30: Chat **Directions** Go to the main Harold Washington Library entrance at 400 S State. Take the elevator to the 8th floor, and go to the far right corner of that floor for Meeting Room A (8S 15).",
       "link": "https://www.meetup.com/chicagogo/events/317196274/",
       "feed": "chicagogo",
       "auto": true,
@@ -2663,6 +2663,31 @@
       "slug": "9fb946284d06b902"
     },
     {
+      "date": "2026-12-12",
+      "start": "13:00",
+      "end": "14:00",
+      "title": "Info Session on Mentor-Led Data Science Internship Program",
+      "host": "AI Professionals Chicago",
+      "orgs": [
+        "aipros"
+      ],
+      "type": "Talk",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "ai",
+        "data",
+        "dev"
+      ],
+      "desc": "AI Professionals Chicago Please register using the zoom link to get a reminder: https://us02web.zoom.us/webinar/register/8617335660229/WN_baWalUCNS1Op_cp9UHkCgw Attention all aspiring data scientists! Magnimind Academy has one-of-its-kind mentorship and internship program for students lacking a portfolio but having the fundamentals. This fifteen-week boot camp is designed to provide you with: -Real industry projects -Expert data scientists -Project-based intensive training -Mock interviews -Resume polish -Post-interview feedback We will be hosting an information session to discuss the program in more detail. Whether you're a recent graduate or looking to transition into the field, this program is perfect for those who are serious about a career in data science. Join us to learn more about this exciting program and get your questions answered. RSVP now to reserve your spot! Agenda: (PDT) 11:00 am - 11:05 am Arrival and socializing and Opening (PDT) 11:05 am - 12:00 pm \"Info Session on Mentor-Led Data Science Internship Program\" (PDT) 12:00 pm - 12:10 pm Q&A About Dr. Murat Baday: Dr. Baday is the co-founder of Magnimind Academy. He is passionate about everything related to data science, education, and entrepreneurship. He received a biophysics PhD from the University of Illinois and continued his studies at Stanford Univ as a Postdoc. He has published several papers and patents and he is the co-founder of several biotechs and AI startups. About Dr. Yasin Ceran: Yasin Ceran is passionate about all things data and holds a vast experience in data analysis, mathematical modeling and Apache Spark, and in SQL, Python and R. He is currently an associate professor at KAIST, South Korea, as well as teaching at San Jose State University at the heart of Silicon Valley. Yasin has worked rigorously on an array of data-related projects encompassing data mining, statistics, modeling, and is dedicated to sharing his experience and expertise with learners. Please register using the zoom link to get a reminder: https://us02web.zoom.us/webinar/register/8617335660229/WN_baWalUCNS1Op_cp9UHkCgw",
+      "link": "https://www.meetup.com/ai-professionals-chicago/events/317473021/",
+      "feed": "aipros",
+      "auto": true,
+      "id": "evt-166fdbd3a717a4a7ad260165",
+      "slug": "fb299fb0369ce3ff"
+    },
+    {
       "date": "2026-12-04",
       "start": "11:00",
       "end": "14:00",
@@ -2887,6 +2912,33 @@
       "auto": true,
       "id": "evt-b19cf8c26bfc7c33753319df",
       "slug": "322ebe977e87cbe7"
+    },
+    {
+      "date": "2027-03-18",
+      "start": "09:00",
+      "end": "19:00",
+      "title": "AI in Healthcare Conference 2027 — Stanford Faculty Club",
+      "host": "AI Professionals Chicago",
+      "orgs": [
+        "aipros"
+      ],
+      "type": "Conference",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "ai",
+        "startup",
+        "lead"
+      ],
+      "desc": "AI Professionals Chicago (This is a paid event) We invite you to attend the AI in Healthcare Conference 2027, which will take place March 18-19 2027 at the Stanford Faculty Club in Palo Alto, California. Super Early Bird ends **October 31.** Register here: [https://aihealthcareconference.com/](https://aihealthcareconference.com/) The conference is designed as a small, executive-level forum to facilitate discussion among leaders from healthcare systems, academia, technology companies, venture capital, and startups. 📍 Location: Stanford Faculty Club, Palo Alto, California 📅 Dates: March 18-19, 2027 We hope you will be able to join us at Stanford. (This is a paid event)",
+      "link": "https://www.meetup.com/ai-professionals-chicago/events/316636430/",
+      "feed": "aipros",
+      "auto": true,
+      "note": "Through Mar 19",
+      "endDate": "2027-03-19",
+      "id": "evt-b210a6c423cfc28a21d746ad",
+      "slug": "e996789286db7442"
     },
     {
       "date": "2026-11-24",
