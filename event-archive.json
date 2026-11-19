@@ -2688,6 +2688,31 @@
       "slug": "fb299fb0369ce3ff"
     },
     {
+      "date": "2026-12-05",
+      "start": "11:00",
+      "end": "14:00",
+      "title": "Build Your Tech Portfolio: Create & Publish Your First Project",
+      "host": "Chicago Women Developers",
+      "orgs": [
+        "womendevs"
+      ],
+      "type": "Meetup",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "dev",
+        "career",
+        "ai"
+      ],
+      "desc": "Chicago Women Developers Build your own tech portfolio and publish your first project in this beginner-friendly, hands-on coding workshop for women! Want to build a website or create your own tech project but don't know where to start? Do you have AI write code for you but have no idea what it means? Let me explain it to you in this workshop. Join **Womxn Built** for a hands-on, beginner-friendly coding workshop! We'll learn, experiment, and build together. No prior coding experience needed. ### What you'll learn * Create your own portfolio website * Build a simple project to showcase your skills * Connect your project to your portfolio * Publish your work online so you can share it! ### Agenda **11:00–11:15** — Meet, greet & network **11:15–12:00** — Build your portfolio website **12:00–12:45** — Learn about what your code is doing. Create your first project **12:45–1:00** — Break **1:00–1:45** — Publish your work, get your own free domain! **1:45–2:00** — Share, connect & wrap up ### Who's welcome? Women and gender-nonconforming people of all experience levels. Whether you're exploring tech, changing careers, or building something of your own, we'd love to have you! **Bring:** A laptop, charger, notetaking tools, and curiosity! ### Tickets * General Admission: $55 * Returning Womxn Built & Devi-Labs Members: $45 **Purchase tickets [here](https://www.eventbrite.com/e/build-your-tech-portfolio-create-publish-your-first-project-tickets-2005097705212?aff=oddtdtcreator).** If you are a returning member, you should have a discount code in your inbox. ### About Womxn Built We're a Chicago-based community helping womxn learn technology, build businesses, and create opportunities together through hands-on education and in-person connection. Come as you are. Let's build something together! — Devina, Founder of Womxn Built",
+      "link": "https://www.meetup.com/womandevelopers/events/317503162/",
+      "feed": "womendevs",
+      "auto": true,
+      "id": "evt-2eeaf4f25683cf9b5b3b9696",
+      "slug": "4a5235ad704e7967"
+    },
+    {
       "date": "2026-12-04",
       "start": "11:00",
       "end": "14:00",
