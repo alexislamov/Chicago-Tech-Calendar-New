@@ -2688,6 +2688,32 @@
       "slug": "fb299fb0369ce3ff"
     },
     {
+      "date": "2026-12-01",
+      "start": "11:00",
+      "end": "12:00",
+      "title": "[Virtual] Google Agents in Production for Enterprises with Oracle",
+      "host": "Chicago Enterprise AI",
+      "orgs": [
+        "enterpriseai",
+        "aidevs"
+      ],
+      "type": "Meetup",
+      "venue": "Online",
+      "area": "Virtual",
+      "mode": "Virtual",
+      "topics": [
+        "ai",
+        "data",
+        "dev"
+      ],
+      "desc": "Chicago Enterprise AI **Important:** Register on the[ ](https://www.aicamp.ai/event/eventdetails/W2026101209)[Event Website](https://www.aicamp.ai/event/eventdetails/W2026120109) to receive the joining link. (RSVP on Meetup will NOT receive the joining link.) Brought to you by Google Cloud and AI Camp, Agents in Production for Enterprises is a global event series designed for organizations ready to move beyond AI experimentation and into production reality. This series brings together Google Cloud engineers, partner architects, and enterprise practitioners to tackle the real-world challenges of building and deploying agentic AI at scale. At this episode, we team up with Oracle to learn: Building Autonomous Agents: Grounding Gemini on Oracle Databases with MCP. **Tech Talk: Building Autonomous Agents: Grounding Gemini on Oracle Databases with MCP** **Speaker:** Anwar Belayachi (Google) **Abstract:** Custom Natural-Language-to-SQL solutions are notoriously complex to build, difficult to secure, and brittle in production. This fast-paced, live-demo session introduces a game-changing solution: the Oracle AI Database Agent for Gemini and the Remote MCP (Model Context Protocol) Server. We’ll demonstrate how to securely connect Gemini to your Oracle database with zero custom query-translation code. This walkthrough shows how Gemini safely interprets a user's natural language request, builds and executes the appropriate database queries, and returns secure, human-readable results. Learn how Gemini is revolutionizing daily DBA operations, moving teams past simple database maintenance to intelligent automation. **Who Should Attend?** This series is designed for enterprise practitioners who are building or planning to build AI agents: * Developers & Engineers building AI-powered applications * Data Scientists & ML Engineers operationalizing models * Solutions Architects & Tech Leads designing enterprise AI infrastructure * Engineering Leaders & Decision Makers driving AI adoption **Venue:** Virtual, join from anywhere. **More Virtual AI Events:** * Dec 4th: AI Deep Dive with Google Ep 6.[ RSVP](https://www.aicamp.ai/event/eventdetails/W2026120409) * Dec 9th: AI Webinar with Diagrid and AWS. [RSVP](https://www.aicamp.ai/event/eventdetails/W2026120910) * Dec 17th: AI Webinar with NVIDIA. [RSVP](https://www.aicamp.ai/event/eventdetails/W2026121709)",
+      "link": "https://www.meetup.com/chicago-enterprise-ai/events/317511592/",
+      "feed": "enterpriseai",
+      "auto": true,
+      "id": "evt-24d2e09f3830f31f60f524bb",
+      "slug": "f6b4ea427998a3b5"
+    },
+    {
       "date": "2026-12-05",
       "start": "11:00",
       "end": "14:00",
@@ -2711,6 +2737,31 @@
       "auto": true,
       "id": "evt-2eeaf4f25683cf9b5b3b9696",
       "slug": "4a5235ad704e7967"
+    },
+    {
+      "date": "2026-12-09",
+      "start": "17:00",
+      "end": "19:00",
+      "title": "Applied AI Ethics MonthlyMixer - Where Innovation Meets Responsibility",
+      "host": "Analytics.Club Chicago",
+      "orgs": [
+        "analyticsclub"
+      ],
+      "type": "Meetup",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "data",
+        "ai",
+        "grc"
+      ],
+      "desc": "Analytics.Club Chicago: Data & AI Community, Connect. Grow. Join a global, open-format gathering for those building and questioning AI — from real-world use cases to critical conversations around ethics, bias, and transparency. Every month, we create space for developers, researchers, and policymakers to connect in meaningful, unmoderated dialogue — with flexible chats, peer learning, and 1-on-1 video networking. Watch how it works: **[https://www.youtube.com/watch?v=bOYkxBjrAYY](https://www.youtube.com/watch?v=bOYkxBjrAYY)** **What Is the Applied AI & Ethics #MonthlyMixer?** The Applied AI & Ethics MonthlyMixer is a self-directed online networking event where professionals from across the AI spectrum come together to collaborate, question, and connect. This isn’t a webinar or panel — it’s a structured-free, chat-first environment hosted on a Slack-like virtual platform, featuring topic-specific channels and private video or text chat options. Whether you're designing algorithms, drafting policy, or advocating for responsible tech, this is your space to exchange ideas, showcase projects, or meet others who care about building AI with integrity and impact. **Who Should Join:** * AI/ML developers working on real-world deployments * Policy makers and legal experts exploring AI governance * Data scientists interested in ethical model design * Academics and researchers studying AI and society * Ethicists, community leaders, and social impact advocates * Product leaders balancing innovation with responsibility Whether you're launching applied AI tools or questioning their societal effects, this mixer welcomes your perspective. **Explore These Channels Inside:** The platform provides themed group discussions to help you navigate the topics that matter most: * #general – Start with introductions, announcements, and cross-topic conversation * #networking – Share your portfolio, white papers, startups, or ethical AI tools * #intros – Tell your story: what you work on and why it matters * #help-wanted – Request or offer guidance around data ethics, fairness, or responsible deployment * #industry-room-tech – Dive deep into real-world cases, AI misuse, explainability, and bias mitigation You’ll also be able to chat directly and launch 1-on-1 video calls for deeper conversations. **When & Where?** * Second Wednesday of Every month * 5:00 PM – 7:00 PM (your local time) * Register from the platform here - [https://events.tao.ai/pod/analytics.club/cont-r8tfbvicrqsh/source--me](https://events.tao.ai/pod/analytics.club/cont-r8tfbvicrqsh) No login hurdles. No presentations. Just people-driven dialogue. **Why Join?** * Global gathering of AI professionals shaping the future responsibly * Self-led chats & 1-on-1 networking with values-aligned peers * Exchange insights, frameworks, and use cases for applied AI * Build your ethical AI toolkit and collaborative network * Reconnect monthly to deepen the conversation **Questions or Suggestions?** We’re always listening. Contact us anytime at: [https://noworkerleftbehind.org/event_support](https://noworkerleftbehind.org/event_support) **Quick Links:** * Explainer Video: [https://www.youtube.com/watch?v=bOYkxBjrAYY](https://www.youtube.com/watch?v=bOYkxBjrAYY) * Support Page: [https://noworkerleftbehind.org/event_support](https://noworkerleftbehind.org/event_support) **Hashtags for Discovery & Engagement** #AppliedAI #EthicalAI #AIEthics #ResponsibleTech #MonthlyMixer #AIGovernance #AIandSociety #FairAI #BiasInAI #TechForGood #AINetworking #AIProfessionals #GlobalAICommunity",
+      "link": "https://www.meetup.com/ac-ord/events/317506111/",
+      "feed": "analyticsclub",
+      "auto": true,
+      "id": "evt-38bccc4cad885b5bbb094c22",
+      "slug": "377104bf9169250e"
     },
     {
       "date": "2026-12-04",
@@ -3016,6 +3067,29 @@
       "slug": "c680cc42f42385e7"
     },
     {
+      "date": "2026-12-22",
+      "start": "18:00",
+      "end": "23:55",
+      "title": "East Holiday Party by Push Security!!",
+      "host": "BurbSec",
+      "orgs": [
+        "burbsec"
+      ],
+      "type": "Meetup",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "sec"
+      ],
+      "desc": "BurbSec Chicago: The Midwest's Favorite Cybersecurity Events **# [This year's holiday sponsor is PUSH SECURITY!!!](pushsecurity.com)** ## Details 🎁🤣 **Get Ready for a Hilarious Night! 🎉🤖** We're excited to once again announce our annual White Elephant gift exchange! For those unfamiliar, this is a **gag gift** exchange done simply to make people laugh. Participants should **bring a single, wrapped gift** that has a generally nerdy theme. **It should be something that is useless, pointless, or generally unwanted.** The funnier, the better. Remember: **this is a JOKE.** **Do not spend money on this.** 🎁 **White Elephant Rules:** * Participation is **OPTIONAL.** * First gift opens at **8PM SHARP.** * Bring a single, wrapped \"gift\" per participant * The gift should be nerdy, and dumb * **Max spend is $0** * We will pull numbers out of a hat to determine turn order * **Note: STEALING IS NO LONGER AN OPTION. Y'all are animals.** 👥 **About Burbsec East:** Burbsec East is an informal meetup of Information Security enthusiasts, engineers, hackers, and general geeks! Expect a night of great networking and lubricated conversations! The crowd is very chill, about 30-40 strong, with experience levels ranging from college students through CISOs! We have NO DUES, NO PRESENTATIONS, and NO PUSHY SALESPEOPLE! **Information Superhighway World Wide Web Presence:** Discord: ([https://discord.gg/zfkTdnTf](https://discord.gg/zfkTdnTf)) Web: ([http://burbsec.com/](http://burbsec.com/)) Twitter: [@burbseceast](https://www.x.com/burbseceast) BlueSky: [@east.burbsec.com](https://bsky.app/profile/east.burbsec.com) Mastodon: [https://infosec.exchange/@BurbSecEast](https://infosec.exchange/@BurbSecEast) LinkedIn: [https://www.linkedin.com/groups/4081253/](https://www.linkedin.com/groups/4081253/)",
+      "link": "https://www.meetup.com/burbsec/events/317436463/",
+      "feed": "burbsec",
+      "auto": true,
+      "id": "evt-c961365bcf958574b1112989",
+      "slug": "56efa2eede05dc90"
+    },
+    {
       "date": "2027-03-11",
       "start": "17:30",
       "end": "19:30",
@@ -3037,6 +3111,29 @@
       "auto": true,
       "id": "evt-d113d3721b104bcef613a990",
       "slug": "0c8732199af42f9f"
+    },
+    {
+      "date": "2027-01-21",
+      "start": "17:30",
+      "end": "19:30",
+      "title": "January Go / Golang meetup: Lightning talks & discussion",
+      "host": "ChicaGo",
+      "orgs": [
+        "chicagogo"
+      ],
+      "type": "Meetup",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "dev"
+      ],
+      "desc": "ChicaGo Gather with other gophers who write Go/Golang in Chicago. Watch lightning talks! Talk with humans! This event is for anyone who writes Go, has written Go, is interested in writing Go, or is interested in becoming a past writer of Go. **Registration is on Luma** Please register on Luma to get in: https://luma.com/dicht5v7 The venue has a capacity limit. **Talks** TBD **Schedule** * 5:30: Arrive and chat * 6:00: Lightning talks with Q&A * 7:00-7:30: Chat **Directions** Go to the main Harold Washington Library entrance at 400 S State. Take the elevator to the 8th floor, and go to the far right corner of that floor for Meeting Room A (8S 15).",
+      "link": "https://www.meetup.com/chicagogo/events/317514827/",
+      "feed": "chicagogo",
+      "auto": true,
+      "id": "evt-dbad6bca96e4474c23b995fd",
+      "slug": "66470113293d0216"
     },
     {
       "date": "2026-12-08",
