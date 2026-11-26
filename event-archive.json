@@ -2639,6 +2639,31 @@
       "slug": "33acdb0fd09335f0"
     },
     {
+      "date": "2026-12-24",
+      "start": "18:00",
+      "end": "20:00",
+      "title": "Burbsec Northwest - Sponsors Welcome!",
+      "host": "BurbSec",
+      "orgs": [
+        "burbsec"
+      ],
+      "type": "Meetup",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "sec",
+        "grc",
+        "career"
+      ],
+      "desc": "BurbSec Chicago: The Midwest's Favorite Cybersecurity Events 🚀🔐 **Unlock the Excitement at Burbsec Northwest!** 🍻🎉 Are you ready for a night of geeking out, making new friends, and expanding your network in the world of infosec? Look no further—Burbsec Northwest is the place to be, and everyone is welcome! We have **NO DUES, NO PRESENTATIONS, and NO PUSHY SALESPEOPLE OR RECRUITERS!** [Crystal Lake Brewing](http://crystallakebrew.com/), at the address below, has a full bar, but you will need to **BYO food** if you need dinner. 👥 **A Community Just Like You:** We're just like you, and you'll fit right in! Whether you're passionate about infosec, love indulging in memes, enjoy a good beer, or appreciate compliance jokes (among other things), we've got you covered. Our diverse skill set ranges from novice to expert, and yes, we even dabble in paper hat making! 🎩✨ 🤝 **Connections That Matter:** At Burbsec Northwest, you'll find more than just like-minded people. You'll make valuable contacts, form genuine friendships, and expand your network of professional connections. These are the kinds of connections that come in handy when you're tackling that thorny problem at work, at home, or in the job market. 💡 **Knowledge Exchange:** Whether you're seeking answers to tough questions or ready to share your expertise, there's always someone at Burbsec Northwest who's got your back. We thrive in a collaborative atmosphere where knowledge flows freely, and camaraderie is key. 🕕 **Flexible Timing:** Don't worry about being fashionably late! People will start rolling in after work around 6 pm, and we keep the vibe going until we're done (generally 2-3 hours) 🌐 **Stay Connected:** Don't miss out on the latest updates and community banter! Join the BurbSec Discord and follow us on Twitter for all the behind-the-scenes action and event sneak peeks. **Information Superhighway World Wide Web Presence:** BurbSec Discord: [https://discord.gg/4hhVPHebJX](https://discord.gg/4hhVPHebJX) Web: http://burbsec.com ([http://burbsec.com/](http://burbsec.com/)) Twitter: @burbsecnw ([https://www.twitter.com/burbsecnw](https://www.twitter.com/burbsecnw)) Mastodon: burbsecnw@infosec.exchange [(https://infosec.exchange/@burbsecnw](https://infosec.exchange/@burbsecnw))",
+      "link": "https://www.meetup.com/burbsec/events/btbjbvyjcqbgc/",
+      "feed": "burbsec",
+      "auto": true,
+      "id": "evt-000c4d88dd86ea29c5b20da0",
+      "slug": "9463db6b9947cedc"
+    },
+    {
       "date": "2027-01-14",
       "start": "11:00",
       "end": "13:00",
@@ -2662,6 +2687,31 @@
       "auto": true,
       "id": "evt-0eb848f9eacc48358c4a1507",
       "slug": "9fb946284d06b902"
+    },
+    {
+      "date": "2026-12-10",
+      "start": "17:45",
+      "end": "19:15",
+      "title": "Hiring and Getting Hired: Real Talk",
+      "host": "ChiPMA",
+      "orgs": [
+        "chipma"
+      ],
+      "type": "Talk",
+      "venue": "See event page",
+      "area": "",
+      "mode": "In person",
+      "topics": [
+        "pm",
+        "ai",
+        "lead"
+      ],
+      "desc": "Chicago Product Management Association Budgets are resetting in January and hiring is afoot. Don't hibernate on this chance to find new candidates and get hired yourself! In this chat between ChiPMA President **Oleg Yazvin** and Networking Coach + Former PM leader **David Speigel**, we discuss what it takes to get a Product job in today's difficult hiring market, and what hiring managers could be doing to better to get the candidates they want. We'll be covering topics like: \\- How to network purposefully as a jobseeker \\- Why HR screens can actually screen out good candidates \\- Interview prep \\- How AI factors into the screening process \\(beyond just robots reading your resume\\) \\- Some underrated questions that hiring managers could use to find the people they're looking for This session WILL be interactive, so get ready to participate.",
+      "link": "https://www.meetup.com/chipma/events/317391433/",
+      "feed": "chipma",
+      "auto": true,
+      "id": "evt-11737716de724e1048b15c84",
+      "slug": "fca331d93cd2f242"
     },
     {
       "date": "2026-12-12",
